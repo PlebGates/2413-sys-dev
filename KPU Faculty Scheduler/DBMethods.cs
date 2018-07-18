@@ -35,7 +35,7 @@ CREATE TABLE courses(
 	
 CREATE TABLE schedule(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-	profID INTEGER,
+	professorID INTEGER,
     courseID INTEGER,
 	roomID INTEGER,
 	time INTEGER
@@ -45,7 +45,7 @@ CREATE TABLE professorscourses(
 	professorID INTEGER NOT NULL,
 	courseID INTEGER NOT NULL,
 	PRIMARY KEY(profID,courseID)
-	)"; //test/
+	)";
             cmd.ExecuteNonQuery();
         }
 
@@ -134,7 +134,10 @@ CREATE TABLE professorscourses(
         }
         public void addCourseBlock(CourseBlock block)
         {
-
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO schedule (id,professorid,courseid,roomid,time) values (" + block.id + "," + block.professor.id +
+                "," + block.course.id + "," + block.room.id + "," + block.time + ");";
+            cmd.ExecuteNonQuery();
         }
     }
 }
