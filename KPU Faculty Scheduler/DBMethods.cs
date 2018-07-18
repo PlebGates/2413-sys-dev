@@ -15,7 +15,7 @@ namespace KPU_Faculty_Scheduler
         {
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText =
-            @"CREATE TABLE profs(
+            @"CREATE TABLE professors(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL
 	)
@@ -23,26 +23,26 @@ namespace KPU_Faculty_Scheduler
 CREATE TABLE rooms(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL,
-	hasComputers BIT NOT NULL
+	hasComputers INTEGER NOT NULL
 	)
 
 CREATE TABLE courses(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	sections INTEGER NOT NULL,
-	needsComputers BIT NOT NULL
+	needsComputers INTEGER NOT NULL
 	)
 	
 CREATE TABLE schedule(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	profID INTEGER,
+    courseID INTEGER,
 	roomID INTEGER,
-	courseID INTEGER,
 	time INTEGER
 	)
 	
-CREATE TABLE profcourse(
-	profID INTEGER NOT NULL,
+CREATE TABLE professorscourses(
+	professorID INTEGER NOT NULL,
 	courseID INTEGER NOT NULL,
 	PRIMARY KEY(profID,courseID)
 	)"; //test/
@@ -52,7 +52,7 @@ CREATE TABLE profcourse(
         public Professor getProfessor(int id)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "select * from profs where id = " + id;
+            cmd.CommandText = "select * from professors where id = " + id;
             SQLiteDataReader data = cmd.ExecuteReader();
             Professor prof = new Professor();
             prof.id = data.GetInt32(0);
@@ -63,9 +63,10 @@ CREATE TABLE profcourse(
         public bool canTeach(int teachID, int classID)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "select * from teacherclass where teachID = " + teachID + " and classID = " + classID;
+            cmd.CommandText = "select * from professorsclass where teachID = " + teachID + " and classID = " + classID;
+            //select the row where the teacher id and class id are shared
             SQLiteDataReader data = cmd.ExecuteReader();
-            return data.HasRows;
+            return data.HasRows; //if that row exists, then the class is taught by the teacher - so you return true
         }
         public Room getRoom(int id)
         {
@@ -103,6 +104,37 @@ CREATE TABLE profcourse(
             block.room = getRoom(data.GetInt32(3));
             block.time = data.GetInt32(4);
             return block;
+        }
+
+        public void addProfessor(Professor prof)
+        {
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO professors (id,name) values (" + prof.id + "," + prof.name + ");";
+            cmd.ExecuteNonQuery();
+        }
+        public void addRoom(Room room)
+        {
+            int computers = room.hasComputers ? 1 : 0; //room has computers? yes = 1, no = 0
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO rooms (id,name,hasComputers) values (" + room.id + "," + room.name + "," + computers + ");";
+            cmd.ExecuteNonQuery();
+        }
+        public void addCourse(Course course)
+        {
+            int computers = course.needsComputers ? 1 : 0; //room has computers? yes = 1, no = 0
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO courses (id,name,sections,needsComputers) values (" + course.id + "," + course.name + "," + course.sections + "," + computers + ");";
+            cmd.ExecuteNonQuery();
+        }
+        public void addCanTeach(int profid, int courseid)
+        {
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO professorscourses (professorid,courseid) values (" + profid + "," + courseid + ");";
+            cmd.ExecuteNonQuery();
+        }
+        public void addCourseBlock(CourseBlock block)
+        {
+
         }
     }
 }
