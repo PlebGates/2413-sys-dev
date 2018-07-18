@@ -45,7 +45,7 @@ CREATE TABLE profcourse(
 	profID INTEGER NOT NULL,
 	courseID INTEGER NOT NULL,
 	PRIMARY KEY(profID,courseID)
-	)";
+	)"; //test/
             cmd.ExecuteNonQuery();
         }
 
