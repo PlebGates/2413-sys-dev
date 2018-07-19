@@ -8,7 +8,8 @@ namespace KPU_Faculty_Scheduler
         SQLiteConnection connection;
         public DBMethods(SQLiteConnection connection_)
         {
-            connection = connection_;
+            connection = connection_; //"Data Source=:memory:"
+            connection.Open();
         }
 
         public void createTables()
@@ -18,20 +19,20 @@ namespace KPU_Faculty_Scheduler
             @"CREATE TABLE professors(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL
-	)
+	);
 	
 CREATE TABLE rooms(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	hasComputers INTEGER NOT NULL
-	)
+	);
 
 CREATE TABLE courses(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	sections INTEGER NOT NULL,
 	needsComputers INTEGER NOT NULL
-	)
+	);
 	
 CREATE TABLE schedule(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -39,13 +40,13 @@ CREATE TABLE schedule(
     courseID INTEGER,
 	roomID INTEGER,
 	time INTEGER
-	)
-	
+	);
+
 CREATE TABLE professorscourses(
 	professorID INTEGER NOT NULL,
 	courseID INTEGER NOT NULL,
-	PRIMARY KEY(profID,courseID)
-	)";
+	PRIMARY KEY(professorID,courseID)
+	);";
             cmd.ExecuteNonQuery();
         }
 
@@ -53,11 +54,18 @@ CREATE TABLE professorscourses(
         {
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from professors where id = " + id;
-            SQLiteDataReader data = cmd.ExecuteReader();
-            Professor prof = new Professor();
-            prof.id = data.GetInt32(0);
-            prof.name = data.GetString(1);
-            return prof;
+            using (SQLiteDataReader data = cmd.ExecuteReader())
+            {
+                Professor prof = new Professor();
+                while(data.Read())
+                {
+                    prof.id = data.GetInt32(0);
+                    prof.name = data.GetString(1);
+                    return prof;
+                }
+                
+            }
+            return null;
             //return new Prof(data.GetInt32(0), data.GetString(1));
         }
         public bool canTeach(int teachID, int classID)
@@ -109,7 +117,7 @@ CREATE TABLE professorscourses(
         public void addProfessor(Professor prof)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO professors (id,name) values (" + prof.id + "," + prof.name + ");";
+            cmd.CommandText = "INSERT INTO professors (id,name) values (" + prof.id + "," + "'" + prof.name + "'" + ");";
             cmd.ExecuteNonQuery();
         }
         public void addRoom(Room room)
