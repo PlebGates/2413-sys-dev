@@ -30,15 +30,22 @@ namespace KPU_Faculty_Scheduler
             time = time_;
         }
 
+        public CourseBlock(Professor prof_, Room room_, Course course_)
+        {
+            professor = prof_;
+            room = room_;
+            course = course_;
+        }
+
         // Method to confirm whether a professor can teach a course or not.
-        bool checkCanTeach()
+        public bool checkCanTeach()
         {
             return professor.classList.Contains(course.id.ToString());
         }
 
 
         // Method to check if the course requires computers and, if so, the room has computers.
-        bool checkComputers()
+        public bool checkComputers()
         {
             if (this.course.needsComputers == true && this.room.hasComputers == false)
             {
