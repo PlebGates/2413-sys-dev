@@ -13,7 +13,7 @@ namespace KPU_Faculty_Scheduler
         public String name;
 
         // List to hold the classes that the professor can teach.
-        List<String> classList = new List<String>();
+        public List<String> classList;
 
         // Default Constructor.
         public Professor()

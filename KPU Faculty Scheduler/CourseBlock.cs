@@ -33,16 +33,19 @@ namespace KPU_Faculty_Scheduler
         // Method to confirm whether a professor can teach a course or not.
         bool checkCanTeach()
         {
-            /* random output so it will compile. */
-            return true;
+            return professor.classList.Contains(course.id.ToString());
         }
 
 
         // Method to check if the course requires computers and, if so, the room has computers.
         bool checkComputers()
         {
-            /* random output so it will compile. */
-            return true;
+            if (this.course.needsComputers == true && this.room.hasComputers == false)
+            {
+                return false;
+            }
+            else return true; //this allows classes that don't need computers to be held in rooms with computers
+            //TODO: should this be changed?
         }
     }
 }
