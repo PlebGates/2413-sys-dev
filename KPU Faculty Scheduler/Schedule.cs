@@ -126,26 +126,43 @@ namespace KPU_Faculty_Scheduler
         {
             HashSet<RoomTime> roomTimes = new HashSet<RoomTime>(); //set of roomtimes
             HashSet<Professor> profSet = new HashSet<Professor>();
+            HashSet<RoomTime> classTimes = new HashSet<RoomTime>();
             foreach (CourseBlock block in list)
             {
                 profSet.Add(block.professor); //add each professor into a set to check if they're teaching more than 4 classes or more than 2 in a day
+                
                 //foreach block check if the professor can teach it
                 if (!block.checkCanTeach())
                 {
                     return false;
                 }
+
                 //foreach block check if the computers have the correct value
                 if (!block.checkComputers())
                 {
                     return false;
                 }
+
                 //foreach block add its time to the roomtime set
                 if (!roomTimes.Add(new RoomTime(block.room.id, block.time)))
                 { //adding an element to a hashset returns false if it already exists
                     return false;
                 }
+
                 //foreach block check if it's a 3rd or 4th year class in the wrong timeslot
+                //if the 6th character of a name (ex INFO |3|110) denotes 3rd or 4th year and the time isn't acceptable
+                int[] acceptableTimes = { 2, 3, 6, 7, 9, 10, 12, 13, 16, 17, 19, 20 }; //all 4-7 and 7-10 blocks
+                if ((block.course.name[5] == '3' || block.course.name[5] == '4') && !(acceptableTimes.Contains(block.time)))
+                {
+                    return false;
+                }
+
                 //foreach block check if there's another section at the same time
+                //using the same method of checking if a room is in use at the same time, do it with a class id instead
+                if (!classTimes.Add(new RoomTime(block.course.id,block.time)))
+                {
+                    return false;
+                }
             }
             
             
