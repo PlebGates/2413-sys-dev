@@ -13,13 +13,21 @@ namespace KPU_Faculty_Scheduler
         List<CourseBlock> classList = new List<CourseBlock>();
 
         // Method to swap a course with another time block (or course).
-        void swapCourse()
+        void swapCourse(CourseBlock a, CourseBlock b)
         {
-
+            if (swapCourseValid(a, b)) //if swapping the courses is valid
+            {
+                int atime = a.time; //get the value of a's timeblock
+                int btime = b.time; //get the value of b's timeblock
+                int indexa = classList.FindIndex(c => c == a); //get the index of a from the class list
+                int indexb = classList.FindIndex(c => c == b); //get the index of b from the class list
+                classList[indexa].time = btime; //set the time of a to b's time
+                classList[indexb].time = atime; //set the time of b to a's time
+            }
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapCourseValid()
+        bool swapCourseValid(CourseBlock a, CourseBlock b)
         {
             /* random output so it will compile. */
             return true;
@@ -117,9 +125,10 @@ namespace KPU_Faculty_Scheduler
                 {
                     this.classList = blockList;
                     done = true;
+                    return true; //completed and valid
                 }
             }
-            return true; //return true when completed
+            return false; //completed invalid
             
         }
         public bool validityCheck(List<CourseBlock> list)
