@@ -64,6 +64,6 @@
         <CheckBox x:Name="coursesBox10" HorizontalAlignment="Left" Margin="272,329,0,0" VerticalAlignment="Top"/>
 
         <!-- Button to submit entered info -->
-        <Button x:Name="professorAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20"/>
+        <Button x:Name="coursesAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20" Click="coursesAddButton_Click"/>
     </Grid>
 </Page>

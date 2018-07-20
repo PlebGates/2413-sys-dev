@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace KPU_Faculty_Scheduler
         public Courses()
         {
             InitializeComponent();
+        }
+
+        ArrayList courses = new ArrayList();
+
+        private void coursesAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (roomNum1.Text != "" && sectionNum1.Text != "")
+            {
+                if (coursesBox1.IsChecked == true)
+                {
+                    courses.Add(new Course())
+                }
+            }
         }
     }
 }
