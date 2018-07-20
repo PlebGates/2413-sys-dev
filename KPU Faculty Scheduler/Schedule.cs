@@ -26,8 +26,9 @@ namespace KPU_Faculty_Scheduler
         // Method to confirm the above is aloud to happen.
         bool swapCourseValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapCourseBlock(a, b); //swap the blocks
+            return isValid(tempList); //see if the temp list is valid
         }
 
         // Method to swap a professor with another course blocks professor.
@@ -42,10 +43,11 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapProfessorValid()
+        bool swapProfessorValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapProfessor(a, b); //swap the profs
+            return isValid(tempList); //see if the temp list is valid
         }
 
         // Method to swap a room with another course blocks room.
@@ -60,10 +62,11 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapRoomValid()
+        bool swapRoomValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapRoom(a, b); //swap the rooms
+            return isValid(tempList); //see if the temp list is valid
         }
 
         // Method to swap the class taught between two course blocks.
@@ -78,15 +81,11 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapClassValid()
+        bool swapClassValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
-        }
-
-        public bool isValid()
-        {
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapCourse(a, b); //swap the courses
+            return isValid(tempList); //see if the temp list is valid
         }
 
         public bool CreateSchedule(List<Professor> profList, List<Course> courseList,List<Room> roomList)
@@ -179,7 +178,7 @@ namespace KPU_Faculty_Scheduler
                         }
                 }
 
-                if (validityCheck(blockList)) //check if the generated schedule is valid
+                if (isValid(blockList)) //check if the generated schedule is valid
                 {
                     this.classList = blockList;
                     done = true;
@@ -189,7 +188,7 @@ namespace KPU_Faculty_Scheduler
             return false; //completed invalid
             
         }
-        public bool validityCheck(List<CourseBlock> list)
+        public bool isValid(List<CourseBlock> list)
         {
             HashSet<IDTime> roomTimes = new HashSet<IDTime>(); //set of IDTimes
             HashSet<Professor> profSet = new HashSet<Professor>();
