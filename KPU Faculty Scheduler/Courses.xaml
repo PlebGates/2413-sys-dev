@@ -4,11 +4,66 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KPU_Faculty_Scheduler"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Courses" Width="280">
+      mc:Ignorable="d"
+      Title="Courses" Width="400" MinHeight="400">
 
     <Grid>
-        <TextBlock Text="Page 3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" />
+        <!-- Rectangle to contain elements -->
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="10,60,0,15" Stroke="Black" Width="380"/>
+
+        <!-- Page Header & row Labels -->
+        <Label x:Name="coursesLabel" Content="Courses" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36"/>
+        <Label x:Name="label1" Content="1" HorizontalAlignment="Left" Margin="15,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="2" HorizontalAlignment="Left" Margin="15,123,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="3" HorizontalAlignment="Left" Margin="15,148,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label4" Content="4" HorizontalAlignment="Left" Margin="15,173,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="5" HorizontalAlignment="Left" Margin="15,198,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label6" Content="6" HorizontalAlignment="Left" Margin="15,223,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label7" Content="7" HorizontalAlignment="Left" Margin="15,248,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label8" Content="8" HorizontalAlignment="Left" Margin="15,273,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label9" Content="9" HorizontalAlignment="Left" Margin="15,298,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label10" Content="10" HorizontalAlignment="Left" Margin="11,323,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.058,0.662"/>
+        
+        <!-- Room Number Textboxes & Header -->
+        <Label x:Name="roomNumLabel" Content="Room Number" HorizontalAlignment="Left" Margin="45,76,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
+        <TextBox x:Name="roomNum1" HorizontalAlignment="Left" Height="20" Margin="36,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum2" HorizontalAlignment="Left" Height="20" Margin="36,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum3" HorizontalAlignment="Left" Height="20" Margin="36,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum4" HorizontalAlignment="Left" Height="20" Margin="36,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum5" HorizontalAlignment="Left" Height="20" Margin="36,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum6" HorizontalAlignment="Left" Height="20" Margin="36,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum7" HorizontalAlignment="Left" Height="20" Margin="36,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum8" HorizontalAlignment="Left" Height="20" Margin="36,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum9" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum10" HorizontalAlignment="Left" Height="20" Margin="36,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+
+        <!-- Section Number Textboxes & Header -->
+        <Label x:Name="sectionNumLabel" Content="Section Number" HorizontalAlignment="Left" Margin="133,76,0,0" VerticalAlignment="Top" Width="92" FontSize="10"/>
+        <TextBox x:Name="sectionNum1" HorizontalAlignment="Left" Height="20" Margin="131,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum2" HorizontalAlignment="Left" Height="20" Margin="131,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum3" HorizontalAlignment="Left" Height="20" Margin="131,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum4" HorizontalAlignment="Left" Height="20" Margin="131,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum5" HorizontalAlignment="Left" Height="20" Margin="131,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum6" HorizontalAlignment="Left" Height="20" Margin="131,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum7" HorizontalAlignment="Left" Height="20" Margin="131,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum8" HorizontalAlignment="Left" Height="20" Margin="131,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum9" HorizontalAlignment="Left" Height="20" Margin="131,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="sectionNum10" HorizontalAlignment="Left" Height="20" Margin="131,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        
+        <!-- Checkboxes & Header -->
+        <Label x:Name="checkboxLabel" Content="Requires Computers?" HorizontalAlignment="Left" Margin="230,76,0,0" VerticalAlignment="Top" Width="104" FontSize="10"/>
+        <CheckBox x:Name="coursesBox1" HorizontalAlignment="Left" Margin="272,104,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox2" HorizontalAlignment="Left" Margin="272,129,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox3" HorizontalAlignment="Left" Margin="272,154,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox4" HorizontalAlignment="Left" Margin="272,179,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox5" HorizontalAlignment="Left" Margin="272,204,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox6" HorizontalAlignment="Left" Margin="272,229,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox7" HorizontalAlignment="Left" Margin="272,254,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox8" HorizontalAlignment="Left" Margin="272,279,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox9" HorizontalAlignment="Left" Margin="272,304,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox10" HorizontalAlignment="Left" Margin="272,329,0,0" VerticalAlignment="Top"/>
+
+        <!-- Button to submit entered info -->
+        <Button x:Name="professorAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20"/>
     </Grid>
 </Page>
