@@ -26,9 +26,9 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Create new pages upon program launch
-        Professors page1 = new Professors();
+        Courses page1 = new Courses();
         Rooms page2 = new Rooms();
-        Courses page3 = new Courses();
+        Professors page3 = new Professors();
 
         // Upon clicking "Create", hide original buttons, and toggle visibility of the frame and stack panels
         private void createButton_Click(object sender, RoutedEventArgs e)
@@ -74,9 +74,9 @@ namespace KPU_Faculty_Scheduler
                 navBarNext.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Content = " ";
                 mainFrame.Visibility = System.Windows.Visibility.Hidden;
-                page1 = new Professors();
+                page1 = new Courses();
                 page2 = new Rooms();
-                page3 = new Courses();
+                page3 = new Professors();
             }
             else if (mainFrame.Content == page2)
             {
