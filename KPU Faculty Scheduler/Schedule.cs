@@ -13,17 +13,14 @@ namespace KPU_Faculty_Scheduler
         List<CourseBlock> classList = new List<CourseBlock>();
 
         // Method to swap a course with another time block (or course).
-        void swapCourse(CourseBlock a, CourseBlock b)
+        void swapCourseBlock(CourseBlock a, CourseBlock b)
         {
-            if (swapCourseValid(a, b)) //if swapping the courses is valid
-            {
                 int atime = a.time; //get the value of a's timeblock
                 int btime = b.time; //get the value of b's timeblock
                 int indexa = classList.FindIndex(c => c == a); //get the index of a from the class list
                 int indexb = classList.FindIndex(c => c == b); //get the index of b from the class list
                 classList[indexa].time = btime; //set the time of a to b's time
                 classList[indexb].time = atime; //set the time of b to a's time
-            }
         }
 
         // Method to confirm the above is aloud to happen.
@@ -34,9 +31,14 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to swap a professor with another course blocks professor.
-        void swapProfessor()
+        void swapProfessor(CourseBlock a, CourseBlock b)
         {
-
+            Professor aprof = a.professor; //get a's professor
+            Professor bprof = b.professor; //get b's professor
+            int indexa = classList.FindIndex(c => c == a); //get the index of a from the class list
+            int indexb = classList.FindIndex(c => c == b); //get the index of b from the class list
+            classList[indexa].professor = bprof; //set a's prof to b's prof
+            classList[indexb].professor = aprof; //set b's prof to a's prof
         }
 
         // Method to confirm the above is aloud to happen.
@@ -47,9 +49,14 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to swap a room with another course blocks room.
-        void swapRoom()
+        void swapRoom(CourseBlock a, CourseBlock b)
         {
-
+            Room aroom = a.room; //get a's room
+            Room broom = b.room; //get b's room
+            int indexa = classList.FindIndex(c => c == a); //get the index of a from the class list
+            int indexb = classList.FindIndex(c => c == b); //get the index of b from the class list
+            classList[indexa].room = broom; //set a's room to b's room
+            classList[indexb].room = aroom; //set b's room to a's room
         }
 
         // Method to confirm the above is aloud to happen.
@@ -60,9 +67,14 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to swap the class taught between two course blocks.
-        void swapClass()
+        void swapCourse(CourseBlock a, CourseBlock b)
         {
-
+            Course acourse = a.course; //get a's course
+            Course bcourse = b.course; //get b's course
+            int indexa = classList.FindIndex(c => c == a); //get the index of a from the class list
+            int indexb = classList.FindIndex(c => c == b); //get the index of b from the class list
+            classList[indexa].course = bcourse; //set a's course to b's course
+            classList[indexb].course = acourse; //set b's course to a's course
         }
 
         // Method to confirm the above is aloud to happen.
