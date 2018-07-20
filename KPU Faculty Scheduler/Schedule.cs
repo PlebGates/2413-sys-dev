@@ -97,7 +97,7 @@ namespace KPU_Faculty_Scheduler
             {
                 List<CourseBlock> blockList = new List<CourseBlock>();
                 int time = 0; //time starts at 0
-                HashSet<IDTime> IDTimeSet = new HashSet<IDTime>();
+                HashSet<IDTime> RoomTimeSet = new HashSet<IDTime>();
                 HashSet<IDTime> profTimeSet = new HashSet<IDTime>();
                 /* Time blocks
                  * M |T |W |T |F |S |S
@@ -111,7 +111,7 @@ namespace KPU_Faculty_Scheduler
                     time = time % 20; //if the time reaches 20 then reset it
                         foreach (Room room in roomList) //for each room
                         {
-                            if (IDTimeSet.Contains(new IDTime(room.id, time))) //if that room is already in use
+                            if (RoomTimeSet.Contains(new IDTime(room.id, time))) //if that room is already in use
                             {
                                 continue;
                             }
@@ -128,31 +128,50 @@ namespace KPU_Faculty_Scheduler
                                 }
                                 //if professor teaches two classes that day
                                 //if professor teaches four classes in total
-                                int day = timeToDay(time);
-                                int classCountDay = 0;
-                                int classCountTotal = 0;
-                                foreach (IDTime proftime in profTimeSet)
+                                int day = timeToDay(time); //get the current day
+                                int classCountDay = 0; //classes during this day
+                                int classCountTotal = 0; //total classes for prof
+                                foreach (IDTime proftime in profTimeSet) //for each set proftime
                                 {
-                                    if (proftime.id == prof.id)
+                                    if (proftime.id == prof.id) //if the current professor is assigned to that time
                                     {
-                                        classCountTotal++;
-                                        if (timeToDay(proftime.time) == day)
+                                        classCountTotal++; //add to the total classes
+                                        if (timeToDay(proftime.time) == day) //if the proftime is teaching that day
                                         {
-                                            classCountDay++;
+                                            classCountDay++; //add to classes that day
+                                        } else if (day > 10) //if the current time is a double block and wasn't the current selected block
+                                        {
+                                            if (day / 10 == timeToDay(proftime.time)) //if the first digit of the double block matches the selected time
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            } else if (day % 10 == timeToDay(proftime.time)) //if the second digit of the double block matches the selected time
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            }
+                                        } else if (timeToDay(proftime.time) > 10) //if the selected time is a double block
+                                        {
+                                            if (timeToDay(proftime.time) / 10 == day) //if the first digit of the selected time matches the current day
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            }
+                                            else if (timeToDay(proftime.time) % 10 == day) //if the second digit of the selected time matches the current day
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            }
                                         }
                                     }
                                 }
 
-                                if (classCountTotal >= 4)
+                                if (classCountTotal >= 4) //four classes or more already being taught?
                                 {
-                                    continue;
+                                    continue; //move to the next prof
                                 }
-                                if (classCountDay >= 2)
+                                if (classCountDay >= 2) //two or more classes being taught today?
                                 {
-                                    continue;
+                                    continue; //move to next prof
                                 }
                                     //more validity checking and logic
-                                    IDTimeSet.Add(new IDTime(room.id, time)); //this room is now in use at this time
+                                    RoomTimeSet.Add(new IDTime(room.id, time)); //this room is now in use at this time
                                 profTimeSet.Add(new IDTime(prof.id, time)); //this professor is now teaching at this time
                                     blockList.Add(new CourseBlock(prof, room, course, time)); //add your new courseblock
                                     time++; //increment time forwards
@@ -315,6 +334,9 @@ namespace KPU_Faculty_Scheduler
         }
         public int timeToDay(int time)
         {
+            //return day # 1-6 for single day classes
+            //return day1day2 for double day classes (ie a mon/wed class returns 13 because mon is 1 and wed is 3)
+            //to convert use two operations, day/10 to get the first digit, day % 10 to get the second
             int day = 0;
             /* Time blocks
                  * M |T |W |T |F |S |S
@@ -323,6 +345,51 @@ namespace KPU_Faculty_Scheduler
                  * 2 |6 |9 |12|16|19
                  * 3 |7 |10|13|17|20
                  */
+               
+            switch(time)
+            {
+                case 0:
+                    day = 13;
+                    break;
+                case 1: 
+                case 2:
+                case 3:
+                    day = 1;
+                    break;
+                case 4:
+                    day = 24;
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                    day = 2;
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                    day = 3;
+                    break;
+                case 11:
+                case 12:
+                case 13:
+                    day = 4;
+                    break;
+                case 14:
+                    day = 56;
+                    break;
+                case 15:
+                case 16:
+                case 17:
+                    day = 5;
+                    break;
+                case 18:
+                case 19:
+                case 20:
+                    day = 6;
+                    break;
+                default: day = 0;
+                    break;
+            }
 
             return day;
         }
