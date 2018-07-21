@@ -37,50 +37,50 @@
         	HorizontalAlignment="Left"
         	Margin="205,135,0,0"
         	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber1_Copy2" HorizontalAlignment="Left" Height="20" Margin="36,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="RoomNumber2_Copy2" HorizontalAlignment="Left" Height="20" Margin="112,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="RoomNumber4" HorizontalAlignment="Left" Height="20" Margin="36,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="BuildingNumber4" HorizontalAlignment="Left" Height="20" Margin="112,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,164,0,0"
         	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber1_Copy3" HorizontalAlignment="Left" Height="20" Margin="36,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="RoomNumber2_Copy3" HorizontalAlignment="Left" Height="20" Margin="112,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="RoomNumber5" HorizontalAlignment="Left" Height="20" Margin="36,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="BuildingNumber5" HorizontalAlignment="Left" Height="20" Margin="112,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,194,0,0"
         	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber1_Copy4" HorizontalAlignment="Left" Height="20" Margin="36,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="RoomNumber2_Copy4" HorizontalAlignment="Left" Height="20" Margin="112,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="RoomNumber7" HorizontalAlignment="Left" Height="20" Margin="36,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="BuildingNumber7" HorizontalAlignment="Left" Height="20" Margin="112,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,252,0,0"
         	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber1_Copy5" HorizontalAlignment="Left" Height="20" Margin="36,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="RoomNumber2_Copy5" HorizontalAlignment="Left" Height="20" Margin="112,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="RoomNumber8" HorizontalAlignment="Left" Height="20" Margin="36,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="BuildingNumber8" HorizontalAlignment="Left" Height="20" Margin="112,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,279,0,0"
         	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber1_Copy6" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="RoomNumber2_Copy6" HorizontalAlignment="Left" Height="20" Margin="112,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="RoomNumber9" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="BuildingNumber9" HorizontalAlignment="Left" Height="20" Margin="112,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,309,0,0"
         	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber1_Copy7" HorizontalAlignment="Left" Height="20" Margin="36,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="RoomNumber2_Copy7" HorizontalAlignment="Left" Height="20" Margin="112,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="RoomNumber6" HorizontalAlignment="Left" Height="20" Margin="36,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="BuildingNumber6" HorizontalAlignment="Left" Height="20" Margin="112,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,223,0,0"
         	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber1_Copy8" HorizontalAlignment="Left" Height="20" Margin="36,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="RoomNumber2_Copy8" HorizontalAlignment="Left" Height="20" Margin="112,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="RoomNumber10" HorizontalAlignment="Left" Height="20" Margin="36,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="BuildingNumber10" HorizontalAlignment="Left" Height="20" Margin="112,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
