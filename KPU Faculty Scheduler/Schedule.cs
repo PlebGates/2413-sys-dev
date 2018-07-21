@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -402,5 +404,69 @@ namespace KPU_Faculty_Scheduler
                 time = time_;
             }
         }
+        public void extractToXslx(FileInfo filepath)
+        {
+            if (ExcelClass.IsFileinUse(filepath))
+            {
+
+            }
+            //create a new xlsx file
+            //write the schedule data to the xlsx file
+            //close the xslx file
+
+
+
+        }
+        public void extractToCsv(FileInfo filepath)
+        {
+            HashSet<Room> roomSet = new HashSet<Room>();
+            HashSet<Professor> profSet = new HashSet<Professor>();
+            HashSet<Course> courseSet = new HashSet<Course>();
+            HashSet<csvRecord> blockSet = new HashSet<csvRecord>();
+            //take classList and get every room, course, and prof 
+            foreach (CourseBlock block in classList)
+            {
+                roomSet.Add(block.room);
+                profSet.Add(block.professor);
+                courseSet.Add(block.course);
+                blockSet.Add(new csvRecord(block)); //get every courseblock present
+            }
+            //create csv writer
+            using (TextWriter writer = new StreamWriter(filepath.FullName)) //to ensure it's closed
+            {
+                CsvHelper.CsvWriter csv = new CsvHelper.CsvWriter(writer);
+                csv.WriteRecord("rooms"); 
+                csv.NextRecord(); 
+                csv.WriteRecords(roomSet); //write rooms to file
+                csv.WriteRecord("courses");
+                csv.NextRecord();
+                csv.WriteRecords(courseSet); //write courses to file
+                csv.WriteRecord("professors");
+                csv.NextRecord();
+                csv.WriteRecords(profSet); //write profs to file
+                csv.WriteRecord("blocks");
+                csv.NextRecord();
+                csv.WriteRecords(blockSet); //write every courseblock to file
+            }
+        }
+        public class csvRecord
+        {
+            int blockID;
+            int courseID;
+            int roomID;
+            int professorID;
+            int time;
+
+            public csvRecord(CourseBlock block)
+            {
+                blockID = block.id;
+                courseID = block.course.id;
+                roomID = block.room.id;
+                professorID = block.professor.id;
+                time = block.time;
+            }
+        }
     }
+
+        
 }
