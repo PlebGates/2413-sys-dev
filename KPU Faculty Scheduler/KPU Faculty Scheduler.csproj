@@ -80,11 +80,24 @@
     </ApplicationDefinition>
     <Compile Include="Course.cs" />
     <Compile Include="CourseBlock.cs" />
+    <Compile Include="Courses.xaml.cs">
+      <DependentUpon>Courses.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DBMethods.cs" />
     <Compile Include="export.cs" />
     <Compile Include="openExcel.cs" />
+    <Compile Include="Professors.xaml.cs">
+      <DependentUpon>Professors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs" />
+    <Compile Include="Rooms.xaml.cs">
+      <DependentUpon>Rooms.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Schedule.cs" />
+    <Page Include="Courses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,6 +110,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Professors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Rooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Professor.cs" />

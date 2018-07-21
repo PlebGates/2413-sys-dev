@@ -11,7 +11,8 @@ namespace KPU_Faculty_Scheduler
 
         // Variables to hold the room name and id.
         public int id;
-        public String name;
+        public int roomNum;
+        public String building; 
 
         // Boolean variable for whether the room has a computer lab or not.
         public Boolean hasComputers;
@@ -23,10 +24,11 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Main Constructor.
-        public Room(int id_, String name_, Boolean hasComputers_)
+        public Room(int id_, int roomNum_, String building_, Boolean hasComputers_)
         {
             id = id_;
-            name = name_;
+            roomNum = roomNum_;
+            building = building_;
             hasComputers = hasComputers_;
         }
 

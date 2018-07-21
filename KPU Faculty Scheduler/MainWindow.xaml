@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KPU_Faculty_Scheduler"
         mc:Ignorable="d"
-        Title="KPU Faculty Scheduler" Height="250" Width="250" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" MinWidth="300" MinHeight="350" ResizeMode="CanMinimize">
+        Title="KPU Faculty Scheduler" Height="Auto" Width="300" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" MinWidth="300" MinHeight="350">
     <Grid>
+        <StackPanel x:Name="navBarBack" Orientation="Horizontal" Height="35" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Visibility="Hidden">
+            <Button Content="Back" MinWidth="75" Click="backClick"/>
+        </StackPanel>
+        <StackPanel x:Name="navBarNext" Orientation="Horizontal" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.ColumnSpan="2"  Visibility="Hidden">
+            <Button Content="Next" MinWidth="75" Click="nextClick"/>
+        </StackPanel>
+        <Button x:Name="importButton" Content="Import Schedule" HorizontalAlignment="Center" Margin="0,0,0,60" VerticalAlignment="Bottom" Width="175" Height="75"/>
+        <Button x:Name="createButton" Content="Create Schedule" HorizontalAlignment="Center" VerticalAlignment="Top" Width="175" Grid.ColumnSpan="2" Margin="0,60,0,0" Height="75" Click="createButton_Click"/>
+        <Frame x:Name="mainFrame" Margin="0, 0, 0, 35" Grid.ColumnSpan="2" Visibility="Hidden" NavigationUIVisibility="Hidden"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Frame x:Name="mainFrame" />
-        <Button x:Name="importButton" Content="Import Schedule" HorizontalAlignment="Center" Margin="0,0,0,60" VerticalAlignment="Bottom" Width="175" Grid.ColumnSpan="2" Height="75" Click="importButton_Click"/>
-        <Button x:Name="createButton" Content="Create Schedule" HorizontalAlignment="Center" VerticalAlignment="Top" Width="175" Grid.ColumnSpan="2" Margin="0,60,0,0" Height="75" Click="createButton_Click"/>
     </Grid>
 </Window>
