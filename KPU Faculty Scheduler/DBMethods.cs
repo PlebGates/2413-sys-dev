@@ -94,7 +94,7 @@ CREATE TABLE professorscourses(
                 while (data.Read())
                 {
                     room.id = data.GetInt32(0);
-                    room.roomNum = data.GetInt32(1);
+                    room.roomNum = data.GetString(1);
                     room.hasComputers = (data.GetInt32(3) == 1);
                     return room;
                 }
@@ -143,6 +143,26 @@ CREATE TABLE professorscourses(
             return null;
                 
             //return new Room(data.GetInt32(0), data.GetString(1), data.GetBoolean(3));
+        }
+        public List<Course> getAllCourse()
+        {
+            SQLiteCommand cmd = connection.CreateCommand(); //new sql command
+            cmd.CommandText = "select * from courses"; //select all courses
+            List<Course> courseList = new List<Course>(); //create the list
+            using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
+            {
+                while (data.Read()) //while there are rows to read
+                {
+                    Course course = new Course(); //create a new course
+                    course.id = data.GetInt32(0); //get the course id
+                    course.name = data.GetString(1); //get thecourse name
+                    course.sections = data.GetInt32(2); //get the section #
+                    course.needsComputers = (data.GetInt32(4) == 1); //get the bool value of having computers
+                    courseList.Add(course); //add the room to the list
+                }
+            }
+
+            return courseList; //return the list
         }
         public CourseBlock getBlock(int id)
         {
