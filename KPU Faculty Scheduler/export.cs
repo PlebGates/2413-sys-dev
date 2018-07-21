@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Excel = Microsoft.Office.Interop.Excel;
 
-
+/*
 namespace KPU_Faculty_Scheduler
 {
     class Export
@@ -77,4 +77,5 @@ namespace KPU_Faculty_Scheduler
             }
         }
     }
-}*/
+}
+*/

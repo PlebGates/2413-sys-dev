@@ -36,6 +36,13 @@ namespace KPU_Faculty_Scheduler
             room = room_;
             course = course_;
         }
+        public CourseBlock(Professor prof_, Room room_, Course course_, int time_)
+        {
+            professor = prof_;
+            room = room_;
+            course = course_;
+            time = time_;
+        }
 
         // Method to confirm whether a professor can teach a course or not.
         public bool checkCanTeach()

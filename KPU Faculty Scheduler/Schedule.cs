@@ -26,8 +26,9 @@ namespace KPU_Faculty_Scheduler
         // Method to confirm the above is aloud to happen.
         bool swapCourseValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapCourseBlock(a, b); //swap the blocks
+            return isValid(tempList); //see if the temp list is valid
         }
 
         // Method to swap a professor with another course blocks professor.
@@ -42,10 +43,11 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapProfessorValid()
+        bool swapProfessorValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapProfessor(a, b); //swap the profs
+            return isValid(tempList); //see if the temp list is valid
         }
 
         // Method to swap a room with another course blocks room.
@@ -60,10 +62,11 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapRoomValid()
+        bool swapRoomValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapRoom(a, b); //swap the rooms
+            return isValid(tempList); //see if the temp list is valid
         }
 
         // Method to swap the class taught between two course blocks.
@@ -78,15 +81,11 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapClassValid()
+        bool swapClassValid(CourseBlock a, CourseBlock b)
         {
-            /* random output so it will compile. */
-            return true;
-        }
-
-        public bool isValid()
-        {
-            return true;
+            List<CourseBlock> tempList = classList; //create a temp list
+            swapCourse(a, b); //swap the courses
+            return isValid(tempList); //see if the temp list is valid
         }
 
         public bool CreateSchedule(List<Professor> profList, List<Course> courseList,List<Room> roomList)
@@ -97,7 +96,8 @@ namespace KPU_Faculty_Scheduler
             {
                 List<CourseBlock> blockList = new List<CourseBlock>();
                 int time = 0; //time starts at 0
-                HashSet<RoomTime> roomTimeSet = new HashSet<RoomTime>();
+                HashSet<IDTime> RoomTimeSet = new HashSet<IDTime>();
+                HashSet<IDTime> profTimeSet = new HashSet<IDTime>();
                 /* Time blocks
                  * M |T |W |T |F |S |S
                  * 0 |4 |0 |4 |14|14
@@ -108,12 +108,9 @@ namespace KPU_Faculty_Scheduler
                 foreach (Course course in courseList)
                 {
                     time = time % 20; //if the time reaches 20 then reset it
-
-                    if (course.sections > 0) //if the course still has more sections left
-                    {
                         foreach (Room room in roomList) //for each room
                         {
-                            if (roomTimeSet.Contains(new RoomTime(room.id, time))) //if that room is already in use
+                            if (RoomTimeSet.Contains(new IDTime(room.id, time))) //if that room is already in use
                             {
                                 continue;
                             }
@@ -123,17 +120,65 @@ namespace KPU_Faculty_Scheduler
                             }
                             else foreach (Professor prof in profList)
                                 {
-                                    //more validity checking and logic
-                                    roomTimeSet.Add(new RoomTime(room.id, time)); //this room is now in use at this time
-                                    blockList.Add(new CourseBlock(prof, room, course)); //add your new courseblock
-                                    time++; //increment time forwards
-                                    course.sections--; //increment the sections of the course down 1
+                                //if professor is already teaching at that time
+                                if (profTimeSet.Contains(new IDTime(prof.id,time)))
+                                {
+                                    continue;
+                                }
+                                //if professor teaches two classes that day
+                                //if professor teaches four classes in total
+                                int day = timeToDay(time); //get the current day
+                                int classCountDay = 0; //classes during this day
+                                int classCountTotal = 0; //total classes for prof
+                                foreach (IDTime proftime in profTimeSet) //for each set proftime
+                                {
+                                    if (proftime.id == prof.id) //if the current professor is assigned to that time
+                                    {
+                                        classCountTotal++; //add to the total classes
+                                        if (timeToDay(proftime.time) == day) //if the proftime is teaching that day
+                                        {
+                                            classCountDay++; //add to classes that day
+                                        } else if (day > 10) //if the current time is a double block and wasn't the current selected block
+                                        {
+                                            if (day / 10 == timeToDay(proftime.time)) //if the first digit of the double block matches the selected time
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            } else if (day % 10 == timeToDay(proftime.time)) //if the second digit of the double block matches the selected time
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            }
+                                        } else if (timeToDay(proftime.time) > 10) //if the selected time is a double block
+                                        {
+                                            if (timeToDay(proftime.time) / 10 == day) //if the first digit of the selected time matches the current day
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            }
+                                            else if (timeToDay(proftime.time) % 10 == day) //if the second digit of the selected time matches the current day
+                                            {
+                                                classCountDay++; //it's on the same day
+                                            }
+                                        }
+                                    }
                                 }
 
+                                if (classCountTotal >= 4) //four classes or more already being taught?
+                                {
+                                    continue; //move to the next prof
+                                }
+                                if (classCountDay >= 2) //two or more classes being taught today?
+                                {
+                                    continue; //move to next prof
+                                }
+                                    //more validity checking and logic
+                                    RoomTimeSet.Add(new IDTime(room.id, time)); //this room is now in use at this time
+                                profTimeSet.Add(new IDTime(prof.id, time)); //this professor is now teaching at this time
+                                    blockList.Add(new CourseBlock(prof, room, course, time)); //add your new courseblock
+                                    time++; //increment time forwards
+                                }
                         }
-                    }
                 }
-                if (validityCheck(blockList)) //check if the generated schedule is valid
+
+                if (isValid(blockList)) //check if the generated schedule is valid
                 {
                     this.classList = blockList;
                     done = true;
@@ -143,11 +188,11 @@ namespace KPU_Faculty_Scheduler
             return false; //completed invalid
             
         }
-        public bool validityCheck(List<CourseBlock> list)
+        public bool isValid(List<CourseBlock> list)
         {
-            HashSet<RoomTime> roomTimes = new HashSet<RoomTime>(); //set of roomtimes
+            HashSet<IDTime> roomTimes = new HashSet<IDTime>(); //set of IDTimes
             HashSet<Professor> profSet = new HashSet<Professor>();
-            HashSet<RoomTime> classTimes = new HashSet<RoomTime>();
+            HashSet<IDTime> classTimes = new HashSet<IDTime>();
             foreach (CourseBlock block in list)
             {
                 profSet.Add(block.professor); //add each professor into a set to check if they're teaching more than 4 classes or more than 2 in a day
@@ -164,8 +209,8 @@ namespace KPU_Faculty_Scheduler
                     return false;
                 }
 
-                //foreach block add its time to the roomtime set
-                if (!roomTimes.Add(new RoomTime(block.room.id, block.time)))
+                //foreach block add its time to the IDTime set
+                if (!roomTimes.Add(new IDTime(block.room.id, block.time)))
                 { //adding an element to a hashset returns false if it already exists
                     return false;
                 }
@@ -180,7 +225,7 @@ namespace KPU_Faculty_Scheduler
 
                 //foreach block check if there's another section at the same time
                 //using the same method of checking if a room is in use at the same time, do it with a class id instead
-                if (!classTimes.Add(new RoomTime(block.course.id,block.time)))
+                if (!classTimes.Add(new IDTime(block.course.id,block.time)))
                 {
                     return false;
                 }
@@ -286,13 +331,74 @@ namespace KPU_Faculty_Scheduler
             }
             return true; //not teaching more than 2 blocks a day
         }
-        class RoomTime //just a container for room and time for use in roomtime sets
+        public int timeToDay(int time)
         {
-            int room;
-            int time;
-            public RoomTime(int room_, int time_)
+            //return day # 1-6 for single day classes
+            //return day1day2 for double day classes (ie a mon/wed class returns 13 because mon is 1 and wed is 3)
+            //to convert use two operations, day/10 to get the first digit, day % 10 to get the second
+            int day = 0;
+            /* Time blocks
+                 * M |T |W |T |F |S |S
+                 * 0 |4 |0 |4 |14|14
+                 * 1 |5 |8 |11|15|18
+                 * 2 |6 |9 |12|16|19
+                 * 3 |7 |10|13|17|20
+                 */
+               
+            switch(time)
             {
-                room = room_;
+                case 0:
+                    day = 13;
+                    break;
+                case 1: 
+                case 2:
+                case 3:
+                    day = 1;
+                    break;
+                case 4:
+                    day = 24;
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                    day = 2;
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                    day = 3;
+                    break;
+                case 11:
+                case 12:
+                case 13:
+                    day = 4;
+                    break;
+                case 14:
+                    day = 56;
+                    break;
+                case 15:
+                case 16:
+                case 17:
+                    day = 5;
+                    break;
+                case 18:
+                case 19:
+                case 20:
+                    day = 6;
+                    break;
+                default: day = 0;
+                    break;
+            }
+
+            return day;
+        }
+        class IDTime //just a container for room and time for use in IDTime sets
+        {
+            public int id;
+            public int time;
+            public IDTime(int room_, int time_)
+            {
+                id = room_;
                 time = time_;
             }
         }
