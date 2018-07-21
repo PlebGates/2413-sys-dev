@@ -23,7 +23,7 @@
         <Label x:Name="label8" Content="8" HorizontalAlignment="Left" Margin="15,273,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label9" Content="9" HorizontalAlignment="Left" Margin="15,298,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label10" Content="10" HorizontalAlignment="Left" Margin="11,323,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.058,0.662"/>
-        
+
         <!-- Course Number Textboxes & Header -->
         <Label x:Name="roomNumLabel" Content="Course Number" HorizontalAlignment="Left" Margin="45,76,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
         <TextBox x:Name="courseNum1" HorizontalAlignment="Left" Height="20" Margin="36,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
@@ -49,19 +49,19 @@
         <TextBox x:Name="sectionNum8" HorizontalAlignment="Left" Height="20" Margin="131,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="sectionNum9" HorizontalAlignment="Left" Height="20" Margin="131,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="sectionNum10" HorizontalAlignment="Left" Height="20" Margin="131,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        
+
         <!-- Checkboxes & Header -->
-        <Label x:Name="checkboxLabel" Content="Requires Computers?" HorizontalAlignment="Left" Margin="230,76,0,0" VerticalAlignment="Top" Width="104" FontSize="10"/>
-        <CheckBox x:Name="coursesBox1" HorizontalAlignment="Left" Margin="272,104,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox2" HorizontalAlignment="Left" Margin="272,129,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox3" HorizontalAlignment="Left" Margin="272,154,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox4" HorizontalAlignment="Left" Margin="272,179,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox5" HorizontalAlignment="Left" Margin="272,204,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox6" HorizontalAlignment="Left" Margin="272,229,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox7" HorizontalAlignment="Left" Margin="272,254,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox8" HorizontalAlignment="Left" Margin="272,279,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox9" HorizontalAlignment="Left" Margin="272,304,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesBox10" HorizontalAlignment="Left" Margin="272,329,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="checkboxLabel" Content="Requires Computers?" HorizontalAlignment="Left" Margin="254,76,0,0" VerticalAlignment="Top" Width="104" FontSize="10"/>
+        <CheckBox x:Name="coursesBox1" HorizontalAlignment="Left" Margin="296,104,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox2" HorizontalAlignment="Left" Margin="296,129,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox3" HorizontalAlignment="Left" Margin="296,154,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox4" HorizontalAlignment="Left" Margin="296,179,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox5" HorizontalAlignment="Left" Margin="296,204,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox6" HorizontalAlignment="Left" Margin="296,229,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox7" HorizontalAlignment="Left" Margin="296,254,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox8" HorizontalAlignment="Left" Margin="296,279,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox9" HorizontalAlignment="Left" Margin="296,304,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesBox10" HorizontalAlignment="Left" Margin="296,329,0,0" VerticalAlignment="Top"/>
 
         <!-- Button to submit entered info -->
         <Button x:Name="coursesAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20" Click="coursesAddButton_Click"/>

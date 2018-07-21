@@ -81,11 +81,11 @@ namespace KPU_Faculty_Scheduler
             }
             else if (mainFrame.Content == roomsPage)
             {
-                mainFrame.Content = roomsPage;
+                mainFrame.Content = coursesPage;
             }
             else if (mainFrame.Content == professorsPage)
             {
-                mainFrame.Content = professorsPage;
+                mainFrame.Content = roomsPage;
             }
         }
     }
