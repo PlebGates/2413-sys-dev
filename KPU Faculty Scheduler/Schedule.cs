@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using CsvHelper;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -434,7 +435,7 @@ namespace KPU_Faculty_Scheduler
             //create csv writer
             using (TextWriter writer = new StreamWriter(filepath.FullName)) //to ensure it's closed
             {
-                CsvHelper.CsvWriter csv = new CsvHelper.CsvWriter(writer);
+                CsvWriter csv = new CsvHelper.CsvWriter(writer);
                 csv.WriteRecord("rooms"); 
                 csv.NextRecord(); 
                 csv.WriteRecords(roomSet); //write rooms to file
@@ -455,16 +456,61 @@ namespace KPU_Faculty_Scheduler
             HashSet<Room> roomSet = new HashSet<Room>(); //create roomset
             HashSet<Course> courseSet = new HashSet<Course>(); //create courseset
             HashSet<csvRecord> csvSet = new HashSet<csvRecord>(); //create blockset
+            string readmode = "default";
             //open stream
-            //find the rooms record
-            //read the records
-            //find the courses record
-            //read the records
-            //find the profs record
-            //read the records
-            //find the blocks record
-            //read the records
-            //close reader
+            using (TextReader reader = new StreamReader(filepath.FullName))
+            {
+                CsvReader csv = new CsvReader(reader);
+                while (csv.Read()) //while there are records to read
+                {
+                    //get the readmode for the current record
+                    if (csv[0] == "rooms")
+                    {
+                        readmode = "rooms";
+                        csv.Read();
+                    } else if (csv[0] == "courses")
+                    {
+                        readmode = "courses";
+                        csv.Read();
+                    } else if (csv[0] == "professors")
+                    {
+                        readmode = "professors";
+                    } else if (csv[0] == "blocks")
+                    {
+                        readmode = "blocks";
+                        csv.Read();
+                    }
+
+                    switch(readmode) //depending on readmode
+                    {
+                        case "rooms":
+                            roomSet.Add(csv.GetRecord<Room>()); //read rooms to set
+                            break;
+                        case "courses": //read courses to set
+                            courseSet.Add(csv.GetRecord<Course>());
+                            break;
+                        case "professors": //read profs to set
+                            profSet.Add(csv.GetRecord<Professor>());
+                            break;
+                        case "blocks": //read blocks to set
+                            csvSet.Add(csv.GetRecord<csvRecord>());
+                            break;
+                        default: //probably throw some kind of exception here
+                            break;
+                    }
+                }
+                
+                //find the rooms record
+                //read the records
+                //find the courses record
+                //read the records
+                //find the profs record
+                //read the records
+                //find the blocks record
+                //read the records
+                //close reader
+            }
+
             List<CourseBlock> tempList = new List<CourseBlock>();
             //convert profs/rooms/courses/blocks to courseblock list
             foreach (csvRecord record in csvSet)
@@ -494,8 +540,13 @@ namespace KPU_Faculty_Scheduler
                         break; //break the loop since the course has been found
                     }
                 }
+                tempList.Add(block);
             }
             //this.classlist = courseblock list
+            if (isValid(tempList))
+            {
+                classList = tempList;
+            }
         }
         public class csvRecord
         {
