@@ -93,7 +93,7 @@ CREATE TABLE professorscourses(
                 while (data.Read())
                 {
                     room.id = data.GetInt32(0);
-                    room.name = data.GetString(1);
+                    room.roomNum = data.GetInt32(1);
                     room.hasComputers = (data.GetInt32(3) == 1);
                     return room;
                 }
@@ -112,6 +112,8 @@ CREATE TABLE professorscourses(
                 while (data.Read())
                 {
                     course.id = data.GetInt32(0);
+
+                    // NOT SURE IF THIS IS CORRECT VINCENT, ALSO SEE LINE 156
                     course.name = data.GetString(1);
                     course.needsComputers = (data.GetInt32(3) == 1);
                     return course;
@@ -151,7 +153,7 @@ CREATE TABLE professorscourses(
         {
             int computers = room.hasComputers ? 1 : 0; //room has computers? yes = 1, no = 0
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO rooms (id,name,hasComputers) values (" + room.id + ",'" + room.name + "'," + computers + ");";
+            cmd.CommandText = "INSERT INTO rooms (id,name,hasComputers) values (" + room.id + ",'" + room.roomNum + "'," + computers + ");";
             cmd.ExecuteNonQuery();
         }
         public void addCourse(Course course)

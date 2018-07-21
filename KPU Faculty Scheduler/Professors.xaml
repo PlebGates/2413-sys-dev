@@ -36,7 +36,7 @@
         <TextBox x:Name="lastName7" HorizontalAlignment="Left" Height="20" Margin="131,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="firstName8" HorizontalAlignment="Left" Height="20" Margin="36,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <Label x:Name="label8" Content="8" HorizontalAlignment="Left" Margin="15,273,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="lastName1_Copy6" HorizontalAlignment="Left" Height="20" Margin="131,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="lastName8" HorizontalAlignment="Left" Height="20" Margin="131,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="firstName9" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <Label x:Name="label9" Content="9" HorizontalAlignment="Left" Margin="15,298,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="lastName9" HorizontalAlignment="Left" Height="20" Margin="131,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>

@@ -24,18 +24,18 @@
         <Label x:Name="label9" Content="9" HorizontalAlignment="Left" Margin="15,298,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label10" Content="10" HorizontalAlignment="Left" Margin="11,323,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.058,0.662"/>
         
-        <!-- Room Number Textboxes & Header -->
-        <Label x:Name="roomNumLabel" Content="Room Number" HorizontalAlignment="Left" Margin="45,76,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
-        <TextBox x:Name="roomNum1" HorizontalAlignment="Left" Height="20" Margin="36,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum2" HorizontalAlignment="Left" Height="20" Margin="36,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum3" HorizontalAlignment="Left" Height="20" Margin="36,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum4" HorizontalAlignment="Left" Height="20" Margin="36,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum5" HorizontalAlignment="Left" Height="20" Margin="36,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum6" HorizontalAlignment="Left" Height="20" Margin="36,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum7" HorizontalAlignment="Left" Height="20" Margin="36,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum8" HorizontalAlignment="Left" Height="20" Margin="36,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum9" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="roomNum10" HorizontalAlignment="Left" Height="20" Margin="36,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <!-- Course Number Textboxes & Header -->
+        <Label x:Name="roomNumLabel" Content="Course Number" HorizontalAlignment="Left" Margin="45,76,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
+        <TextBox x:Name="courseNum1" HorizontalAlignment="Left" Height="20" Margin="36,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum2" HorizontalAlignment="Left" Height="20" Margin="36,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum3" HorizontalAlignment="Left" Height="20" Margin="36,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum4" HorizontalAlignment="Left" Height="20" Margin="36,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum5" HorizontalAlignment="Left" Height="20" Margin="36,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum6" HorizontalAlignment="Left" Height="20" Margin="36,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum7" HorizontalAlignment="Left" Height="20" Margin="36,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum8" HorizontalAlignment="Left" Height="20" Margin="36,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum9" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="courseNum10" HorizontalAlignment="Left" Height="20" Margin="36,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
 
         <!-- Section Number Textboxes & Header -->
         <Label x:Name="sectionNumLabel" Content="Section Number" HorizontalAlignment="Left" Margin="133,76,0,0" VerticalAlignment="Top" Width="92" FontSize="10"/>
