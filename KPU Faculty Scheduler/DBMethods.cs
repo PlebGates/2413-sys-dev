@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 
 namespace KPU_Faculty_Scheduler
@@ -101,6 +102,26 @@ CREATE TABLE professorscourses(
             }
                 
             //return new Room(data.GetInt32(0), data.GetString(1), data.GetBoolean(3));
+        }
+
+        public List<Room> getAllRoom()
+        {
+            SQLiteCommand cmd = connection.CreateCommand(); //new sql command
+            cmd.CommandText = "select * from rooms"; //select all rooms
+            List<Room> roomList = new List<Room>(); //create the roomlist
+            using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
+            {
+                while (data.Read()) //while there are rows to read
+                {
+                    Room room = new Room(); //create a new room
+                    room.id = data.GetInt32(0); //get the roomid
+                    room.roomNum = data.GetInt32(1); //get the roomnum
+                    room.hasComputers = (data.GetInt32(3) == 1); //get the bool value of having computers
+                    roomList.Add(room); //add the room to the list
+                }
+            }
+
+                return roomList; //return the list
         }
         public Course getCourse(int id)
         {
