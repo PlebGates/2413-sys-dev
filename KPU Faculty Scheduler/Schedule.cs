@@ -449,13 +449,61 @@ namespace KPU_Faculty_Scheduler
                 csv.WriteRecords(blockSet); //write every courseblock to file
             }
         }
+        public void readFromCsv(FileInfo filepath)
+        {
+            HashSet<Professor> profSet = new HashSet<Professor>(); //create profset
+            HashSet<Room> roomSet = new HashSet<Room>(); //create roomset
+            HashSet<Course> courseSet = new HashSet<Course>(); //create courseset
+            HashSet<csvRecord> csvSet = new HashSet<csvRecord>(); //create blockset
+            //open stream
+            //find the rooms record
+            //read the records
+            //find the courses record
+            //read the records
+            //find the profs record
+            //read the records
+            //find the blocks record
+            //read the records
+            //close reader
+            List<CourseBlock> tempList = new List<CourseBlock>();
+            //convert profs/rooms/courses/blocks to courseblock list
+            foreach (csvRecord record in csvSet)
+            {
+                CourseBlock block = new CourseBlock(record.blockID, record.time);
+                foreach (Professor prof in profSet) //for each professor in the set
+                {
+                    if (prof.id == record.professorID) //if the id matches
+                    {
+                        block.professor = prof; //set professor
+                        break; //break the loop since the prof has been found
+                    }
+                }
+                foreach (Room room in roomSet) //for each room in the set
+                {
+                    if (room.id == record.roomID) //if the id matches
+                    {
+                        block.room = room; //set room
+                        break; //break the loop since the room has been found
+                    }
+                }
+                foreach (Course course in courseSet) //for each course in the set
+                {
+                    if (course.id == record.courseID) //if the id matches
+                    {
+                        block.course = course; //set course
+                        break; //break the loop since the course has been found
+                    }
+                }
+            }
+            //this.classlist = courseblock list
+        }
         public class csvRecord
         {
-            int blockID;
-            int courseID;
-            int roomID;
-            int professorID;
-            int time;
+            public int blockID;
+            public int courseID;
+            public int roomID;
+            public int professorID;
+            public int time;
 
             public csvRecord(CourseBlock block)
             {

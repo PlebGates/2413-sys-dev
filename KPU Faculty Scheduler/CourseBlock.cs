@@ -24,7 +24,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Main Constructor.
-        CourseBlock(int id_, int time_)
+        public CourseBlock(int id_, int time_)
         {
             id = id_;
             time = time_;
