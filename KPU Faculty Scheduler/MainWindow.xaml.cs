@@ -23,6 +23,7 @@ namespace KPU_Faculty_Scheduler
         public MainWindow()
         {
             InitializeComponent();
+            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
         }
 
         private void createButton_Click(object sender, RoutedEventArgs e) //when create schedule button clicked
