@@ -14,7 +14,7 @@ namespace KPU_Faculty_Scheduler
         public int sections;
 
         // Bool variable for whether this course needs a computer lab or not.
-        public Boolean needsComputers;
+        public bool needsComputers;
 
         // Default Constructor.
         public Course()
@@ -23,12 +23,26 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Main Constructor.
-        public Course(int id_, int sections_, String name_, Boolean needsComputers_)
+        public Course(String name_, int sections_, bool needsComputers_)
         {
-            id = id_;
-            sections = sections_;
             name = name_;
+            sections = sections_;
             needsComputers = needsComputers_;
+        }
+
+        public String getName()
+        {
+            return name;
+        }
+
+        public int getSection()
+        {
+            return sections;
+        }
+
+        public bool getComp()
+        {
+            return needsComputers;
         }
     }
 }

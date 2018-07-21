@@ -26,16 +26,49 @@ namespace KPU_Faculty_Scheduler
             InitializeComponent();
         }
 
-        ArrayList courses = new ArrayList();
+        // List to hold all course objects
+        List<Course> courseList = new List<Course>();
 
+        // Add button to create course objects and add to list
         private void coursesAddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (roomNum1.Text != "" && sectionNum1.Text != "")
+            if (courseNum1.Text != "" && sectionNum1.Text != "")
             {
-                if (coursesBox1.IsChecked == true)
+                if (coursesBox1.IsChecked != true)
                 {
-                    courses.Add(new Course())
+                    courseList.Add(new Course(courseNum1.Text, Int32.Parse(sectionNum1.Text), false));
+                    courseNum5.Text = courseList[0].getName();
+                    sectionNum5.Text = courseList[0].getSection().ToString();
+                    coursesBox5.IsChecked = courseList[0].getComp();
                 }
+                else
+                {
+                    courseList.Add(new Course(courseNum1.Text, Int32.Parse(sectionNum1.Text), true));
+                }
+            }
+            else
+            {
+                 MessageBox.Show("A text field on line 1 was left empty");
+            }
+
+
+            if (courseNum2.Text != "" && sectionNum2.Text != "")
+            {
+                if (coursesBox2.IsChecked != true)
+                {
+                    courseList.Add(new Course(courseNum2.Text, Int32.Parse(sectionNum2.Text), false));
+                }
+                else
+                {
+                    courseList.Add(new Course(courseNum2.Text, Int32.Parse(sectionNum2.Text), true));
+                    courseNum7.Text = courseList[1].getName();
+                    sectionNum7.Text = courseList[1].getSection().ToString();
+                    coursesBox7.IsChecked = courseList[1].getComp();
+                }
+            }
+            else
+            {
+                MessageBox.Show("A text field on line 2 was left empty");
             }
         }
     }
