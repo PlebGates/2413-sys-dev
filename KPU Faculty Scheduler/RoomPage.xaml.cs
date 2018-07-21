@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace KPU_Faculty_Scheduler
 {
     /// <summary>
-    /// Interaction logic for Professors.xaml
+    /// Interaction logic for Rooms.xaml
     /// </summary>
-    public partial class Professors : Page
+    public partial class RoomPage : Page
     {
-        public Professors()
+        public RoomPage()
         {
             InitializeComponent();
         }

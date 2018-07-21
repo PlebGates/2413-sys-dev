@@ -80,21 +80,21 @@
     </ApplicationDefinition>
     <Compile Include="Course.cs" />
     <Compile Include="CourseBlock.cs" />
-    <Compile Include="Courses.xaml.cs">
-      <DependentUpon>Courses.xaml</DependentUpon>
+    <Compile Include="CoursePage.xaml.cs">
+      <DependentUpon>CoursePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBMethods.cs" />
     <Compile Include="export.cs" />
     <Compile Include="openExcel.cs" />
-    <Compile Include="Professors.xaml.cs">
-      <DependentUpon>Professors.xaml</DependentUpon>
+    <Compile Include="ProfessorPage.xaml.cs">
+      <DependentUpon>ProfessorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Room.cs" />
-    <Compile Include="Rooms.xaml.cs">
-      <DependentUpon>Rooms.xaml</DependentUpon>
+    <Compile Include="RoomPage.xaml.cs">
+      <DependentUpon>RoomPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Schedule.cs" />
-    <Page Include="Courses.xaml">
+    <Page Include="CoursePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,11 +110,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Professors.xaml">
+    <Page Include="ProfessorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Rooms.xaml">
+    <Page Include="RoomPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

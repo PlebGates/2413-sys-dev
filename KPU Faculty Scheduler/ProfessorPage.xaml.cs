@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +16,13 @@ using System.Windows.Shapes;
 namespace KPU_Faculty_Scheduler
 {
     /// <summary>
-    /// Interaction logic for Courses.xaml
+    /// Interaction logic for Professors.xaml
     /// </summary>
-    public partial class Courses : Page
+    public partial class ProfessorPage : Page
     {
-        public Courses()
+        public ProfessorPage()
         {
             InitializeComponent();
-        }
-
-        // Add button to create course objects and add to list
-        private void coursesAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

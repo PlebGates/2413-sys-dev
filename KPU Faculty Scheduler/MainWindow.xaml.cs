@@ -27,9 +27,9 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Create new pages upon program launch
-        Courses page1 = new Courses();
-        Rooms page2 = new Rooms();
-        Professors page3 = new Professors();
+        CoursePage coursesPage = new CoursePage();
+        RoomPage roomsPage = new RoomPage();
+        ProfessorPage professorsPage = new ProfessorPage();
 
         // Upon clicking "Create", hide original buttons, and toggle visibility of the frame and stack panels
         private void createButton_Click(object sender, RoutedEventArgs e)
@@ -39,7 +39,7 @@ namespace KPU_Faculty_Scheduler
             navBarBack.Visibility = System.Windows.Visibility.Visible;
             navBarNext.Visibility = System.Windows.Visibility.Visible;
             mainFrame.Visibility = System.Windows.Visibility.Visible;
-            mainFrame.Content = page1;
+            mainFrame.Content = coursesPage;
         }
 
         private void importButton_Click(object sender, RoutedEventArgs e)
@@ -53,13 +53,13 @@ namespace KPU_Faculty_Scheduler
         // Upon clicking the next button, figure out which page is currently visible, and decide where to go from there
         private void nextClick(object sender, RoutedEventArgs e)
         {
-            if (mainFrame.Content == page1)
+            if (mainFrame.Content == coursesPage)
             {
-                mainFrame.Content = page2;
+                mainFrame.Content = roomsPage;
             }
-            else if (mainFrame.Content == page2)
+            else if (mainFrame.Content == roomsPage)
             {
-                mainFrame.Content = page3;
+                mainFrame.Content = professorsPage;
             }
         }
 
@@ -67,7 +67,7 @@ namespace KPU_Faculty_Scheduler
         private void backClick(object sender, RoutedEventArgs e)
         {
             // If returning to the main menu, delete all object content
-            if (mainFrame.Content == page1)
+            if (mainFrame.Content == coursesPage)
             {
                 createButton.Visibility = System.Windows.Visibility.Visible;
                 importButton.Visibility = System.Windows.Visibility.Visible;
@@ -75,17 +75,17 @@ namespace KPU_Faculty_Scheduler
                 navBarNext.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Content = " ";
                 mainFrame.Visibility = System.Windows.Visibility.Hidden;
-                page1 = new Courses();
-                page2 = new Rooms();
-                page3 = new Professors();
+                coursesPage = new CoursePage();
+                roomsPage = new RoomPage();
+                professorsPage = new ProfessorPage();
             }
-            else if (mainFrame.Content == page2)
+            else if (mainFrame.Content == roomsPage)
             {
-                mainFrame.Content = page1;
+                mainFrame.Content = roomsPage;
             }
-            else if (mainFrame.Content == page3)
+            else if (mainFrame.Content == professorsPage)
             {
-                mainFrame.Content = page2;
+                mainFrame.Content = professorsPage;
             }
         }
     }
