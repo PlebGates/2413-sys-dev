@@ -5,90 +5,65 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KPU_Faculty_Scheduler"
       mc:Ignorable="d" 
-     
-       Title="RoomPage" Width="400" MinHeight="400">
-
+      Title="RoomPage" Width="400" MinHeight="400">
 
     <Grid>
-        <Label x:Name="RoomsLabel" Content="Rooms" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="10,49,0,15" Stroke="Black" Width="380"/>
-        <Button x:Name="RoomAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20"/>
-        <TextBox x:Name="RoomNumber1" HorizontalAlignment="Left" Height="20" Margin="36,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <Label x:Name="RoomLabel" Content="Room Number" HorizontalAlignment="Left" Margin="36,49,0,0" VerticalAlignment="Top" Width="91" FontSize="10" RenderTransformOrigin="-0.088,0.609"/>
-        <TextBox x:Name="RoomBuilding1" HorizontalAlignment="Left" Height="20" Margin="112,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <Label x:Name="BuildingLabel" Content="Building" HorizontalAlignment="Left" Margin="127,49,0,0" VerticalAlignment="Top" Width="49" FontSize="10" RenderTransformOrigin="-0.088,0.609"/>
-        <Label x:Name="ComputerLabel" Content="Computers" HorizontalAlignment="Left" Margin="205,49,0,0" VerticalAlignment="Top" Width="58" FontSize="10" RenderTransformOrigin="-0.088,0.609"/>
-        <CheckBox
-            Content="True"
-            HorizontalAlignment="Left"
-            Margin="205,77,0,0"
-            VerticalAlignment="Top" />
-        <TextBox x:Name="RoomNumber2" HorizontalAlignment="Left" Height="20" Margin="36,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber2" HorizontalAlignment="Left" Height="20" Margin="112,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,106,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber3" HorizontalAlignment="Left" Height="20" Margin="36,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber3" HorizontalAlignment="Left" Height="20" Margin="112,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,135,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber4" HorizontalAlignment="Left" Height="20" Margin="36,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber4" HorizontalAlignment="Left" Height="20" Margin="112,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,164,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber5" HorizontalAlignment="Left" Height="20" Margin="36,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber5" HorizontalAlignment="Left" Height="20" Margin="112,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,194,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber7" HorizontalAlignment="Left" Height="20" Margin="36,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber7" HorizontalAlignment="Left" Height="20" Margin="112,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,252,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber8" HorizontalAlignment="Left" Height="20" Margin="36,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber8" HorizontalAlignment="Left" Height="20" Margin="112,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,279,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber9" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber9" HorizontalAlignment="Left" Height="20" Margin="112,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,309,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber6" HorizontalAlignment="Left" Height="20" Margin="36,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber6" HorizontalAlignment="Left" Height="20" Margin="112,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,223,0,0"
-        	VerticalAlignment="Top"/>
-        <TextBox x:Name="RoomNumber10" HorizontalAlignment="Left" Height="20" Margin="36,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="BuildingNumber10" HorizontalAlignment="Left" Height="20" Margin="112,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <CheckBox
-        	Content="True"
-        	HorizontalAlignment="Left"
-        	Margin="205,336,0,0"
-        	VerticalAlignment="Top"/>
+        <!-- Rectangle to contain elements -->
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="10,60,0,15" Stroke="Black" Width="380"/>
 
+        <!-- Page Header & row Labels -->
+        <Label x:Name="roomHeader" Content="Rooms" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36"/>
+        <Label x:Name="roomLabel1" Content="1" HorizontalAlignment="Left" Margin="15,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel2" Content="2" HorizontalAlignment="Left" Margin="15,123,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel3" Content="3" HorizontalAlignment="Left" Margin="15,148,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel4" Content="4" HorizontalAlignment="Left" Margin="15,173,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel5" Content="5" HorizontalAlignment="Left" Margin="15,198,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel6" Content="6" HorizontalAlignment="Left" Margin="15,223,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel7" Content="7" HorizontalAlignment="Left" Margin="15,248,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel8" Content="8" HorizontalAlignment="Left" Margin="15,273,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel9" Content="9" HorizontalAlignment="Left" Margin="15,298,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="roomLabel10" Content="10" HorizontalAlignment="Left" Margin="11,323,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.058,0.662"/>
 
+        <!-- Course Number Textboxes & Header -->
+        <Label x:Name="buildingNameLabel" Content="Building Name" HorizontalAlignment="Left" Margin="45,76,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
+        <TextBox x:Name="buildingName1" HorizontalAlignment="Left" Height="20" Margin="36,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName2" HorizontalAlignment="Left" Height="20" Margin="36,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName3" HorizontalAlignment="Left" Height="20" Margin="36,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName4" HorizontalAlignment="Left" Height="20" Margin="36,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName5" HorizontalAlignment="Left" Height="20" Margin="36,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName6" HorizontalAlignment="Left" Height="20" Margin="36,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName7" HorizontalAlignment="Left" Height="20" Margin="36,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName8" HorizontalAlignment="Left" Height="20" Margin="36,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName9" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="buildingName10" HorizontalAlignment="Left" Height="20" Margin="36,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+
+        <!-- Section Number Textboxes & Header -->
+        <Label x:Name="roomNumLabel" Content="Room Number" HorizontalAlignment="Left" Margin="138,76,0,0" VerticalAlignment="Top" Width="78" FontSize="10"/>
+        <TextBox x:Name="roomNum1" HorizontalAlignment="Left" Height="20" Margin="131,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum2" HorizontalAlignment="Left" Height="20" Margin="131,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum3" HorizontalAlignment="Left" Height="20" Margin="131,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum4" HorizontalAlignment="Left" Height="20" Margin="131,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum5" HorizontalAlignment="Left" Height="20" Margin="131,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum6" HorizontalAlignment="Left" Height="20" Margin="131,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum7" HorizontalAlignment="Left" Height="20" Margin="131,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum8" HorizontalAlignment="Left" Height="20" Margin="131,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum9" HorizontalAlignment="Left" Height="20" Margin="131,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="roomNum10" HorizontalAlignment="Left" Height="20" Margin="131,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+
+        <!-- Checkboxes & Header -->
+        <Label x:Name="roomCheckboxLabel" Content="Has Computers?" HorizontalAlignment="Left" Margin="266,76,0,0" VerticalAlignment="Top" Width="84" FontSize="10"/>
+        <CheckBox x:Name="roomCheckbox1" HorizontalAlignment="Left" Margin="296,104,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox2" HorizontalAlignment="Left" Margin="296,129,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox3" HorizontalAlignment="Left" Margin="296,154,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox4" HorizontalAlignment="Left" Margin="296,179,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox5" HorizontalAlignment="Left" Margin="296,204,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox6" HorizontalAlignment="Left" Margin="296,229,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox7" HorizontalAlignment="Left" Margin="296,254,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox8" HorizontalAlignment="Left" Margin="296,279,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox9" HorizontalAlignment="Left" Margin="296,304,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckbBox10" HorizontalAlignment="Left" Margin="296,329,0,0" VerticalAlignment="Top"/>
+
+        <!-- Button to submit entered info -->
+        <Button x:Name="roomAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20"/>
     </Grid>
-
-
 </Page>
