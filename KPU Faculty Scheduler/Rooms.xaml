@@ -22,90 +22,70 @@
             Content="True"
             HorizontalAlignment="Left"
             Margin="205,77,0,0"
-            VerticalAlignment="Top"
-            Checked="CheckBox_Checked"
-            Unchecked="CheckBox_Unchecked"/>
+            VerticalAlignment="Top" />
         <TextBox x:Name="RoomNumber2" HorizontalAlignment="Left" Height="20" Margin="36,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="BuildingNumber2" HorizontalAlignment="Left" Height="20" Margin="112,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,106,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber3" HorizontalAlignment="Left" Height="20" Margin="36,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="BuildingNumber3" HorizontalAlignment="Left" Height="20" Margin="112,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,135,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber1_Copy2" HorizontalAlignment="Left" Height="20" Margin="36,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="RoomNumber2_Copy2" HorizontalAlignment="Left" Height="20" Margin="112,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,164,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber1_Copy3" HorizontalAlignment="Left" Height="20" Margin="36,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="RoomNumber2_Copy3" HorizontalAlignment="Left" Height="20" Margin="112,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,194,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber1_Copy4" HorizontalAlignment="Left" Height="20" Margin="36,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="RoomNumber2_Copy4" HorizontalAlignment="Left" Height="20" Margin="112,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,252,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber1_Copy5" HorizontalAlignment="Left" Height="20" Margin="36,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="RoomNumber2_Copy5" HorizontalAlignment="Left" Height="20" Margin="112,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,279,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber1_Copy6" HorizontalAlignment="Left" Height="20" Margin="36,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="RoomNumber2_Copy6" HorizontalAlignment="Left" Height="20" Margin="112,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,309,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber1_Copy7" HorizontalAlignment="Left" Height="20" Margin="36,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="RoomNumber2_Copy7" HorizontalAlignment="Left" Height="20" Margin="112,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,223,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
         <TextBox x:Name="RoomNumber1_Copy8" HorizontalAlignment="Left" Height="20" Margin="36,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="RoomNumber2_Copy8" HorizontalAlignment="Left" Height="20" Margin="112,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <CheckBox
         	Content="True"
         	HorizontalAlignment="Left"
         	Margin="205,336,0,0"
-        	VerticalAlignment="Top"
-        	Checked="CheckBox_Checked"
-        	Unchecked="CheckBox_Unchecked"/>
+        	VerticalAlignment="Top"/>
 
 
     </Grid>
