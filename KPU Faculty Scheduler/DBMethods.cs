@@ -279,7 +279,7 @@ CREATE TABLE professorscourses(
         {
             int computers = course.needsComputers ? 1 : 0; //room has computers? yes = 1, no = 0
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO courses (name,sections,needsComputers) values (" + course.name + "," + course.sections + "," + computers + ");";
+            cmd.CommandText = "INSERT INTO courses (name,sections,needsComputers) values ('" + course.name + "'," + course.sections + "," + computers + ");";
             cmd.ExecuteNonQuery();
         }
         public void addCanTeach(int profid, int courseid)
