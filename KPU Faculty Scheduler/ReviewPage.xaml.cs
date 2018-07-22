@@ -25,12 +25,48 @@ namespace KPU_Faculty_Scheduler
             InitializeComponent();
         }
 
+        public void review(List<Course> input)
+        {
+            Review_Listbox.Items.Clear();
+            int count = 0;
+            Review_Listbox.Items.Add(count + " |\tCourse Name\t|  Section Number\t|  Need Computers");
+            foreach (Course output in input) //foreach in list
+            {   //Add each element to listbox
+                count++;
+                //MessageBox.Show(output.name);
+                Review_Listbox.Items.Add(count + " |\t          " + output.name + "   \t|             " + output.sections + "\t|             " + output.needsComputers);
+            }
+        }
+        public void review(List<Room> input)
+        {
+            Review_Listbox.Items.Clear();
+            int count = 0;
+            Review_Listbox.Items.Add(count + " |\tBuilding Name\t|  Room Number\t|  Has Computers");
+            foreach (Room output in input) //foreach in list
+            {   //Add each element to listbox
+                count++;
+                Review_Listbox.Items.Add(count + " |\t          " + output.building + "   \t|             " + output.roomNum + "\t|             " + output.hasComputers);
+            }
+        }
+        public void review(List<Professor> input)
+        {
+            Review_Listbox.Items.Clear();
+            int count = 0;
+            Review_Listbox.Items.Add(count + " |\tCourse Name\t|  Can Teach The Following");
+            foreach (Professor output in input) //foreach in list
+            {   //Add each element to listbox
+                count++;
+                Review_Listbox.Items.Add(count + " |\t          " + output.name + "   \t|             " + output.classList );
+            }
+        }
+
+        /*
         private void reviewCourses_Click(object sender, RoutedEventArgs e)
         {
             //listbox format
             //course name, section, needcomputer
             Review_Listbox.Items.Clear();
-            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
+
             foreach(Course output in db.getAllCourse()) //foreach in list
             {   //Add each element to listbox
                 Review_Listbox.Items.Add(output.name + ", " + output.sections + ", " + output.needsComputers);
@@ -60,7 +96,7 @@ namespace KPU_Faculty_Scheduler
                 Review_Listbox.Items.Add(output.name + ", [" + String.Join(",", db.getCanTeach(output.id).classList.ToArray()) + "]");
             }
             
-        }
+        }*/
 
 
 

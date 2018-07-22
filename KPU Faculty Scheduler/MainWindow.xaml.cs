@@ -68,6 +68,7 @@ namespace KPU_Faculty_Scheduler
             else if (mainFrame.Content == professorsPage)
             {
                 AddButton.Visibility = System.Windows.Visibility.Hidden;
+                reviewButtons.Visibility = System.Windows.Visibility.Visible;
                 mainFrame.Content = reviewPage;
 
             }
@@ -104,10 +105,11 @@ namespace KPU_Faculty_Scheduler
             else if (mainFrame.Content == reviewPage)
             {
                 AddButton.Visibility = System.Windows.Visibility.Visible;
+                reviewButtons.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Content = professorsPage;
             }
         }
-        public void coursesAddButton_Click(object sender, RoutedEventArgs e)
+        private void coursesAddButton_Click(object sender, RoutedEventArgs e)
         {
             if(mainFrame.Content == coursesPage)
             {
@@ -137,6 +139,21 @@ namespace KPU_Faculty_Scheduler
                     db.addProfessor(Prof_);
                 }
             }
+        }
+
+        private void review_Click_Course(object sender, RoutedEventArgs e)
+        {
+            reviewPage.review(db.getAllCourse());
+        }
+
+        private void review_Click_Room(object sender, RoutedEventArgs e)
+        {
+            reviewPage.review(db.getAllRoom());
+        }
+
+        private void review_Click_Professor(object sender, RoutedEventArgs e)
+        {
+            reviewPage.review(db.getAllProfessor());
         }
     }
 }

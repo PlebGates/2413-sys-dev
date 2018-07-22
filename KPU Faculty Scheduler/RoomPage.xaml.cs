@@ -26,7 +26,6 @@ namespace KPU_Faculty_Scheduler
         }
         public List<Room> addInput()
         {
-
             // block of OBJECTS to simplify code
             List<TextBox> inputboxes1 = new List<TextBox> { buildingName1, buildingName2, buildingName3, buildingName4, buildingName5, buildingName6, buildingName7, buildingName8, buildingName9, buildingName10 };
             List<TextBox> inputboxes2 = new List<TextBox> { roomNum1, roomNum2, roomNum3, roomNum4, roomNum5, roomNum6, roomNum7, roomNum8, roomNum9, roomNum10 };

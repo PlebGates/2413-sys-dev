@@ -27,5 +27,12 @@
         <!-- Add button -->
         <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20" Click="coursesAddButton_Click" Visibility="Hidden"/>
 
+        <!-- Stackpanel for buttons -->
+        <StackPanel x:Name="reviewButtons"  HorizontalAlignment="Center" Height="35" Margin="0,68,0,0" VerticalAlignment="Top" Width="300" Orientation="Horizontal" Visibility="Hidden">
+            <Button x:Name="reviewCourses" Content="Course" Height="35" Width="100" Click="review_Click_Course"></Button>
+            <Button x:Name="reviewRoom" Content="Room" Height="35" Width="100" Click="review_Click_Room"></Button>
+            <Button x:Name="reviewProf" Content="Professor" Height="35" Width="100" Click="review_Click_Professor"></Button>
+        </StackPanel>
+        
     </Grid>
 </Window>

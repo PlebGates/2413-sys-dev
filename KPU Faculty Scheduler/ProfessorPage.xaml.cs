@@ -39,7 +39,7 @@ namespace KPU_Faculty_Scheduler
                 {
                     try
                     {
-                        Professor.name = inputboxes1[i].Text + ", "+inputboxes2[i].Text;
+                        Professor.name = inputboxes1[i].Text + " "+inputboxes2[i].Text;
                         //Professor.classList = Convert.ToInt32(inputboxes2[i].Text);
                         validInput.Add(Professor);
                     }

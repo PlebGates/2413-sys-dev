@@ -26,6 +26,7 @@ namespace KPU_Faculty_Scheduler
 CREATE TABLE rooms(
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL,
+    roomNumber int NOT NULL,
 	hasComputers INTEGER NOT NULL
 	);
 
@@ -126,7 +127,7 @@ CREATE TABLE professorscourses(
             List<String> classList = new List<string>();
 
             SQLiteCommand cmd = connection.CreateCommand(); //new sql command
-            cmd.CommandText = "select * from professorscourses where profid = " + id; //select all courses
+            cmd.CommandText = "select * from professorscourses where professorID = " + id; //select all courses
             using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
             {
                 while (data.Read())
@@ -146,7 +147,8 @@ CREATE TABLE professorscourses(
                 while (data.Read())
                 {
                     room.id = data.GetInt32(0);
-                    room.roomNum = data.GetInt32(1);
+                    room.building = data.GetString(1);
+                    room.roomNum = data.GetInt32(2);
                     room.hasComputers = (data.GetInt32(3) == 1);
                     return room;
                 }
@@ -166,8 +168,10 @@ CREATE TABLE professorscourses(
                 while (data.Read()) //while there are rows to read
                 {
                     Room room = new Room(); //create a new room
+                    
                     room.id = data.GetInt32(0); //get the roomid
-                    room.roomNum = data.GetInt32(1); //get the roomnum
+                    room.building = data.GetString(1);
+                    room.roomNum = data.GetInt32(2);
                     room.hasComputers = (data.GetInt32(3) == 1); //get the bool value of having computers
                     roomList.Add(room); //add the room to the list
                 }
@@ -185,9 +189,8 @@ CREATE TABLE professorscourses(
                 while (data.Read())
                 {
                     course.id = data.GetInt32(0);
-
-                    // NOT SURE IF THIS IS CORRECT VINCENT, ALSO SEE LINE 156
                     course.name = data.GetString(1);
+                    course.sections = data.GetInt32(2);
                     course.needsComputers = (data.GetInt32(3) == 1);
                     return course;
                 }
@@ -203,9 +206,10 @@ CREATE TABLE professorscourses(
             List<Course> courseList = new List<Course>(); //create the list
             using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
             {
+                Course course = new Course(); //create a new course
                 while (data.Read()) //while there are rows to read
                 {
-                    Course course = new Course(); //create a new course
+                    
                     course.id = data.GetInt32(0); //get the course id
                     course.name = data.GetString(1); //get thecourse name
                     course.sections = data.GetInt32(2); //get the section #
@@ -261,21 +265,21 @@ CREATE TABLE professorscourses(
         public void addProfessor(Professor prof)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO professors (id,name) values (" + prof.id + ",'" + prof.name + "');";
+            cmd.CommandText = "INSERT INTO professors (name) values ('" + prof.name + "');";
             cmd.ExecuteNonQuery();
         }
         public void addRoom(Room room)
         {
             int computers = room.hasComputers ? 1 : 0; //room has computers? yes = 1, no = 0
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO rooms (id,name,hasComputers) values (" + room.id + ",'" + room.roomNum + "'," + computers + ");";
+            cmd.CommandText = "INSERT INTO rooms (name,roomNumber,hasComputers) values ('" + room.building + "'," + room.roomNum + "," + computers + ");";
             cmd.ExecuteNonQuery();
         }
         public void addCourse(Course course)
         {
             int computers = course.needsComputers ? 1 : 0; //room has computers? yes = 1, no = 0
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO courses (id,name,sections,needsComputers) values (" + course.id + ",'" + course.name + "'," + course.sections + "," + computers + ");";
+            cmd.CommandText = "INSERT INTO courses (name,sections,needsComputers) values (" + course.name + "," + course.sections + "," + computers + ");";
             cmd.ExecuteNonQuery();
         }
         public void addCanTeach(int profid, int courseid)
