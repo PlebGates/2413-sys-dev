@@ -39,11 +39,13 @@ namespace KPU_Faculty_Scheduler
             
             List<Course> validInput = new List<Course> { };
             for (int i = 0; i < 10; i++) {
+                Course course = new Course();
                 if (inputboxes1[i].Text != "" && inputboxes2[i].Text != "")
                 {
                     Course course = new Course();
                     try
                     {
+                        
                         course.name = inputboxes1[i].Text;
                         course.sections = Convert.ToInt32(inputboxes2[i].Text);
                         course.needsComputers = (bool)inputboxes3[i].IsChecked;
