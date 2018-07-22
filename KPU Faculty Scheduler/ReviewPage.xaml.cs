@@ -30,26 +30,48 @@ namespace KPU_Faculty_Scheduler
             //listbox format
             //course name, section, needcomputer
             Review_Listbox.Items.Clear();
-            //DBMethods db = new DBMethods();
-            List<Course> temp = new List<Course>;
-            temp = db.getAllRoom();
+            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
+            List<Course> temp = new List<Course> { };
+            temp = db.getAllCourse();
             //Review_Listbox.ItemsSource = temp;
             foreach(Course output in temp)
             {
-                Review_Listbox.Items.Add(output.name+", "+output.sections+", "+output.needsComputers)
+                Review_Listbox.Items.Add(output.name + ", " + output.sections + ", " + output.needsComputers);
             }
         }
 
-        private void reviewClass_Click(object sender, RoutedEventArgs e)
+        private void reviewRoom_Click(object sender, RoutedEventArgs e)
         {
             //listbox format
             //building, room, hascomputer
+            Review_Listbox.Items.Clear();
+            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
+            List<Room> temp = new List<Room> { };
+            temp = db.getAllRoom();
+            //Review_Listbox.ItemsSource = temp;
+            foreach (Room output in temp)
+            {
+                Review_Listbox.Items.Add(output.building + ", " + output.roomNum + ", " + output.hasComputers);
+            }
         }
 
         private void reviewProf_Click(object sender, RoutedEventArgs e)
         {
             //listbox format
             //Last, first, [canteach]
+            Review_Listbox.Items.Clear();
+            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
+            List<Professor> temp = new List<Professor> { };
+            temp = db.GetAllProfessor();
+            //Review_Listbox.ItemsSource = temp;
+            foreach (Professor output in temp)
+            {
+                Review_Listbox.Items.Add(output.name + ", [" + String.Join(",", db.getCanTeach(output.id).classList.ToArray()) + "]");
+            }
+            
         }
+
+
+
     }
 }

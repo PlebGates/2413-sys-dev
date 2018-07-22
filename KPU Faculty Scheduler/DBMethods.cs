@@ -102,7 +102,24 @@ CREATE TABLE professorscourses(
             }
             return false;
         }
-
+        public Professor getCanTeach(int teachID)
+        {   //populates Professor List<String> classList
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "select * from professorsclass where teachID = " + teachID;
+            using (SQLiteDataReader data = cmd.ExecuteReader())
+            {
+                Professor prof = new Professor();
+                while (data.Read())
+                {
+                    prof.classList.Add(data.GetInt32(1) + "");
+                }
+                if (prof.classList[0] == null)
+                {
+                    return null;
+                }
+                return prof;
+            }
+        }
         public List<String> getClassList(int id)
         {
             List<String> classList = new List<string>();

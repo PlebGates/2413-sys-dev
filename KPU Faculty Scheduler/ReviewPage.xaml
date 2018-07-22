@@ -14,7 +14,7 @@
         <ListBox x:Name="Review_Listbox" HorizontalAlignment="Left" Height="200" Margin="20,110,0,0" VerticalAlignment="Top" Width="360"/>
         <StackPanel HorizontalAlignment="Center" Height="35" Margin="0,68,0,0" VerticalAlignment="Top" Width="300" Orientation="Horizontal">
             <Button x:Name="reviewCourses" Content="Course" Height="35" Width="100" Click="reviewCourses_Click"></Button>
-            <Button x:Name="reviewClass" Content="Class" Height="35" Width="100" Click="reviewClass_Click"></Button>
+            <Button x:Name="reviewRoom" Content="Room" Height="35" Width="100" Click="reviewRoom_Click"></Button>
             <Button x:Name="reviewProf" Content="Professor" Height="35" Width="100" Click="reviewProf_Click"></Button>
         </StackPanel>
 
