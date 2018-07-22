@@ -11,6 +11,7 @@ namespace KPU_Faculty_Scheduler
         {
             connection = connection_; //"Data Source=:memory:"
             connection.Open();
+            createTables();
         }
 
         public void createTables()
@@ -145,7 +146,7 @@ CREATE TABLE professorscourses(
                 while (data.Read())
                 {
                     room.id = data.GetInt32(0);
-                    room.roomNum = data.GetString(1);
+                    room.roomNum = data.GetInt32(1);
                     room.hasComputers = (data.GetInt32(3) == 1);
                     return room;
                 }
@@ -208,7 +209,7 @@ CREATE TABLE professorscourses(
                     course.id = data.GetInt32(0); //get the course id
                     course.name = data.GetString(1); //get thecourse name
                     course.sections = data.GetInt32(2); //get the section #
-                    course.needsComputers = (data.GetInt32(4) == 1); //get the bool value of having computers
+                    course.needsComputers = (data.GetInt32(3) == 1); //get the bool value of having computers
                     courseList.Add(course); //add the room to the list
                 }
             }

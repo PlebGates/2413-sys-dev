@@ -53,7 +53,6 @@
         <!-- Courses they can teach column -->
 
         <!-- Add button -->
-        <Button x:Name="professorAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20"/>
 
         <!-- Listbox column -->
         <Label x:Name="canTeachLabel" Content="What can they teach?" HorizontalAlignment="Left" Margin="251,76,0,0" VerticalAlignment="Top" Width="106" FontSize="10"/>
