@@ -59,9 +59,10 @@ CREATE TABLE professorscourses(
             cmd.CommandText = "select * from professors where id = " + id;
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
-                Professor prof = new Professor();
+                
                 while(data.Read())
                 {
+                    Professor prof = new Professor();
                     prof.id = data.GetInt32(0);
                     prof.name = data.GetString(1);
                     return prof;
@@ -74,7 +75,7 @@ CREATE TABLE professorscourses(
         public List<Professor> getAllProfessor()
         {
             SQLiteCommand cmd = connection.CreateCommand(); //new sql command
-            cmd.CommandText = "select * from courses"; //select all profs
+            cmd.CommandText = "select * from professors"; //select all profs
             List<Professor> profList = new List<Professor>(); //create the list
             using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
             {
@@ -141,11 +142,11 @@ CREATE TABLE professorscourses(
         {
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from rooms where id = " + id;
-            Room room = new Room();
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
                 while (data.Read())
                 {
+                    Room room = new Room();
                     room.id = data.GetInt32(0);
                     room.building = data.GetString(1);
                     room.roomNum = data.GetInt32(2);
@@ -183,11 +184,12 @@ CREATE TABLE professorscourses(
         {
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from courses where id = " + id;
-            Course course = new Course();
+            
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
                 while (data.Read())
                 {
+                    Course course = new Course();
                     course.id = data.GetInt32(0);
                     course.name = data.GetString(1);
                     course.sections = data.GetInt32(2);
@@ -206,10 +208,10 @@ CREATE TABLE professorscourses(
             List<Course> courseList = new List<Course>(); //create the list
             using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
             {
-                Course course = new Course(); //create a new course
+               
                 while (data.Read()) //while there are rows to read
                 {
-                    
+                    Course course = new Course(); //create a new course
                     course.id = data.GetInt32(0); //get the course id
                     course.name = data.GetString(1); //get thecourse name
                     course.sections = data.GetInt32(2); //get the section #
@@ -224,11 +226,12 @@ CREATE TABLE professorscourses(
         {
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from schedule where id = " + id;
-            CourseBlock block = new CourseBlock();
+            
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
                 while (data.Read())
                 {
+                    CourseBlock block = new CourseBlock();
                     block.id = id;
                     block.professor = getProfessor(data.GetInt32(1));
                     block.course = getCourse(data.GetInt32(2));
@@ -279,7 +282,7 @@ CREATE TABLE professorscourses(
         {
             int computers = course.needsComputers ? 1 : 0; //room has computers? yes = 1, no = 0
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO courses (name,sections,needsComputers) values (" + course.name + "," + course.sections + "," + computers + ");";
+            cmd.CommandText = "INSERT INTO courses (name,sections,needsComputers) values ('" + course.name + "'," + course.sections + "," + computers + ");";
             cmd.ExecuteNonQuery();
         }
         public void addCanTeach(int profid, int courseid)

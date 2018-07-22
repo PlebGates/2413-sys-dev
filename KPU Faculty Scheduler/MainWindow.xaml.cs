@@ -109,7 +109,7 @@ namespace KPU_Faculty_Scheduler
                 mainFrame.Content = professorsPage;
             }
         }
-        private void coursesAddButton_Click(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if(mainFrame.Content == coursesPage)
             {
@@ -143,17 +143,17 @@ namespace KPU_Faculty_Scheduler
 
         private void review_Click_Course(object sender, RoutedEventArgs e)
         {
-            reviewPage.review(db.getAllCourse());
+            reviewPage.reviewCourse(db.getAllCourse());
         }
 
         private void review_Click_Room(object sender, RoutedEventArgs e)
         {
-            reviewPage.review(db.getAllRoom());
+            reviewPage.reviewRoom(db.getAllRoom());
         }
 
         private void review_Click_Professor(object sender, RoutedEventArgs e)
         {
-            reviewPage.review(db.getAllProfessor());
+            reviewPage.reviewProfesser(db.getAllProfessor());
         }
     }
 }
