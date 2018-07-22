@@ -160,7 +160,7 @@ CREATE TABLE professorscourses(
         public Course getCourse(int id)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "select * from rooms where id = " + id;
+            cmd.CommandText = "select * from courses where id = " + id;
             Course course = new Course();
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
