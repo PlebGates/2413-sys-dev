@@ -23,14 +23,14 @@ namespace KPU_Faculty_Scheduler
         public MainWindow()
         {
             InitializeComponent();
-            
+            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
         }
 
         // Create new pages upon program launch
         CoursePage coursesPage = new CoursePage();
         RoomPage roomsPage = new RoomPage();
         ProfessorPage professorsPage = new ProfessorPage();
-        DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
+        
 
         // Upon clicking "Create", hide original buttons, and toggle visibility of the frame and stack panels
         private void createButton_Click(object sender, RoutedEventArgs e)
