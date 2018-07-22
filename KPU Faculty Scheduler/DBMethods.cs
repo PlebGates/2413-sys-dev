@@ -69,10 +69,28 @@ CREATE TABLE professorscourses(
             return null;
             //return new Prof(data.GetInt32(0), data.GetString(1));
         }
+        public List<Professor> getAllProfessor()
+        {
+            SQLiteCommand cmd = connection.CreateCommand(); //new sql command
+            cmd.CommandText = "select * from courses"; //select all profs
+            List<Professor> profList = new List<Professor>(); //create the list
+            using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
+            {
+                while (data.Read())
+                {
+                    Professor prof = new Professor();
+                    prof.id = data.GetInt32(0);
+                    prof.name = data.GetString(1);
+                    prof.classList = getClassList(prof.id);
+                    profList.Add(prof);
+                }
+            }
+            return profList; //return the list
+        }
         public bool canTeach(int teachID, int classID)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "select * from professorsclass where teachID = " + teachID + " and classID = " + classID;
+            cmd.CommandText = "select * from professorscourses where teachID = " + teachID + " and classID = " + classID;
             //select the row where the teacher id and class id are shared
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
@@ -83,6 +101,22 @@ CREATE TABLE professorscourses(
                 
             }
             return false;
+        }
+
+        public List<String> getClassList(int id)
+        {
+            List<String> classList = new List<string>();
+
+            SQLiteCommand cmd = connection.CreateCommand(); //new sql command
+            cmd.CommandText = "select * from professorscourses where profid = " + id; //select all courses
+            using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
+            {
+                while (data.Read())
+                {
+                    classList.Add(getCourse(data.GetInt32(2)).name); //get the course name and add to list
+                }
+            }
+            return classList; //return the list
         }
         public Room getRoom(int id)
         {
@@ -182,6 +216,28 @@ CREATE TABLE professorscourses(
                 }
             }
             return null;
+        }
+
+        public List<CourseBlock> getAllCourseBlock()
+        {
+            SQLiteCommand cmd = connection.CreateCommand(); //new sql command
+            cmd.CommandText = "select * from courses"; //select all courses
+            List<CourseBlock> blockList = new List<CourseBlock>(); //create the list
+            using (SQLiteDataReader data = cmd.ExecuteReader()) //using the reader
+            {
+                while (data.Read()) //while there are records
+                {
+                    CourseBlock block = new CourseBlock(); //create a block
+                    block.id = data.GetInt32(0); //get the id
+                    block.professor = getProfessor(data.GetInt32(1)); //get the prof object
+                    block.course = getCourse(data.GetInt32(2)); //get the course
+                    block.room = getRoom(data.GetInt32(3)); //get the room
+                    block.time = data.GetInt32(4); //get the time
+                    blockList.Add(block); //add the block
+                }
+            }
+
+                return blockList; //return the list
         }
 
         public void addProfessor(Professor prof)
