@@ -141,11 +141,12 @@ CREATE TABLE professorscourses(
         {
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from rooms where id = " + id;
-            Room room = new Room();
+            
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
                 while (data.Read())
                 {
+                    Room room = new Room();
                     room.id = data.GetInt32(0);
                     room.building = data.GetString(1);
                     room.roomNum = data.GetInt32(2);
@@ -206,10 +207,10 @@ CREATE TABLE professorscourses(
             List<Course> courseList = new List<Course>(); //create the list
             using (SQLiteDataReader data = cmd.ExecuteReader()) //using the datareader
             {
-                Course course = new Course(); //create a new course
+                
                 while (data.Read()) //while there are rows to read
                 {
-                    
+                    Course course = new Course(); //create a new course
                     course.id = data.GetInt32(0); //get the course id
                     course.name = data.GetString(1); //get thecourse name
                     course.sections = data.GetInt32(2); //get the section #
