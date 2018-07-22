@@ -52,18 +52,17 @@
 
         <!-- Checkboxes & Header -->
         <Label x:Name="roomCheckboxLabel" Content="Has Computers?" HorizontalAlignment="Left" Margin="266,76,0,0" VerticalAlignment="Top" Width="84" FontSize="10"/>
-        <CheckBox x:Name="roomCheckbox1" HorizontalAlignment="Left" Margin="296,104,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox2" HorizontalAlignment="Left" Margin="296,129,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox3" HorizontalAlignment="Left" Margin="296,154,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox4" HorizontalAlignment="Left" Margin="296,179,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox5" HorizontalAlignment="Left" Margin="296,204,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox6" HorizontalAlignment="Left" Margin="296,229,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox7" HorizontalAlignment="Left" Margin="296,254,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox8" HorizontalAlignment="Left" Margin="296,279,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox9" HorizontalAlignment="Left" Margin="296,304,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="roomCheckbBox10" HorizontalAlignment="Left" Margin="296,329,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox1" HorizontalAlignment="Left" Margin="296,104,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox2" HorizontalAlignment="Left" Margin="296,129,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox3" HorizontalAlignment="Left" Margin="296,154,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox4" HorizontalAlignment="Left" Margin="296,179,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox5" HorizontalAlignment="Left" Margin="296,204,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox6" HorizontalAlignment="Left" Margin="296,229,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox7" HorizontalAlignment="Left" Margin="296,254,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox8" HorizontalAlignment="Left" Margin="296,279,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox9" HorizontalAlignment="Left" Margin="296,304,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="roomCheckBox10" HorizontalAlignment="Left" Margin="296,329,0,0" VerticalAlignment="Top"/>
 
         <!-- Button to submit entered info -->
-        <Button x:Name="roomAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20"/>
     </Grid>
 </Page>

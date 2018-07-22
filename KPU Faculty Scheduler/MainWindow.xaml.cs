@@ -23,7 +23,7 @@ namespace KPU_Faculty_Scheduler
         public MainWindow()
         {
             InitializeComponent();
-            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
+            
         }
 
         // Create new pages upon program launch
@@ -31,6 +31,8 @@ namespace KPU_Faculty_Scheduler
         RoomPage roomsPage = new RoomPage();
         ProfessorPage professorsPage = new ProfessorPage();
         ReviewPage reviewPage = new ReviewPage();
+
+        DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
 
         // Upon clicking "Create", hide original buttons, and toggle visibility of the frame and stack panels
         private void createButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +42,7 @@ namespace KPU_Faculty_Scheduler
             navBarBack.Visibility = System.Windows.Visibility.Visible;
             navBarNext.Visibility = System.Windows.Visibility.Visible;
             mainFrame.Visibility = System.Windows.Visibility.Visible;
+            AddButton.Visibility = System.Windows.Visibility.Visible;
             mainFrame.Content = coursesPage;
         }
 
@@ -64,9 +67,14 @@ namespace KPU_Faculty_Scheduler
             }
             else if (mainFrame.Content == professorsPage)
             {
+                AddButton.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Content = reviewPage;
+
             }
         }
+
+   
+
 
         // Upon clicking the back button, figure out which page is currently visible, and decide where to go from there
         private void backClick(object sender, RoutedEventArgs e)
@@ -95,7 +103,39 @@ namespace KPU_Faculty_Scheduler
             }
             else if (mainFrame.Content == reviewPage)
             {
+                AddButton.Visibility = System.Windows.Visibility.Visible;
                 mainFrame.Content = professorsPage;
+            }
+        }
+        public void coursesAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(mainFrame.Content == coursesPage)
+            {
+
+                foreach(Course course_ in coursesPage.addInput())
+                {
+                    db.addCourse(course_);
+                }
+                /*List<Course> test = db.getAllCourse();
+                foreach(Course temp in test)
+                {
+                    MessageBox.Show("you have entered in course: " + temp.name, "IT WORKED!",MessageBoxButton.OK);
+                }*/
+            }
+            else if (mainFrame.Content == roomsPage)
+            {
+                foreach (Room room_ in roomsPage.addInput())
+                {
+                    db.addRoom(room_);
+                }
+            }
+            else if (mainFrame.Content == professorsPage)
+            {
+
+                foreach (Professor Prof_ in professorsPage.addInput())
+                {
+                    db.addProfessor(Prof_);
+                }
             }
         }
     }

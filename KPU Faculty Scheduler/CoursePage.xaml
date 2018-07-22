@@ -52,18 +52,17 @@
 
         <!-- Checkboxes & Header -->
         <Label x:Name="courseCheckboxLabel" Content="Requires Computers?" HorizontalAlignment="Left" Margin="254,76,0,0" VerticalAlignment="Top" Width="104" FontSize="10"/>
-        <CheckBox x:Name="coursesCheckbox1" HorizontalAlignment="Left" Margin="296,104,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox2" HorizontalAlignment="Left" Margin="296,129,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox3" HorizontalAlignment="Left" Margin="296,154,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox4" HorizontalAlignment="Left" Margin="296,179,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox5" HorizontalAlignment="Left" Margin="296,204,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox6" HorizontalAlignment="Left" Margin="296,229,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox7" HorizontalAlignment="Left" Margin="296,254,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox8" HorizontalAlignment="Left" Margin="296,279,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox9" HorizontalAlignment="Left" Margin="296,304,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="coursesCheckbBox10" HorizontalAlignment="Left" Margin="296,329,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox1" HorizontalAlignment="Left" Margin="296,104,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox2" HorizontalAlignment="Left" Margin="296,129,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox3" HorizontalAlignment="Left" Margin="296,154,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox4" HorizontalAlignment="Left" Margin="296,179,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox5" HorizontalAlignment="Left" Margin="296,204,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox6" HorizontalAlignment="Left" Margin="296,229,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox7" HorizontalAlignment="Left" Margin="296,254,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox8" HorizontalAlignment="Left" Margin="296,279,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox9" HorizontalAlignment="Left" Margin="296,304,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="coursesCheckBox10" HorizontalAlignment="Left" Margin="296,329,0,0" VerticalAlignment="Top"/>
 
         <!-- Button to submit entered info -->
-        <Button x:Name="coursesAddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20" Click="coursesAddButton_Click"/>
     </Grid>
 </Page>

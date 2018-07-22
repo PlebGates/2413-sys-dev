@@ -23,5 +23,9 @@
 
         <!-- Frame to hold pages -->
         <Frame x:Name="mainFrame" Margin="0, 0, 0, 35" Grid.ColumnSpan="2" Visibility="Hidden" NavigationUIVisibility="Hidden"/>
+        
+        <!-- Add button -->
+        <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20" Click="coursesAddButton_Click" Visibility="Hidden"/>
+
     </Grid>
 </Window>
