@@ -23,14 +23,14 @@ namespace KPU_Faculty_Scheduler
         public MainWindow()
         {
             InitializeComponent();
-            
+            DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
         }
 
         // Create new pages upon program launch
         CoursePage coursesPage = new CoursePage();
         RoomPage roomsPage = new RoomPage();
         ProfessorPage professorsPage = new ProfessorPage();
-        DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
+        ReviewPage reviewPage = new ReviewPage();
 
         // Upon clicking "Create", hide original buttons, and toggle visibility of the frame and stack panels
         private void createButton_Click(object sender, RoutedEventArgs e)
@@ -62,6 +62,10 @@ namespace KPU_Faculty_Scheduler
             {
                 mainFrame.Content = professorsPage;
             }
+            else if (mainFrame.Content == professorsPage)
+            {
+                mainFrame.Content = reviewPage;
+            }
         }
 
         // Upon clicking the back button, figure out which page is currently visible, and decide where to go from there
@@ -79,6 +83,7 @@ namespace KPU_Faculty_Scheduler
                 coursesPage = new CoursePage();
                 roomsPage = new RoomPage();
                 professorsPage = new ProfessorPage();
+                reviewPage = new ReviewPage();
             }
             else if (mainFrame.Content == roomsPage)
             {
@@ -87,6 +92,10 @@ namespace KPU_Faculty_Scheduler
             else if (mainFrame.Content == professorsPage)
             {
                 mainFrame.Content = roomsPage;
+            }
+            else if (mainFrame.Content == reviewPage)
+            {
+                mainFrame.Content = professorsPage;
             }
         }
     }
