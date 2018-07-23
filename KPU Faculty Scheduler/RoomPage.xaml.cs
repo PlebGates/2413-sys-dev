@@ -46,17 +46,18 @@ namespace KPU_Faculty_Scheduler
                         room.hasComputers = (bool)inputboxes3[i].IsChecked;
                         validInput.Add(room);
                         countValid++;
+                        //reset boxes for every line
+                        inputboxes1[i].Text = "";
+                        inputboxes2[i].Text = "";
+                        inputboxes3[i].IsChecked = false;
                     }
-                    catch (Exception e) { /*maybe grab a list of empty or incomplete textboxes*/ }
+                    catch (Exception e) { /*maybe grab a list of empty or incomplete textboxes*/  incomplete++; }
                 }
                 else if (inputboxes1[i].Text != "" || inputboxes2[i].Text != "")
                 {
                     incomplete++;
                 }
-                //reset boxes for every line
-                inputboxes1[i].Text = "";
-                inputboxes2[i].Text = "";
-                inputboxes3[i].IsChecked = false;
+                
             }
             statusLabel.Text = (incomplete == 0) ? countValid + " valid entries" : countValid + " valid entries, " + incomplete + " incomplete entries";
             return validInput;

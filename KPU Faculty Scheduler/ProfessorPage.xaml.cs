@@ -24,6 +24,12 @@ namespace KPU_Faculty_Scheduler
         {
             InitializeComponent();
         }
+        public List<ListBox> getlistboxes()
+        {
+            List<ListBox> inputboxes3 = new List<ListBox> { teachListbox1, teachListbox2, teachListbox3, teachListbox4, teachListbox5, teachListbox6, teachListbox7, teachListbox8, teachListbox9, teachListbox10 };
+            return inputboxes3;
+        }
+
         public List<Professor> addInput()
         {
 
@@ -46,8 +52,11 @@ namespace KPU_Faculty_Scheduler
                         //Professor.classList = Convert.ToInt32(inputboxes2[i].Text);
                         validInput.Add(Professor);
                         countValid++;
+                        //reset boxes for every line
+                        inputboxes1[i].Text = "";
+                        inputboxes2[i].Text = "";
                     }
-                    catch (Exception e) {/*maybe grab a list of empty or incomplete textboxes*/ }
+                    catch (Exception e) {/*maybe grab a list of empty or incomplete textboxes*/ incomplete++; }
                 }
                 else if (inputboxes1[i].Text != "" || inputboxes2[i].Text != "")
                 {
