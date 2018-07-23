@@ -11,12 +11,12 @@
     <Grid Width="400" Height="400">
         <!-- Rectangle to contain elements -->
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="10,60,0,15" Stroke="Black" Width="380"/>
-        
+
         <!-- Page Header & listbox -->
-        <Label x:Name="roomHeader" Content="Review" HorizontalAlignment="Center" Margin="137,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36"/>
+        <Label x:Name="roomHeader" Content="Review" HorizontalAlignment="Center" Margin="137,0,131,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36" Width="132"/>
         <ListBox x:Name="Review_Listbox" HorizontalAlignment="Left" Height="200" Margin="20,110,0,0" VerticalAlignment="Top" Width="360"/>
 
-        
+
 
     </Grid>
 </Page>
