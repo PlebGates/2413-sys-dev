@@ -115,6 +115,14 @@ namespace KPU_Faculty_Scheduler
                 foreach (Course course in courseList)
                 {
                     time = time % 20; //if the time reaches 20 then reset it
+                    while (!done)
+                    {
+                        //if the 6th character of a name (ex INFO |3|110) denotes 3rd or 4th year and the time isn't acceptable
+                        int[] acceptableTimes = { 2, 3, 6, 7, 9, 10, 12, 13, 16, 17, 19, 20 }; //all 4-7 and 7-10 blocks
+                        while ((course.name[5] == '3' || course.name[5] == '4') && !(acceptableTimes.Contains(time)))
+                        {
+                            time++;
+                        }
                         foreach (Room room in roomList) //for each room
                         {
                             if (RoomTimeSet.Contains(new IDTime(room.id, time))) //if that room is already in use
@@ -127,62 +135,69 @@ namespace KPU_Faculty_Scheduler
                             }
                             else foreach (Professor prof in profList)
                                 {
-                                //if professor is already teaching at that time
-                                if (profTimeSet.Contains(new IDTime(prof.id,time)))
-                                {
-                                    continue;
-                                }
-                                //if professor teaches two classes that day
-                                //if professor teaches four classes in total
-                                int day = timeToDay(time); //get the current day
-                                int classCountDay = 0; //classes during this day
-                                int classCountTotal = 0; //total classes for prof
-                                foreach (IDTime proftime in profTimeSet) //for each set proftime
-                                {
-                                    if (proftime.id == prof.id) //if the current professor is assigned to that time
+                                    //if professor is already teaching at that time
+                                    if (profTimeSet.Contains(new IDTime(prof.id, time)))
                                     {
-                                        classCountTotal++; //add to the total classes
-                                        if (timeToDay(proftime.time) == day) //if the proftime is teaching that day
+                                        continue;
+                                    }
+                                    //if professor teaches two classes that day
+                                    //if professor teaches four classes in total
+                                    int day = timeToDay(time); //get the current day
+                                    int classCountDay = 0; //classes during this day
+                                    int classCountTotal = 0; //total classes for prof
+                                    foreach (IDTime proftime in profTimeSet) //for each set proftime
+                                    {
+                                        if (proftime.id == prof.id) //if the current professor is assigned to that time
                                         {
-                                            classCountDay++; //add to classes that day
-                                        } else if (day > 10) //if the current time is a double block and wasn't the current selected block
-                                        {
-                                            if (day / 10 == timeToDay(proftime.time)) //if the first digit of the double block matches the selected time
+                                            classCountTotal++; //add to the total classes
+                                            if (timeToDay(proftime.time) == day) //if the proftime is teaching that day
                                             {
-                                                classCountDay++; //it's on the same day
-                                            } else if (day % 10 == timeToDay(proftime.time)) //if the second digit of the double block matches the selected time
-                                            {
-                                                classCountDay++; //it's on the same day
+                                                classCountDay++; //add to classes that day
                                             }
-                                        } else if (timeToDay(proftime.time) > 10) //if the selected time is a double block
-                                        {
-                                            if (timeToDay(proftime.time) / 10 == day) //if the first digit of the selected time matches the current day
+                                            else if (day > 10) //if the current time is a double block and wasn't the current selected block
                                             {
-                                                classCountDay++; //it's on the same day
+                                                if (day / 10 == timeToDay(proftime.time)) //if the first digit of the double block matches the selected time
+                                                {
+                                                    classCountDay++; //it's on the same day
+                                                }
+                                                else if (day % 10 == timeToDay(proftime.time)) //if the second digit of the double block matches the selected time
+                                                {
+                                                    classCountDay++; //it's on the same day
+                                                }
                                             }
-                                            else if (timeToDay(proftime.time) % 10 == day) //if the second digit of the selected time matches the current day
+                                            else if (timeToDay(proftime.time) > 10) //if the selected time is a double block
                                             {
-                                                classCountDay++; //it's on the same day
+                                                if (timeToDay(proftime.time) / 10 == day) //if the first digit of the selected time matches the current day
+                                                {
+                                                    classCountDay++; //it's on the same day
+                                                }
+                                                else if (timeToDay(proftime.time) % 10 == day) //if the second digit of the selected time matches the current day
+                                                {
+                                                    classCountDay++; //it's on the same day
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                if (classCountTotal >= 4) //four classes or more already being taught?
-                                {
-                                    continue; //move to the next prof
-                                }
-                                if (classCountDay >= 2) //two or more classes being taught today?
-                                {
-                                    continue; //move to next prof
-                                }
-                                    //more validity checking and logic
+                                    if (classCountTotal >= 4) //four classes or more already being taught?
+                                    {
+                                        continue; //move to the next prof
+                                    }
+                                    if (classCountDay >= 2) //two or more classes being taught today?
+                                    {
+                                        continue; //move to next prof
+                                    }
+
                                     RoomTimeSet.Add(new IDTime(room.id, time)); //this room is now in use at this time
-                                profTimeSet.Add(new IDTime(prof.id, time)); //this professor is now teaching at this time
+                                    profTimeSet.Add(new IDTime(prof.id, time)); //this professor is now teaching at this time
                                     blockList.Add(new CourseBlock(prof, room, course, time)); //add your new courseblock
-                                    time++; //increment time forwards
+                                    
+                                    done = true; //this course has been put into a slot
                                 }
                         }
+                        time++; //increment time forwards
+                    }
+                        
                 }
 
                 if (isValid(blockList)) //check if the generated schedule is valid
@@ -225,11 +240,12 @@ namespace KPU_Faculty_Scheduler
                 //foreach block check if it's a 3rd or 4th year class in the wrong timeslot
                 //if the 6th character of a name (ex INFO |3|110) denotes 3rd or 4th year and the time isn't acceptable
                 int[] acceptableTimes = { 2, 3, 6, 7, 9, 10, 12, 13, 16, 17, 19, 20 }; //all 4-7 and 7-10 blocks
+                
                 if ((block.course.name[5] == '3' || block.course.name[5] == '4') && !(acceptableTimes.Contains(block.time)))
                 {
                     return false;
                 }
-
+                
                 //foreach block check if there's another section at the same time
                 //using the same method of checking if a room is in use at the same time, do it with a class id instead
                 if (!classTimes.Add(new IDTime(block.course.id,block.time)))
@@ -427,7 +443,6 @@ namespace KPU_Faculty_Scheduler
             // creating COM objects for the excel sheet
             Excel.Application xlApp = new Excel.Application(); //open the excel com object
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(xlData.getFileName()); //open the target workbook
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1]; //open the first worksheet
             int row, col;
             
             HashSet<Room> roomSet = new HashSet<Room>();//get every room in the list and add to set
@@ -453,7 +468,7 @@ namespace KPU_Faculty_Scheduler
                 roomSheet.Cells[row, col + 3] = room.hasComputers;
                 row++;
             }
-            Marshal.ReleaseComObject(roomSheet);
+            Marshal.ReleaseComObject(roomSheet); //release roomsheet because we no longer need it
             //switch worksheet and write all profs
             var profSheet = (Excel.Worksheet)xlWorkbook.Sheets.Add(xlWorkbook.Sheets[1], Type.Missing, Type.Missing, Type.Missing);
             roomSheet.Name = "Professors";
@@ -475,7 +490,7 @@ namespace KPU_Faculty_Scheduler
                 }
                 row++;
             }
-            Marshal.ReleaseComObject(profSheet);
+            Marshal.ReleaseComObject(profSheet); //release sheet
             //switch worksheet and write all courses
             var courseSheet = (Excel.Worksheet)xlWorkbook.Sheets.Add(xlWorkbook.Sheets[1], Type.Missing, Type.Missing, Type.Missing);
             courseSheet.Name = "Classes";
@@ -527,7 +542,6 @@ namespace KPU_Faculty_Scheduler
             //  ex: [somthing].[something].[something] is bad
 
             //release com objects to fully kill excel process from running in the background
-            Marshal.ReleaseComObject(xlWorksheet);
             Marshal.ReleaseComObject(blockSheet);
 
             //close and release
@@ -539,7 +553,7 @@ namespace KPU_Faculty_Scheduler
             Marshal.ReleaseComObject(xlApp);
 
         }
-        public void readFromXslx(FileInfo filepath)
+        public void readFromXslx()
         {
             ExcelData xlData = new ExcelData(); //create new excel data
             OpenFileDialog dialog = new OpenFileDialog()

@@ -47,7 +47,7 @@ namespace KPU_Faculty_Scheduler
         // Method to confirm whether a professor can teach a course or not.
         public bool checkCanTeach()
         {
-            return professor.classList.Contains(course.id.ToString());
+            return professor.classList.Contains(course.name.ToString());
         }
 
 
