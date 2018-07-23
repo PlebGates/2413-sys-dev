@@ -42,7 +42,7 @@ namespace KPU_Faculty_Scheduler
                 Course course = new Course();
                 if (inputboxes1[i].Text != "" && inputboxes2[i].Text != "")
                 {
-                    Course course = new Course();
+                    course = new Course();
                     try
                     {
                         
