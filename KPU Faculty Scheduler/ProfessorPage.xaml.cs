@@ -26,8 +26,8 @@ namespace KPU_Faculty_Scheduler
         }
         public List<ListBox> getlistboxes()
         {
-            List<ListBox> inputboxes3 = new List<ListBox> { teachListbox1, teachListbox2, teachListbox3, teachListbox4, teachListbox5, teachListbox6, teachListbox7, teachListbox8, teachListbox9, teachListbox10 };
-            return inputboxes3;
+            List<ListBox> listboxes3 = new List<ListBox> { listBox1, listBox2, listBox3, listBox4, listBox5, listBox6, listBox7, listBox8, listBox9, listBox10 };
+            return listboxes3;
         }
 
         public List<Professor> addInput()
