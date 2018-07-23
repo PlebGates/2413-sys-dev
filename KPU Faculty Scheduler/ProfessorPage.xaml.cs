@@ -69,5 +69,6 @@ namespace KPU_Faculty_Scheduler
             statusLabel.Text = (incomplete == 0) ? countValid + " valid entries" : countValid + " valid entries, " + incomplete + " incomplete entries";
             return validInput;
         }
+
     }
 }
