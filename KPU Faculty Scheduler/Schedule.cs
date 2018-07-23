@@ -436,6 +436,7 @@ namespace KPU_Faculty_Scheduler
             ExcelData xlData = new ExcelData(); //create new excel data
             xlData.setFileName(filepath.FullName);
 
+            /*
             //check if file is in use
             if (ExcelClass.IsFileinUse(new FileInfo(xlData.getFileName()))) //if the excel file is open
             {
@@ -444,13 +445,14 @@ namespace KPU_Faculty_Scheduler
                 GC.WaitForPendingFinalizers();
                 MessageBox.Show("Please close any open instances of the spreadsheet before attempting to save to it.");
                 //System.Environment.Exit(1);
-            }
+            } */
 
             // creating COM objects for the excel sheet
             Excel.Application xlApp = new Excel.Application(); //open the excel com object
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(xlData.getFileName()); //open the target workbook
+            xlApp.SheetsInNewWorkbook = 1;
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Add(); //open the target workbook
             int row, col;
-            
+
             HashSet<Room> roomSet = new HashSet<Room>();//get every room in the list and add to set
             HashSet<Professor> profSet = new HashSet<Professor>(); //get every professor and add to set
             HashSet<Course> courseSet = new HashSet<Course>(); //get every course and add to set
