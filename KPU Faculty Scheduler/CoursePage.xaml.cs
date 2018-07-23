@@ -43,7 +43,7 @@ namespace KPU_Faculty_Scheduler
             for (int i = 0; i < 10; i++) {
                 if (inputboxes1[i].Text != "" && inputboxes2[i].Text != "")
                 {
-                    course = new Course();
+                    Course course = new Course();
                     try
                     {
                         course.name = inputboxes1[i].Text;
