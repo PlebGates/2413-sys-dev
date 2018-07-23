@@ -102,6 +102,12 @@ namespace KPU_Faculty_Scheduler
                             }
                         }
                 }
+            } else if (mainFrame.Content == reviewPage)
+            {
+                Schedule schedule = new Schedule();
+                schedule.CreateSchedule(db.getAllProfessor(), db.getAllCourse(), db.getAllRoom());
+                //schedule.extractToCsv(new System.IO.FileInfo("newcsv.csv"));
+                schedule.extractToXslx(new System.IO.FileInfo("newxslx.xslx"));
             }
         }
 
