@@ -16,10 +16,10 @@ namespace KPU_Faculty_Scheduler
     {
 
         // List to hold all of the created Course Blocks.
-        List<CourseBlock> classList = new List<CourseBlock>();
+        public List<CourseBlock> classList = new List<CourseBlock>();
 
         // Method to swap a course with another time block (or course).
-        void swapCourseBlock(CourseBlock a, CourseBlock b)
+        public void swapCourseBlock(CourseBlock a, CourseBlock b)
         {
                 int atime = a.time; //get the value of a's timeblock
                 int btime = b.time; //get the value of b's timeblock
@@ -30,7 +30,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapCourseValid(CourseBlock a, CourseBlock b)
+        public bool swapCourseValid(CourseBlock a, CourseBlock b)
         {
             List<CourseBlock> tempList = classList; //create a temp list
             swapCourseBlock(a, b); //swap the blocks
@@ -38,7 +38,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to swap a professor with another course blocks professor.
-        void swapProfessor(CourseBlock a, CourseBlock b)
+        public void swapProfessor(CourseBlock a, CourseBlock b)
         {
             Professor aprof = a.professor; //get a's professor
             Professor bprof = b.professor; //get b's professor
@@ -49,7 +49,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapProfessorValid(CourseBlock a, CourseBlock b)
+        public bool swapProfessorValid(CourseBlock a, CourseBlock b)
         {
             List<CourseBlock> tempList = classList; //create a temp list
             swapProfessor(a, b); //swap the profs
@@ -57,7 +57,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to swap a room with another course blocks room.
-        void swapRoom(CourseBlock a, CourseBlock b)
+        public void swapRoom(CourseBlock a, CourseBlock b)
         {
             Room aroom = a.room; //get a's room
             Room broom = b.room; //get b's room
@@ -68,7 +68,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapRoomValid(CourseBlock a, CourseBlock b)
+        public bool swapRoomValid(CourseBlock a, CourseBlock b)
         {
             List<CourseBlock> tempList = classList; //create a temp list
             swapRoom(a, b); //swap the rooms
@@ -76,7 +76,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to swap the class taught between two course blocks.
-        void swapCourse(CourseBlock a, CourseBlock b)
+        public void swapCourse(CourseBlock a, CourseBlock b)
         {
             Course acourse = a.course; //get a's course
             Course bcourse = b.course; //get b's course
@@ -87,7 +87,7 @@ namespace KPU_Faculty_Scheduler
         }
 
         // Method to confirm the above is aloud to happen.
-        bool swapClassValid(CourseBlock a, CourseBlock b)
+        public bool swapClassValid(CourseBlock a, CourseBlock b)
         {
             List<CourseBlock> tempList = classList; //create a temp list
             swapCourse(a, b); //swap the courses
@@ -115,6 +115,7 @@ namespace KPU_Faculty_Scheduler
                 foreach (Course course in courseList)
                 {
                     time = time % 20; //if the time reaches 20 then reset it
+                    done = false;
                     while (!done)
                     {
                         //if the 6th character of a name (ex INFO |3|110) denotes 3rd or 4th year and the time isn't acceptable
@@ -193,7 +194,12 @@ namespace KPU_Faculty_Scheduler
                                     blockList.Add(new CourseBlock(prof, room, course, time)); //add your new courseblock
                                     
                                     done = true; //this course has been put into a slot
+                                    break;
                                 }
+                            if (done == true)
+                            {
+                                break;
+                            }
                         }
                         time++; //increment time forwards
                     }
@@ -430,6 +436,7 @@ namespace KPU_Faculty_Scheduler
             ExcelData xlData = new ExcelData(); //create new excel data
             xlData.setFileName(filepath.FullName);
 
+            /*
             //check if file is in use
             if (ExcelClass.IsFileinUse(new FileInfo(xlData.getFileName()))) //if the excel file is open
             {
@@ -438,13 +445,14 @@ namespace KPU_Faculty_Scheduler
                 GC.WaitForPendingFinalizers();
                 MessageBox.Show("Please close any open instances of the spreadsheet before attempting to save to it.");
                 //System.Environment.Exit(1);
-            }
+            } */
 
             // creating COM objects for the excel sheet
             Excel.Application xlApp = new Excel.Application(); //open the excel com object
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(xlData.getFileName()); //open the target workbook
+            xlApp.SheetsInNewWorkbook = 1;
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Add(); //open the target workbook
             int row, col;
-            
+
             HashSet<Room> roomSet = new HashSet<Room>();//get every room in the list and add to set
             HashSet<Professor> profSet = new HashSet<Professor>(); //get every professor and add to set
             HashSet<Course> courseSet = new HashSet<Course>(); //get every course and add to set
@@ -532,7 +540,7 @@ namespace KPU_Faculty_Scheduler
                 row++;
             }
 
-            xlWorkbook.Save();
+            xlWorkbook.SaveAs(filepath);
             //////////////////////////////////////cleanup///////////////////////////////////////////
             GC.Collect();
             GC.WaitForPendingFinalizers();
