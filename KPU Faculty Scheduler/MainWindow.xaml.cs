@@ -117,6 +117,7 @@ namespace KPU_Faculty_Scheduler
                 navBarBack.Visibility = System.Windows.Visibility.Hidden;
                 navBarNext.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Content = " ";
+                AddButton.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Visibility = System.Windows.Visibility.Hidden;
                 coursesPage = new CoursePage();
                 roomsPage = new RoomPage();
