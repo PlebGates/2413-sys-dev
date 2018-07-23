@@ -32,6 +32,8 @@ namespace KPU_Faculty_Scheduler
             List<CheckBox> inputboxes3 = new List<CheckBox> { roomCheckBox1, roomCheckBox2, roomCheckBox3, roomCheckBox4, roomCheckBox5, roomCheckBox6, roomCheckBox7, roomCheckBox8, roomCheckBox9, roomCheckBox10 };
             
             List<Room> validInput = new List<Room> { };
+            int countValid = 0;
+            int incomplete = 0;
             for (int i = 0; i < 10; i++)
             {
                 if (inputboxes1[i].Text != "" && inputboxes2[i].Text != "")
@@ -43,10 +45,20 @@ namespace KPU_Faculty_Scheduler
                         room.roomNum = Convert.ToInt32(inputboxes2[i].Text);
                         room.hasComputers = (bool)inputboxes3[i].IsChecked;
                         validInput.Add(room);
+                        countValid++;
                     }
                     catch (Exception e) { /*maybe grab a list of empty or incomplete textboxes*/ }
                 }
+                else if (inputboxes1[i].Text != "" || inputboxes2[i].Text != "")
+                {
+                    incomplete++;
+                }
+                //reset boxes for every line
+                inputboxes1[i].Text = "";
+                inputboxes2[i].Text = "";
+                inputboxes3[i].IsChecked = false;
             }
+            statusLabel.Text = (incomplete == 0) ? countValid + " valid entries" : countValid + " valid entries, " + incomplete + " incomplete entries";
             return validInput;
         }
     }

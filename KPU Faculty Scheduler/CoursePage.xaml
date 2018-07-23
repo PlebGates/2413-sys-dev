@@ -63,6 +63,6 @@
         <CheckBox x:Name="coursesCheckBox9" HorizontalAlignment="Left" Margin="296,304,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="coursesCheckBox10" HorizontalAlignment="Left" Margin="296,329,0,0" VerticalAlignment="Top"/>
 
-        <!-- Button to submit entered info -->
+        <TextBox x:Name="statusLabel" Text="" HorizontalAlignment="Center" Margin="0,0,0,18" VerticalAlignment="Bottom" Background="#FFE4E4E4" Foreground="Red" Width="250" FontWeight="Bold" IsEnabled="False"/>
     </Grid>
 </Page>

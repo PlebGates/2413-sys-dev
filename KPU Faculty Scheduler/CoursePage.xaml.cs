@@ -38,22 +38,33 @@ namespace KPU_Faculty_Scheduler
             List<CheckBox> inputboxes3 = new List<CheckBox> { coursesCheckBox1, coursesCheckBox2, coursesCheckBox3, coursesCheckBox4, coursesCheckBox5, coursesCheckBox6, coursesCheckBox7, coursesCheckBox8, coursesCheckBox9, coursesCheckBox10 };
             
             List<Course> validInput = new List<Course> { };
+            int countValid = 0;
+            int incomplete = 0;
             for (int i = 0; i < 10; i++) {
-                Course course = new Course();
                 if (inputboxes1[i].Text != "" && inputboxes2[i].Text != "")
                 {
                     Course course = new Course();
                     try
                     {
-                        
                         course.name = inputboxes1[i].Text;
                         course.sections = Convert.ToInt32(inputboxes2[i].Text);
                         course.needsComputers = (bool)inputboxes3[i].IsChecked;
                         validInput.Add(course);
+                        countValid++;
                     }
                     catch (Exception e) {/*maybe grab a list of empty or incomplete textboxes*/  }
                 }
+                else if (inputboxes1[i].Text != "" || inputboxes2[i].Text != "")
+                {
+                    incomplete++;
+                }
+                //reset boxes for every line
+                inputboxes1[i].Text = "";
+                inputboxes2[i].Text = "";
+                inputboxes3[i].IsChecked = false;
             }
+            statusLabel.Text = (incomplete == 0) ? countValid + " valid entries" : countValid + " valid entries, " + incomplete + " incomplete entries";
+            //some textbox warning
             return validInput;
         }
 

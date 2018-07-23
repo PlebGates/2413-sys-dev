@@ -66,5 +66,7 @@
         <ListBox x:Name="teachListbox8" HorizontalAlignment="Left" Height="20" Margin="251,279,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
         <ListBox x:Name="teachListbox9" HorizontalAlignment="Left" Height="20" Margin="251,304,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
         <ListBox x:Name="teachListbox10" HorizontalAlignment="Left" Height="20" Margin="251,329,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+
+        <TextBox x:Name="statusLabel" Text="" HorizontalAlignment="Center" Margin="0,0,0,18" VerticalAlignment="Bottom" Background="#FFE4E4E4" Foreground="Red" Width="250" FontWeight="Bold" IsEnabled="False"/>
     </Grid>
 </Page>

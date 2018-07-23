@@ -33,6 +33,8 @@ namespace KPU_Faculty_Scheduler
             // List<TextBox> inputboxes3 = new List<TextBox> { roomNum1, roomNum2, roomNum3, roomNum4, roomNum5, roomNum6, roomNum7, roomNum8, roomNum9, roomNum10 };
             
             List<Professor> validInput = new List<Professor> { };
+            int countValid = 0;
+            int incomplete = 0;
             for (int i = 0; i < 10; i++)
             {
                 if (inputboxes1[i].Text != "" && inputboxes2[i].Text != "")
@@ -40,13 +42,22 @@ namespace KPU_Faculty_Scheduler
                     Professor Professor = new Professor();
                     try
                     {
-                        Professor.name = /*inputboxes1[i].Text + " "+*/inputboxes2[i].Text;
+                        Professor.name = inputboxes1[i].Text + " " + inputboxes2[i].Text;
                         //Professor.classList = Convert.ToInt32(inputboxes2[i].Text);
                         validInput.Add(Professor);
+                        countValid++;
                     }
                     catch (Exception e) {/*maybe grab a list of empty or incomplete textboxes*/ }
                 }
+                else if (inputboxes1[i].Text != "" || inputboxes2[i].Text != "")
+                {
+                    incomplete++;
+                }
+                //reset boxes for every line
+                inputboxes1[i].Text = "";
+                inputboxes2[i].Text = "";
             }
+            statusLabel.Text = (incomplete == 0) ? countValid + " valid entries" : countValid + " valid entries, " + incomplete + " incomplete entries";
             return validInput;
         }
     }
