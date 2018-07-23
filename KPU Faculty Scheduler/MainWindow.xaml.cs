@@ -26,11 +26,12 @@ namespace KPU_Faculty_Scheduler
             
         }
 
-        // Create new pages upon program launch
+        // Create new pages upon program launch // Application resources
         CoursePage coursesPage = new CoursePage();
         RoomPage roomsPage = new RoomPage();
         ProfessorPage professorsPage = new ProfessorPage();
         ReviewPage reviewPage = new ReviewPage();
+        Schedule schedule = new Schedule();
 
         DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
 
@@ -64,12 +65,40 @@ namespace KPU_Faculty_Scheduler
             else if (mainFrame.Content == roomsPage)
             {
                 mainFrame.Content = professorsPage;
+                //populate the listbox for teach can teach on professorPage
+                foreach (ListBox box in professorsPage.getlistboxes())
+                {
+                    foreach (Course c in db.getAllCourse())
+                    {
+                        if (!box.Items.Contains(c.name))
+                        {
+                            box.Items.Add(c.name);
+                        }
+                    }
+                }
             }
             else if (mainFrame.Content == professorsPage)
             {
                 AddButton.Visibility = System.Windows.Visibility.Hidden;
                 reviewButtons.Visibility = System.Windows.Visibility.Visible;
                 mainFrame.Content = reviewPage;
+
+                
+
+                /*
+                // semi complie Professor Can Teach Course
+                List<Professor> allProfessors = db.getAllProfessor();
+                List<Course> allCourses = db.getAllCourse();
+                foreach(Professor p in allProfessors)
+                {
+                    foreach (Course c in allCourses)
+                    { 
+                        if (db.canTeach(p.id, c.id)){
+                            db.addCanTeach(p.id, c.id);
+                        }
+                    }
+                }
+                */
 
             }
         }
@@ -88,6 +117,7 @@ namespace KPU_Faculty_Scheduler
                 navBarBack.Visibility = System.Windows.Visibility.Hidden;
                 navBarNext.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Content = " ";
+                AddButton.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Visibility = System.Windows.Visibility.Hidden;
                 coursesPage = new CoursePage();
                 roomsPage = new RoomPage();
@@ -137,6 +167,9 @@ namespace KPU_Faculty_Scheduler
                 foreach (Professor Prof_ in professorsPage.addInput())
                 {
                     db.addProfessor(Prof_);
+                    
+
+
                 }
             }
         }
