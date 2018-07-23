@@ -32,6 +32,7 @@ namespace KPU_Faculty_Scheduler
         ProfessorPage professorsPage = new ProfessorPage();
         ReviewPage reviewPage = new ReviewPage();
         Schedule schedule = new Schedule();
+        SchedulePage schedulePage = new SchedulePage();
 
         DBMethods db = new DBMethods(new System.Data.SQLite.SQLiteConnection("Data Source=:memory:"));
 
@@ -103,7 +104,14 @@ namespace KPU_Faculty_Scheduler
                         }
                 }
             }
+            else if (mainFrame.Content == reviewPage)
+            {
+                mainFrame.Content = schedulePage;
+                reviewButtons.Visibility = System.Windows.Visibility.Hidden;
+                SwapButton.Visibility = System.Windows.Visibility.Visible;
+            }
         }
+        //END next
 
         //moved here from ReviewPage
         public void reviewProfesser(List<Professor> input)
@@ -154,7 +162,15 @@ namespace KPU_Faculty_Scheduler
                 reviewButtons.Visibility = System.Windows.Visibility.Hidden;
                 mainFrame.Content = professorsPage;
             }
+            else if (mainFrame.Content == schedulePage)
+            {
+                mainFrame.Content = reviewPage;
+                reviewButtons.Visibility = System.Windows.Visibility.Visible;
+                SwapButton.Visibility = System.Windows.Visibility.Hidden;
+            }
         }
+
+        //add elements from x page to DB, only visibile on input pages
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if(mainFrame.Content == coursesPage)
@@ -203,6 +219,25 @@ namespace KPU_Faculty_Scheduler
         private void review_Click_Professor(object sender, RoutedEventArgs e)
         {
             reviewProfesser(db.getAllProfessor());
+        }
+
+        private void SwapButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* Time blocks
+            * M |T |W |T |F |S |S
+            * 0 |4 |0 |4 |14|14
+            * 1 |5 |8 |11|15|18
+            * 2 |6 |9 |12|16|19
+            * 3 |7 |10|13|17|20
+            */
+            int[] monday = { 0, 1, 2, 3 };
+            int[] tuseday = { 4, 5, 6, 7 };
+            int[] wednesday = { 0, 8, 9, 10 };
+            int[] thursday = { 4, 11, 12, 13 };
+            int[] friday = { 14, 15, 16, 17 };
+            int[] saturday = { 14, 18, 19, 20 };
+            schedulePage.courseBlockListbox1.Items.Add(db.getCourse(1).name);
+            schedulePage.courseBlockListbox2.Items.Add(db.getCourse(2).name);
         }
     }
 }
