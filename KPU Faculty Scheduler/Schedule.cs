@@ -554,7 +554,7 @@ namespace KPU_Faculty_Scheduler
             }
             if (dialog.FileName == "") //if selections was cancelled
             {
-                System.Environment.Exit(1); //skip the rest of the program
+                //System.Environment.Exit(1); //skip the rest of the program
             }
 
             //check if file is in use
@@ -570,10 +570,111 @@ namespace KPU_Faculty_Scheduler
             Excel.Application xlApp = new Excel.Application(); //open the excel com object
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(xlData.getFileName()); //open the target workbook
             Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1]; //open the first worksheet
-            Excel.Range xlRange = xlWorksheet.UsedRange; //set the range to the used range
-            Excel.Worksheet outputSheet = xlWorkbook.Worksheets.Add(After: xlWorksheet); //create a new output sheet
 
+            int row, col;
+            //read rooms
+            HashSet<Room> roomSet = new HashSet<Room>(); //create set for rooms
+            xlWorksheet = (Excel.Worksheet)xlWorkbook.Sheets["Rooms"]; //go to rooms sheet
+            row = 2;
+            while (xlWorksheet.Cells[row, 1] != null)//if cell is not null
+            {
+                Room room = new Room(); //create new room
+                room.id = Int32.Parse((string)xlWorksheet.Cells[row, 1]); //parse id to int
+                room.building = xlWorksheet.Cells[row, 2]; //get building
+                room.roomNum = xlWorksheet.Cells[row, 3]; //this might throw errors, maybe parse to int
+                room.hasComputers = xlWorksheet.Cells[row, 4]; //parse boolean???
 
+                roomSet.Add(room); //add room to set
+                row++; //next row
+            }
+            
+
+            //read courses
+            HashSet<Course> courseSet = new HashSet<Course>(); //create set for courses
+            xlWorksheet = (Excel.Worksheet)xlWorkbook.Sheets["Courses"]; //go to courses sheet
+            row = 2;
+            while (xlWorksheet.Cells[row, 1] != null)//if cell is not null
+            {
+                Course course = new Course(); //create new course
+                course.id = Int32.Parse((string)xlWorksheet.Cells[row, 1]); //parse id to int
+                course.name = xlWorksheet.Cells[row, 2]; //get name
+                course.sections= xlWorksheet.Cells[row, 3]; //this might throw errors, maybe parse to int
+                course.needsComputers = xlWorksheet.Cells[row, 4]; //parse boolean???
+
+                courseSet.Add(course); //add room to set
+                row++; //next row
+            }
+
+            //read professors
+            HashSet<Professor> profSet = new HashSet<Professor>(); //create set for courses
+            xlWorksheet = (Excel.Worksheet)xlWorkbook.Sheets["Professors"]; //go to profs sheet
+            row = 2;
+            while (xlWorksheet.Cells[row, 1] != null)//if cell is not null
+            {
+                col = 3;
+                Professor prof = new Professor(); //create new prof
+                prof.id = Int32.Parse((string)xlWorksheet.Cells[row, 1]); //parse id to int
+                prof.name = xlWorksheet.Cells[row, 2]; //get name
+                while (xlWorksheet.Cells[row,col] != null) //while there are still classes to get
+                {
+                    prof.classList.Add(xlWorksheet.Cells[row, col]); //add to the prof's list
+                    col++; //increment
+                }
+
+                profSet.Add(prof); //add room to set
+                row++; //next row
+            }
+            //read blocks
+            List<CourseBlock> tempList = new List<CourseBlock>();
+            xlWorksheet = (Excel.Worksheet)xlWorkbook.Sheets["Blocks"]; //go to blocks sheet
+            row = 2;
+            while(xlWorksheet.Cells[row, 1] != null)
+            {
+                int profid = 0; //reset values
+                int roomid = 0;
+                int courseid = 0;
+                CourseBlock block = new CourseBlock(); //create new block
+
+                //parse data
+                block.id = Int32.Parse((string)xlWorksheet.Cells[row, 1]); //parse id to int
+                block.time = xlWorksheet.Cells[row, 2]; //get time
+                profid = xlWorksheet.Cells[row, 3]; //this might throw errors, maybe parse to int
+                courseid = xlWorksheet.Cells[row, 4];
+                roomid = xlWorksheet.Cells[row, 5]; 
+
+                //
+                foreach (Course course in courseSet) //set course
+                {
+                    if (course.id == courseid)
+                    {
+                        block.course = course;
+                        break;
+                    }
+                }
+                foreach (Professor prof in profSet) //set prof
+                {
+                    if (prof.id == profid)
+                    {
+                        block.professor = prof;
+                        break;
+                    }
+                }
+                foreach (Room room in roomSet) //set room
+                {
+                    if (room.id == roomid)
+                    {
+                        block.room = room;
+                        break;
+                    }
+                }
+                tempList.Add(block);
+                row++;
+            }
+
+            if (isValid(tempList))
+            {
+                classList = tempList;
+            }
             //////////////////////////////////////cleanup///////////////////////////////////////////
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -583,9 +684,7 @@ namespace KPU_Faculty_Scheduler
             //  ex: [somthing].[something].[something] is bad
 
             //release com objects to fully kill excel process from running in the background
-            Marshal.ReleaseComObject(xlRange);
             Marshal.ReleaseComObject(xlWorksheet);
-            Marshal.ReleaseComObject(outputSheet);
 
             //close and release
             xlWorkbook.Close();
