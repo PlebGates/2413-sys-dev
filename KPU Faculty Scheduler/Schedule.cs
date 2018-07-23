@@ -97,8 +97,9 @@ namespace KPU_Faculty_Scheduler
         public bool CreateSchedule(List<Professor> profList, List<Course> courseList,List<Room> roomList)
         {
             bool done = false;
+            int fail = 0;
             //TODO: add timer to stop this method if it takes too long and throw error?
-            while (!done) //if the loop hasn't resulted in a valid schedule, try again
+            while (fail < 10) //if the loop hasn't resulted in a valid schedule, try again
             {
                 List<CourseBlock> blockList = new List<CourseBlock>();
                 int time = 0; //time starts at 0
@@ -187,9 +188,9 @@ namespace KPU_Faculty_Scheduler
                 if (isValid(blockList)) //check if the generated schedule is valid
                 {
                     this.classList = blockList;
-                    done = true;
                     return true; //completed and valid
                 }
+                else fail++;
             }
             return false; //completed invalid
             
@@ -537,6 +538,62 @@ namespace KPU_Faculty_Scheduler
             xlApp.Quit();
             Marshal.ReleaseComObject(xlApp);
 
+        }
+        public void readFromXslx(FileInfo filepath)
+        {
+            ExcelData xlData = new ExcelData(); //create new excel data
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = "xlsx files (*.xlsx)|*.xlsx|All files (*.*)|*.*", //excel files, all files - open file window
+                FilterIndex = 1 //set index to xlsx
+            }; //new file dialog box
+               //if (dialog.ShowDialog() == DialogResult.OK) //when ok button is clicked
+            if (dialog.ShowDialog() == true) //when ok button is clicked
+            {
+                xlData.setFileName(dialog.FileName); //set exceldata filename to the selected spreadsheet
+            }
+            if (dialog.FileName == "") //if selections was cancelled
+            {
+                System.Environment.Exit(1); //skip the rest of the program
+            }
+
+            //check if file is in use
+            if (ExcelClass.IsFileinUse(new FileInfo(xlData.getFileName()))) //if the excel file is open
+            {
+                //collect garbage and close the file
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                MessageBox.Show("Please close any open instances of the spreadsheet before opening.");
+            }
+
+            // creating COM objects for the excel sheet
+            Excel.Application xlApp = new Excel.Application(); //open the excel com object
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(xlData.getFileName()); //open the target workbook
+            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1]; //open the first worksheet
+            Excel.Range xlRange = xlWorksheet.UsedRange; //set the range to the used range
+            Excel.Worksheet outputSheet = xlWorkbook.Worksheets.Add(After: xlWorksheet); //create a new output sheet
+
+
+            //////////////////////////////////////cleanup///////////////////////////////////////////
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            //rule of thumb for releasing com objects:
+            //  never use two dots, all COM objects must be referenced and released individually
+            //  ex: [somthing].[something].[something] is bad
+
+            //release com objects to fully kill excel process from running in the background
+            Marshal.ReleaseComObject(xlRange);
+            Marshal.ReleaseComObject(xlWorksheet);
+            Marshal.ReleaseComObject(outputSheet);
+
+            //close and release
+            xlWorkbook.Close();
+            Marshal.ReleaseComObject(xlWorkbook);
+
+            //quit and release
+            xlApp.Quit();
+            Marshal.ReleaseComObject(xlApp);
         }
         public void extractToCsv(FileInfo filepath)
         {
