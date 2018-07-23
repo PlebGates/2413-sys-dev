@@ -93,7 +93,7 @@ CREATE TABLE professorscourses(
         public bool canTeach(int teachID, int classID)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "select * from professorscourses where teachID = " + teachID + " and classID = " + classID;
+            cmd.CommandText = "select * from professorscourses where professorID = " + teachID + " and classID = " + classID;
             //select the row where the teacher id and class id are shared
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
@@ -105,22 +105,20 @@ CREATE TABLE professorscourses(
             }
             return false;
         }
-        public Professor getCanTeach(int teachID)
+        public List<String> getCanTeach(int teachID)
         {   //populates Professor List<String> classList
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "select * from professorsclass where teachID = " + teachID;
+            cmd.CommandText = "select * from professorscourses where professorID = " + teachID;
+
+            List<String> classList = new List<string> { };
             using (SQLiteDataReader data = cmd.ExecuteReader())
             {
-                Professor prof = new Professor();
+                Professor professor = getProfessor(teachID);
                 while (data.Read())
                 {
-                    prof.classList.Add(data.GetInt32(1) + "");
+                    classList.Add( getCourse(data.GetInt32(1)).name);
                 }
-                if (prof.classList[0] == null)
-                {
-                    return null;
-                }
-                return prof;
+                return classList;
             }
         }
         public List<String> getClassList(int id)
@@ -133,7 +131,7 @@ CREATE TABLE professorscourses(
             {
                 while (data.Read())
                 {
-                    classList.Add(getCourse(data.GetInt32(2)).name); //get the course name and add to list
+                    classList.Add(getCourse(data.GetInt32(1)).name); //get the course name and add to list
                 }
             }
             return classList; //return the list
@@ -288,7 +286,7 @@ CREATE TABLE professorscourses(
         public void addCanTeach(int profid, int courseid)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO professorscourses (professorid,courseid) values (" + profid + "," + courseid + ");";
+            cmd.CommandText = "INSERT INTO professorscourses (professorID,courseID) values (" + profid + "," + courseid + ");";
             cmd.ExecuteNonQuery();
         }
         public void addCourseBlock(CourseBlock block)

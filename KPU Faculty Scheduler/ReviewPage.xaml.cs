@@ -48,16 +48,6 @@ namespace KPU_Faculty_Scheduler
                 Review_Listbox.Items.Add(count + " |\t          " + roomInput.building + "   \t|             " + roomInput.roomNum + "\t|             " + roomInput.hasComputers);
             }
         }
-        public void reviewProfesser(List<Professor> input)
-        {
-            Review_Listbox.Items.Clear();
-            int count = 0;
-            Review_Listbox.Items.Add(count + " |\tProfessor Name\t|  Can Teach The Following");
-            foreach (Professor profInput in input) //foreach in list
-            {   //Add each element to listbox
-                count++;
-                Review_Listbox.Items.Add(count + " |\t          " + profInput.name + "   \t|             " + profInput.classList );
-            }
-        }
+        
     }
 }

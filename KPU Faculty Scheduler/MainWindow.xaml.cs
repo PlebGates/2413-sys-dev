@@ -83,27 +83,43 @@ namespace KPU_Faculty_Scheduler
                 reviewButtons.Visibility = System.Windows.Visibility.Visible;
                 mainFrame.Content = reviewPage;
 
-                
-
-                /*
-                // semi complie Professor Can Teach Course
-                List<Professor> allProfessors = db.getAllProfessor();
                 List<Course> allCourses = db.getAllCourse();
-                foreach(Professor p in allProfessors)
-                {
-                    foreach (Course c in allCourses)
-                    { 
-                        if (db.canTeach(p.id, c.id)){
-                            db.addCanTeach(p.id, c.id);
-                        }
-                    }
-                }
-                */
+                List<Professor> allProfessors = db.getAllProfessor();
+                List<ListBox> box = professorsPage.getlistboxes();
 
+                // Populates canTeach TABLE
+                for(int i = 0; i < 10; i++)
+                {
+                    Professor professor = new Professor();//to ensure professor isnt broken every new professor object is made
+                    foreach(object selected in box[i].SelectedItems) {
+                            foreach(Course c in allCourses)
+                            {
+                                if(c.name == selected.ToString())
+                                {
+                                db.addCanTeach(allProfessors[i].id, c.id);
+                                break; //found a match goto next selected course
+                                }
+                            }
+                        }
+                }
             }
         }
 
-   
+        //moved here from ReviewPage
+        public void reviewProfesser(List<Professor> input)
+        {
+            reviewPage.Review_Listbox.Items.Clear();
+            int count = 0;
+            reviewPage.Review_Listbox.Items.Add(count + " |\tProfessor Name\t|  Can Teach The Following");
+            foreach (Professor profInput in input) //foreach in list
+            {
+                List<String> listOfTeachable = db.getCanTeach(profInput.id);
+                
+                //Add each element to listbox
+                count++;
+                reviewPage.Review_Listbox.Items.Add(count + " |\t  " + profInput.name + "   \t|             " + string.Join(", ", listOfTeachable));
+            }
+        }
 
 
         // Upon clicking the back button, figure out which page is currently visible, and decide where to go from there
@@ -186,7 +202,7 @@ namespace KPU_Faculty_Scheduler
 
         private void review_Click_Professor(object sender, RoutedEventArgs e)
         {
-            reviewPage.reviewProfesser(db.getAllProfessor());
+            reviewProfesser(db.getAllProfessor());
         }
     }
 }

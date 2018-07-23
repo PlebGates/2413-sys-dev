@@ -34,8 +34,8 @@ namespace KPU_Faculty_Scheduler
         {
 
             // block of OBJECTS to simplify code
-            List<TextBox> inputboxes1 = new List<TextBox> { lastName1, lastName2, lastName3, lastName4, lastName5, lastName6, lastName7, lastName8, lastName9, lastName10 };
-            List<TextBox> inputboxes2 = new List<TextBox> { firstName1, firstName2, firstName3, firstName4, firstName5, firstName6, firstName7, firstName8, firstName9, firstName10 };
+            List<TextBox> lastName = new List<TextBox> { lastName1, lastName2, lastName3, lastName4, lastName5, lastName6, lastName7, lastName8, lastName9, lastName10 };
+            List<TextBox> firstName = new List<TextBox> { firstName1, firstName2, firstName3, firstName4, firstName5, firstName6, firstName7, firstName8, firstName9, firstName10 };
             // List<TextBox> inputboxes3 = new List<TextBox> { roomNum1, roomNum2, roomNum3, roomNum4, roomNum5, roomNum6, roomNum7, roomNum8, roomNum9, roomNum10 };
             
             List<Professor> validInput = new List<Professor> { };
@@ -43,28 +43,28 @@ namespace KPU_Faculty_Scheduler
             int incomplete = 0;
             for (int i = 0; i < 10; i++)
             {
-                if (inputboxes1[i].Text != "" && inputboxes2[i].Text != "")
+                if (lastName[i].Text != "" && firstName[i].Text != "")
                 {
                     Professor Professor = new Professor();
                     try
                     {
-                        Professor.name = inputboxes1[i].Text + " " + inputboxes2[i].Text;
-                        //Professor.classList = Convert.ToInt32(inputboxes2[i].Text);
+                        Professor.name = firstName[i].Text + " " + lastName[i].Text;
+                        //Professor.classList = Convert.ToInt32(firstName[i].Text);
                         validInput.Add(Professor);
-                        countValid++;
+                        countValid++;   
                         //reset boxes for every line
-                        inputboxes1[i].Text = "";
-                        inputboxes2[i].Text = "";
+                        lastName[i].Text = "";
+                        firstName[i].Text = "";
                     }
                     catch (Exception e) {/*maybe grab a list of empty or incomplete textboxes*/ incomplete++; }
                 }
-                else if (inputboxes1[i].Text != "" || inputboxes2[i].Text != "")
+                else if (lastName[i].Text != "" || firstName[i].Text != "")
                 {
                     incomplete++;
                 }
                 //reset boxes for every line
-                inputboxes1[i].Text = "";
-                inputboxes2[i].Text = "";
+                lastName[i].Text = "";
+                firstName[i].Text = "";
             }
             statusLabel.Text = (incomplete == 0) ? countValid + " valid entries" : countValid + " valid entries, " + incomplete + " incomplete entries";
             return validInput;
