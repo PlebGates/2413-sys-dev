@@ -419,7 +419,7 @@ namespace KPU_Faculty_Scheduler
                 //collect garbage and close the file
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                MessageBox.Show("Please close any open instances of the spreadsheet before running this program.");
+                MessageBox.Show("Please close any open instances of the spreadsheet before attempting to save to it.");
                 //System.Environment.Exit(1);
             }
 
@@ -427,76 +427,96 @@ namespace KPU_Faculty_Scheduler
             Excel.Application xlApp = new Excel.Application(); //open the excel com object
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(xlData.getFileName()); //open the target workbook
             Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1]; //open the first worksheet
+            int row, col;
             
-            //get every room in the list and add to set
-            HashSet<Room> roomSet = new HashSet<Room>();
+            HashSet<Room> roomSet = new HashSet<Room>();//get every room in the list and add to set
+            HashSet<Professor> profSet = new HashSet<Professor>(); //get every professor and add to set
+            HashSet<Course> courseSet = new HashSet<Course>(); //get every course and add to set
+
+            var roomSheet = (Excel.Worksheet)xlWorkbook.Sheets.Add(xlWorkbook.Sheets[1], Type.Missing, Type.Missing, Type.Missing);
+            roomSheet.Name = "Rooms";
+
+            //switch worksheet and write all rooms
+            roomSheet.Cells[1, 1] = "ID";
+            roomSheet.Cells[1, 2] = "Building";
+            roomSheet.Cells[1, 3] = "Number";
+            roomSheet.Cells[1, 4] = "Computers";
+            row = 2;
+            col = 1;
+            foreach(Room room in roomSet)
+            {
+
+                roomSheet.Cells[row, col] = room.id;
+                roomSheet.Cells[row, col + 1] = room.building;
+                roomSheet.Cells[row, col + 2] = room.roomNum;
+                roomSheet.Cells[row, col + 3] = room.hasComputers;
+                row++;
+            }
+            Marshal.ReleaseComObject(roomSheet);
+            //switch worksheet and write all profs
+            var profSheet = (Excel.Worksheet)xlWorkbook.Sheets.Add(xlWorkbook.Sheets[1], Type.Missing, Type.Missing, Type.Missing);
+            roomSheet.Name = "Professors";
+            
+            profSheet.Cells[1, 1] = "ID";
+            profSheet.Cells[1, 2] = "Name";
+            profSheet.Cells[1, 3] = "Classes";
+            row = 2;
+            col = 1;
+            foreach (Professor prof in profSet)
+            {
+                
+                roomSheet.Cells[row, 1] = prof.id;
+                roomSheet.Cells[row, 2] = prof.name;
+                col = 3;
+                foreach (string course in prof.classList)
+                {
+                    roomSheet.Cells[row, col++] = course;
+                }
+                row++;
+            }
+            Marshal.ReleaseComObject(profSheet);
+            //switch worksheet and write all courses
+            var courseSheet = (Excel.Worksheet)xlWorkbook.Sheets.Add(xlWorkbook.Sheets[1], Type.Missing, Type.Missing, Type.Missing);
+            courseSheet.Name = "Classes";
+            profSheet.Cells[1, 1] = "ID";
+            profSheet.Cells[1, 2] = "Name";
+            profSheet.Cells[1, 3] = "Sections";
+            profSheet.Cells[1, 4] = "Computers";
+            row = 2;
+            col = 1;
+            foreach (Course course in courseSet)
+            {
+
+                courseSheet.Cells[row, 1] = course.id;
+                courseSheet.Cells[row, 2] = course.name;
+                courseSheet.Cells[row, 3] = course.sections;
+                courseSheet.Cells[row, 4] = course.needsComputers;
+                row++;
+            }
+
+            Marshal.ReleaseComObject(courseSheet);
+            //switch worksheet and write all blocks
+            var blockSheet = (Excel.Worksheet)xlWorkbook.Sheets.Add(xlWorkbook.Sheets[1], Type.Missing, Type.Missing, Type.Missing);
+            courseSheet.Name = "Blocks";
+            profSheet.Cells[1, 1] = "ID";
+            profSheet.Cells[1, 2] = "Time";
+            profSheet.Cells[1, 3] = "Professor ID";
+            profSheet.Cells[1, 4] = "Course ID";
+            profSheet.Cells[1, 4] = "Room ID";
+            row = 2;
+            col = 1;
             foreach (CourseBlock block in classList)
             {
-                roomSet.Add(block.room);
+
+                courseSheet.Cells[row, 1] = block.id;
+                courseSheet.Cells[row, 2] = block.time;
+                courseSheet.Cells[row, 3] = block.professor.id;
+                courseSheet.Cells[row, 4] = block.course.id;
+                courseSheet.Cells[row, 4] = block.room.id;
+                row++;
             }
 
-            int row = 1;
-            int col = 1;
-            /* Time blocks
-                 * M |T |W |T |F |S |S
-                 * 0 |4 |0 |4 |14|14
-                 * 1 |5 |8 |11|15|18
-                 * 2 |6 |9 |12|16|19
-                 * 3 |7 |10|13|17|20
-                 */
-            for (int time = 0; time < 21; time++)
-            {
-                switch(timeToDay(time))
-                {
-                    case 1: //mon
-                        col = 1;
-                        break;
-                    case 2: //tues
-                        break;
-                    case 3: //wed
-                        break;
-                    case 4: //thurs
-                        break;
-                    case 5: //fri
-                        break;
-                    case 6: //sat
-                        break;
-                    case 13: //mon/wed
-                        break;
-                    case 24: //tues/thurs
-                        break;
-                    case 56: //fri/sat
-                        break;
-                    default:
-                        break;
-                }
-                int count = 0;
-                foreach (Room room in roomSet)
-                {
-                    xlWorksheet.Cells[row, col] = "Class:";
-                    xlWorksheet.Cells[row + 1, col] = "Section:";
-                    xlWorksheet.Cells[row + 2, col] = "Room:";
-                    xlWorksheet.Cells[row + 3, col] = "Professor:";
-                }
-            }
-            
-            foreach (CourseBlock block in classList)
-            {
-                xlWorksheet.Cells[row, col] = "Class:";
-                xlWorksheet.Cells[row + 1, col] = "Section:";
-                xlWorksheet.Cells[row + 2, col] = "Room:";
-                xlWorksheet.Cells[row + 3, col] = "Professor:";
-
-                xlWorksheet.Cells[row, col + 1] = block.course.name;
-                xlWorksheet.Cells[row + 1, col + 1] = block.course.sections;
-                xlWorksheet.Cells[row + 2, col + 1] = block.room.building + " " + block.room.roomNum;
-                xlWorksheet.Cells[row + 3, col + 1] = block.professor.name;
-
-                row += 4;
-
-
-            }
-
+            xlWorkbook.Save();
             //////////////////////////////////////cleanup///////////////////////////////////////////
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -507,6 +527,7 @@ namespace KPU_Faculty_Scheduler
 
             //release com objects to fully kill excel process from running in the background
             Marshal.ReleaseComObject(xlWorksheet);
+            Marshal.ReleaseComObject(blockSheet);
 
             //close and release
             xlWorkbook.Close();
