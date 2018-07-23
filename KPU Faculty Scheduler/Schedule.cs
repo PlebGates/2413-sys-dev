@@ -115,6 +115,7 @@ namespace KPU_Faculty_Scheduler
                 foreach (Course course in courseList)
                 {
                     time = time % 20; //if the time reaches 20 then reset it
+                    done = false;
                     while (!done)
                     {
                         //if the 6th character of a name (ex INFO |3|110) denotes 3rd or 4th year and the time isn't acceptable
@@ -193,7 +194,12 @@ namespace KPU_Faculty_Scheduler
                                     blockList.Add(new CourseBlock(prof, room, course, time)); //add your new courseblock
                                     
                                     done = true; //this course has been put into a slot
+                                    break;
                                 }
+                            if (done == true)
+                            {
+                                break;
+                            }
                         }
                         time++; //increment time forwards
                     }
