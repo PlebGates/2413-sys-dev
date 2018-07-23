@@ -56,16 +56,16 @@
 
         <!-- Listbox column -->
         <Label x:Name="canTeachLabel" Content="What can they teach?" HorizontalAlignment="Left" Margin="251,76,0,0" VerticalAlignment="Top" Width="106" FontSize="10"/>
-        <ListBox x:Name="teachListbox1" HorizontalAlignment="Left" Height="50" Margin="251,105,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox2" HorizontalAlignment="Left" Height="50" Margin="251,160,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox3" HorizontalAlignment="Left" Height="50" Margin="251,215,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox4" HorizontalAlignment="Left" Height="50" Margin="251,270,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox5" HorizontalAlignment="Left" Height="50" Margin="251,325,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox6" HorizontalAlignment="Left" Height="50" Margin="251,380,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox7" HorizontalAlignment="Left" Height="50" Margin="251,435,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox8" HorizontalAlignment="Left" Height="50" Margin="251,490,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox9" HorizontalAlignment="Left" Height="50" Margin="251,545,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox x:Name="teachListbox10" HorizontalAlignment="Left" Height="50" Margin="251,600,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple" AllowDrop="True"/>
+        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="50" Margin="251,105,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox2" HorizontalAlignment="Left" Height="50" Margin="251,160,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox3" HorizontalAlignment="Left" Height="50" Margin="251,215,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox4" HorizontalAlignment="Left" Height="50" Margin="251,270,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox5" HorizontalAlignment="Left" Height="50" Margin="251,325,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox6" HorizontalAlignment="Left" Height="50" Margin="251,380,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox7" HorizontalAlignment="Left" Height="50" Margin="251,435,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox8" HorizontalAlignment="Left" Height="50" Margin="251,490,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox9" HorizontalAlignment="Left" Height="50" Margin="251,545,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <ListBox x:Name="listBox10" HorizontalAlignment="Left" Height="50" Margin="251,600,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple" AllowDrop="True"/>
 
         <TextBox x:Name="statusLabel" Text="" HorizontalAlignment="Center" Margin="0,0,0,18" VerticalAlignment="Bottom" Background="#FFE4E4E4" Foreground="Red" Width="250" FontWeight="Bold" IsEnabled="False"/>
     </Grid>
