@@ -4,8 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace KPU_Faculty_Scheduler
 {
@@ -407,15 +410,111 @@ namespace KPU_Faculty_Scheduler
         }
         public void extractToXslx(FileInfo filepath)
         {
-            if (ExcelClass.IsFileinUse(filepath))
+            ExcelData xlData = new ExcelData(); //create new excel data
+            xlData.setFileName(filepath.FullName);
+
+            //check if file is in use
+            if (ExcelClass.IsFileinUse(new FileInfo(xlData.getFileName()))) //if the excel file is open
             {
+                //collect garbage and close the file
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                MessageBox.Show("Please close any open instances of the spreadsheet before running this program.");
+                //System.Environment.Exit(1);
+            }
+
+            // creating COM objects for the excel sheet
+            Excel.Application xlApp = new Excel.Application(); //open the excel com object
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(xlData.getFileName()); //open the target workbook
+            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1]; //open the first worksheet
+            
+            //get every room in the list and add to set
+            HashSet<Room> roomSet = new HashSet<Room>();
+            foreach (CourseBlock block in classList)
+            {
+                roomSet.Add(block.room);
+            }
+
+            int row = 1;
+            int col = 1;
+            /* Time blocks
+                 * M |T |W |T |F |S |S
+                 * 0 |4 |0 |4 |14|14
+                 * 1 |5 |8 |11|15|18
+                 * 2 |6 |9 |12|16|19
+                 * 3 |7 |10|13|17|20
+                 */
+            for (int time = 0; time < 21; time++)
+            {
+                switch(timeToDay(time))
+                {
+                    case 1: //mon
+                        col = 1;
+                        break;
+                    case 2: //tues
+                        break;
+                    case 3: //wed
+                        break;
+                    case 4: //thurs
+                        break;
+                    case 5: //fri
+                        break;
+                    case 6: //sat
+                        break;
+                    case 13: //mon/wed
+                        break;
+                    case 24: //tues/thurs
+                        break;
+                    case 56: //fri/sat
+                        break;
+                    default:
+                        break;
+                }
+                int count = 0;
+                foreach (Room room in roomSet)
+                {
+                    xlWorksheet.Cells[row, col] = "Class:";
+                    xlWorksheet.Cells[row + 1, col] = "Section:";
+                    xlWorksheet.Cells[row + 2, col] = "Room:";
+                    xlWorksheet.Cells[row + 3, col] = "Professor:";
+                }
+            }
+            
+            foreach (CourseBlock block in classList)
+            {
+                xlWorksheet.Cells[row, col] = "Class:";
+                xlWorksheet.Cells[row + 1, col] = "Section:";
+                xlWorksheet.Cells[row + 2, col] = "Room:";
+                xlWorksheet.Cells[row + 3, col] = "Professor:";
+
+                xlWorksheet.Cells[row, col + 1] = block.course.name;
+                xlWorksheet.Cells[row + 1, col + 1] = block.course.sections;
+                xlWorksheet.Cells[row + 2, col + 1] = block.room.building + " " + block.room.roomNum;
+                xlWorksheet.Cells[row + 3, col + 1] = block.professor.name;
+
+                row += 4;
+
 
             }
-            //create a new xlsx file
-            //write the schedule data to the xlsx file
-            //close the xslx file
 
+            //////////////////////////////////////cleanup///////////////////////////////////////////
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
+            //rule of thumb for releasing com objects:
+            //  never use two dots, all COM objects must be referenced and released individually
+            //  ex: [somthing].[something].[something] is bad
+
+            //release com objects to fully kill excel process from running in the background
+            Marshal.ReleaseComObject(xlWorksheet);
+
+            //close and release
+            xlWorkbook.Close();
+            Marshal.ReleaseComObject(xlWorkbook);
+
+            //quit and release
+            xlApp.Quit();
+            Marshal.ReleaseComObject(xlApp);
 
         }
         public void extractToCsv(FileInfo filepath)
