@@ -538,7 +538,7 @@ namespace KPU_Faculty_Scheduler
                 row++;
             }
 
-            xlWorkbook.Save();
+            xlWorkbook.SaveAs(filepath);
             //////////////////////////////////////cleanup///////////////////////////////////////////
             GC.Collect();
             GC.WaitForPendingFinalizers();
