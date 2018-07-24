@@ -25,23 +25,5 @@ namespace KPU_Faculty_Scheduler
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            courseBlockListbox1.Items.Add("hello world");
-        }
-
-        private void courseBlockListbox1_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effects = DragDropEffects.All;
-
-            courseBlockListbox1.Items.Add(e.Data.GetData(DataFormats.Text));
-        }
-
-        private void courseBlockListbox2_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effects = DragDropEffects.All;
-
-            courseBlockListbox2.Items.Add(e.Data.GetData(DataFormats.Text));
-        }
     }
 }

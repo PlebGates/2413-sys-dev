@@ -34,5 +34,12 @@
             <Button x:Name="reviewProf" Content="Professor" Height="35" Width="100" Click="review_Click_Professor"></Button>
         </StackPanel>
 
+        <Grid x:Name="schedulePageGrid" Visibility="Collapsed" >
+            <ComboBox x:Name="day1_ComboBox" HorizontalAlignment="Left" Height="35" Margin="37,481,0,-16" VerticalAlignment="Top" Width="129" MouseDown="day1_ComboBox_MouseDown" />
+            <ComboBox x:Name="course1_ComboBox" HorizontalAlignment="Left" Height="35" Margin="172,481,0,-16" VerticalAlignment="Top" Width="218" RenderTransformOrigin="0.385,0.949"/>
+            <ComboBox x:Name="day2_ComboBox" HorizontalAlignment="Left" Height="35" Margin="493,482,0,-17" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.282,0.709" MouseDown="day2_ComboBox_MouseDown" />
+            <ComboBox x:Name="course2_ComboBox" HorizontalAlignment="Left" Height="35" Margin="614,482,-23,-17" VerticalAlignment="Top" Width="209" RenderTransformOrigin="3.377,1.58"/>
+            <DataGrid x:Name="schdeuleGrid"  HorizontalAlignment="Left" Height="336" Margin="62,99,0,0" VerticalAlignment="Top" Width="710"/>
+        </Grid>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace KPU_Faculty_Scheduler
 {
@@ -106,9 +107,17 @@ namespace KPU_Faculty_Scheduler
             }
             else if (mainFrame.Content == reviewPage)
             {
+                schedule.CreateSchedule(db.getAllProfessor(),db.getAllCourse(),db.getAllRoom());
+                foreach(CourseBlock block in schedule.classList)
+                {
+                    db.addCourseBlock(block);
+                }
+
                 mainFrame.Content = schedulePage;
                 reviewButtons.Visibility = System.Windows.Visibility.Hidden;
                 SwapButton.Visibility = System.Windows.Visibility.Visible;
+                schedulePageGrid.Visibility = System.Windows.Visibility.Visible;
+                loadSchedulePage(); //load scheulde page days -- needs another function here to load created scheulde on dataGrid
             }
         }
         //END next
@@ -167,6 +176,7 @@ namespace KPU_Faculty_Scheduler
                 mainFrame.Content = reviewPage;
                 reviewButtons.Visibility = System.Windows.Visibility.Visible;
                 SwapButton.Visibility = System.Windows.Visibility.Hidden;
+                schedulePageGrid.Visibility = System.Windows.Visibility.Hidden;
             }
         }
 
@@ -223,21 +233,117 @@ namespace KPU_Faculty_Scheduler
 
         private void SwapButton_Click(object sender, RoutedEventArgs e)
         {
-            /* Time blocks
-            * M |T |W |T |F |S |S
-            * 0 |4 |0 |4 |14|14
-            * 1 |5 |8 |11|15|18
-            * 2 |6 |9 |12|16|19
-            * 3 |7 |10|13|17|20
-            */
-            int[] monday = { 0, 1, 2, 3 };
-            int[] tuseday = { 4, 5, 6, 7 };
-            int[] wednesday = { 0, 8, 9, 10 };
-            int[] thursday = { 4, 11, 12, 13 };
-            int[] friday = { 14, 15, 16, 17 };
-            int[] saturday = { 14, 18, 19, 20 };
-            schedulePage.courseBlockListbox1.Items.Add(db.getCourse(1).name);
-            schedulePage.courseBlockListbox2.Items.Add(db.getCourse(2).name);
+
+            
+
         }
+
+        /* Time blocks
+        * M |T |W |T |F |S |S
+        * 0 |5 |0 |5 |18|18
+        * 1 |6 |10|14|19|23
+        * 2 |7 |11|15|20|24
+        * 3 |8 |12|16|21|25
+        * 4 |9 |13|17|22|26
+        */
+        //schedulePage stuff
+        private static int[] monday = { 0, 1, 2, 3, 4 };
+        private static int[] tuseday = { 5, 6, 7, 8, 9 };
+        private static int[] wednesday = { 0, 10, 11, 12, 13 };
+        private static int[] thursday = { 5, 14, 15, 16, 17 };
+        private static int[] friday = { 18, 19, 20, 21, 22 };
+        private static int[] saturday = { 18, 23, 24, 25, 26 };
+        //creates a Dictionary/Map to connect to the arrays for time
+        Dictionary<String, int[]> map = new Dictionary<string, int[]>()
+            {
+                {"Monday", monday},
+                {"Tuseday", tuseday},
+                {"Wednesday", wednesday},
+                {"Thursday", thursday},
+                {"Friday", friday},
+                {"Saturday", saturday},
+            };
+        Dictionary<int, String> timeSchedule = new Dictionary<int, String>()
+            {
+                {0, "8:30am - 10am"},{5, "8:30am - 10am"},{18, "8:30am - 10am"},
+                {1, "10pm - 12:50pm"},{6, "10pm - 12:50pm"},{10, "10pm - 12:50pm"},{14, "10pm - 12:50pm"},{19, "10pm - 12:50pm"},{23, "10pm - 12:50pm"},
+                {2, "1pm - 3:50pm"},{7, "1pm - 3:50pm"},{11, "1pm - 3:50pm"},{15, "1pm - 3:50pm"},{20, "1pm - 3:50pm"},{24, "1pm - 3:50pm"},
+                {3, "3pm - 6:50pm"},{8, "3pm - 6:50pm"},{12, "3pm - 6:50pm"},{16, "3pm - 6:50pm"},{21, "3pm - 6:50pm"},{25, "3pm - 6:50pm"},
+                {4, "7pm - 9:50pm"},{9, "7pm - 9:50pm"},{13, "7pm - 9:50pm"},{17, "7pm - 9:50pm"},{22, "7pm - 9:50pm"},{26, "7pm - 9:50pm"},
+            };
+
+        public void loadSchedulePage()
+        {
+            //populate the DAYS combobox for user to select what day they want to change
+            foreach (String day in map.Keys)
+            {
+                day1_ComboBox.Items.Add(day);
+                day2_ComboBox.Items.Add(day);
+            }
+        }
+        //when user clicks on combo box and selects a item it will populate coursescombobox2
+        private void day2_ComboBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            foreach (String courseDetails in getBlocksOnDay(day2_ComboBox.SelectedItem.ToString()))
+            {
+                course2_ComboBox.Items.Add(courseDetails);
+            }
+        }
+        //when user clicks on combo box and selects a item it will populate coursescombobox1
+        private void day1_ComboBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            foreach (String courseDetails in getBlocksOnDay(day1_ComboBox.SelectedItem.ToString()))
+            {
+                course1_ComboBox.Items.Add(courseDetails);
+            }
+        }
+        public List<String> getBlocksOnDay(String day)
+        {
+
+            List<String> courseDetails = new List<String>();
+            List<Room> roomList = db.getAllRoom();
+            foreach (int time in map[day])//check if the block.time is on x day ex."monday"
+            {
+                List<Room> consumedRooms = new List<Room>();//new list of consumed rooms
+                CourseBlock blockAtThisTime = new CourseBlock();
+                foreach (Room room in roomList)
+                {
+                    bool roomInUse = false;
+                    foreach (CourseBlock block in db.getAllCourseBlockTime(time)) //check courses for that time
+                    {
+                        if (room == block.room && time == block.time) //if block is on this time and room
+                        {
+                            roomInUse = true;
+                            blockAtThisTime = block;
+                            break;
+                        }
+                    }
+                    if (roomInUse)
+                    {
+                        //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
+                        //[8am - 10pm, cedar 1045] //no teacher and course
+                        if (blockAtThisTime.room.hasComputers)
+                        {
+                            //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
+                            courseDetails.Add(timeSchedule + ", (c)" + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
+                        }
+                        else//this room has no computers
+                        {
+                            //[8am - 10pm, cedar 1045] //no teacher and course
+                            courseDetails.Add(timeSchedule + ", " + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
+                        }
+                    }
+                    //no course for this room
+                    else
+                    {
+                        courseDetails.Add(timeSchedule + ", " + room.building + room.roomNum);
+                    }
+                }
+                
+            }
+
+            return courseDetails;
+        }
+        
     }
 }
