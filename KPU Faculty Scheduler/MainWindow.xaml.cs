@@ -235,9 +235,71 @@ namespace KPU_Faculty_Scheduler
         {
             if(course1_ComboBox.SelectedItem != null && course2_ComboBox.SelectedItem != null)
             {
-                CourseBlock a = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
-                CourseBlock b = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
-                schedule.swapCourseBlock(a, b);
+                MessageBox.Show(course1_ComboBox.SelectedIndex + ":selected " + db.countRooms() + ":total rooms\n" + course2_ComboBox.SelectedIndex + ":selected " + db.countRooms() + ":total rooms");
+                //DAY
+                String aday = day1_ComboBox.SelectedItem.ToString(); //monday
+                String bday = day2_ComboBox.SelectedItem.ToString(); //monday
+
+                //timeblock
+                int a = 0;
+                int b = 0;
+                foreach (String key in map.Keys)
+                {
+                    if(map[key].Contains((int)Math.Floor((decimal)course1_ComboBox.SelectedIndex / db.countRooms())))
+                    {
+                        a = map[key][(int)Math.Floor((decimal)course1_ComboBox.SelectedIndex / db.countRooms())];
+                    }
+                }
+                foreach (String key in map.Keys)
+                {
+                    if (map[key].Contains((int)Math.Floor((decimal)course2_ComboBox.SelectedIndex / db.countRooms())))
+                    {
+                        b = map[key][(int)Math.Floor((decimal)course2_ComboBox.SelectedIndex / db.countRooms())];
+                    }
+                }
+
+                //ROOM
+                Room ra = new Room();
+                Room rb = new Room();
+                ra = db.getRoom(getRoomNo(aday, course1_ComboBox.SelectedIndex % (db.countRooms()+1)));
+                rb = db.getRoom(getRoomNo(aday, course2_ComboBox.SelectedIndex % (db.countRooms() + 1)));
+                if(db.getBlockByTime(a, ra.id) == null)
+                {
+                    try
+                    {
+                        CourseBlock blockb = db.getBlockByTime(b, rb.id);
+                        schedule.swapCourseBlock(blockb, a, ra);
+                    }
+                    catch (Exception exec)
+                    {
+
+                    }
+                }
+                else if (db.getBlockByTime(b, rb.id) == null)
+                {
+                    try
+                    {
+                        CourseBlock blocka = db.getBlockByTime(a, ra.id);
+                        schedule.swapCourseBlock(blocka, b, rb);
+                    }
+                    catch (Exception exe)
+                    {
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        CourseBlock blocka = db.getBlockByTime(a, ra.id);
+                        CourseBlock blockb = db.getBlockByTime(b, rb.id);
+                        schedule.swapCourseBlock(blocka, blockb);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+
             }
             
         }
@@ -306,11 +368,9 @@ namespace KPU_Faculty_Scheduler
                         Room thisRoom = db.getRoom(block.room.id);
                         Course thisCourse = db.getCourse(block.course.id);
                         Professor thisProf = db.getProfessor(block.professor.id);
-                        MessageBox.Show("checking block:" + block.id + "this block time: " + block.time + "for this time: " + time);
                         if (room.id == thisRoom.id && time == block.time) //if block is on this time and room
                         {
                             roomInUse = true;
-                            MessageBox.Show("MATCH!");
                         }
                         if (roomInUse)
                         {
@@ -332,7 +392,6 @@ namespace KPU_Faculty_Scheduler
                         //not a match, keep looking
                         else
                         {
-                            MessageBox.Show("no MAtch!");
                             continue;
                         }
                     }
@@ -341,7 +400,7 @@ namespace KPU_Faculty_Scheduler
                         courseDetails.Add(timeSchedule[time] + ", " + room.building + room.roomNum + "no course, no teacher");
                         continue;
                     }
-                    
+
                 }
                 
             }
@@ -369,6 +428,66 @@ namespace KPU_Faculty_Scheduler
                 }
             }
             return courseDetails;
+        }
+        public int getRoomNo(String day,int index)
+        {
+
+            List<CourseBlock> courseDetails = new List<CourseBlock>();
+            List<Room> roomList = db.getAllRoom();
+            int count = -1;
+            foreach (int time in map[day])//check if the block.time is on x day ex."monday"
+            {
+                foreach (Room room in roomList)
+                {
+                    bool roomInUse = false;
+                    count++;
+                    foreach (CourseBlock block in db.getAllCourseBlockTime(time)) //check courses for that time
+                    {
+                        Room thisRoom = db.getRoom(block.room.id);
+                        Course thisCourse = db.getCourse(block.course.id);
+                        Professor thisProf = db.getProfessor(block.professor.id);
+                        if (room.id == thisRoom.id && time == block.time) //if block is on this time and room
+                        {
+                            roomInUse = true;
+                        }
+                        if (roomInUse)
+                        {
+                            if (thisRoom.hasComputers && room.hasComputers)
+                            {
+
+                                if(count == index)
+                                {
+                                    return count;
+                                }
+
+                            }
+                            else//this room has no computers
+                            {
+
+                                if (count == index)
+                                {
+                                    return count;
+                                }
+
+                            }
+                        }
+                        //not a match, keep looking
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    if (!roomInUse)
+                    { //no course for this room
+                        if (count == index)
+                        {
+                            return count;
+                        }
+                        continue;
+                    }
+                }
+            }
+            return count;
         }
 
 

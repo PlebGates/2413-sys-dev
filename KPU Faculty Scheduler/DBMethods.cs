@@ -157,6 +157,21 @@ CREATE TABLE professorscourses(
             //return new Room(data.GetInt32(0), data.GetString(1), data.GetBoolean(3));
         }
 
+        public int countRooms()
+        {
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "select count(*) from rooms";
+            int count = 0;
+            using (SQLiteDataReader data = cmd.ExecuteReader())
+            {
+                while (data.Read())
+                {
+                    count = data.GetInt32(0);
+
+                }
+            }
+            return count;
+        }
         public List<Room> getAllRoom()
         {
             SQLiteCommand cmd = connection.CreateCommand(); //new sql command
@@ -231,6 +246,26 @@ CREATE TABLE professorscourses(
                 {
                     CourseBlock block = new CourseBlock();
                     block.id = id;
+                    block.professor = getProfessor(data.GetInt32(1));
+                    block.course = getCourse(data.GetInt32(2));
+                    block.room = getRoom(data.GetInt32(3));
+                    block.time = data.GetInt32(4);
+                    return block;
+                }
+            }
+            return null;
+        }
+        public CourseBlock getBlockByTime(int time, int room)
+        {
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "select * from schedule where time = " + time + " and roomID = " + room;
+
+            using (SQLiteDataReader data = cmd.ExecuteReader())
+            {
+                while (data.Read())
+                {
+                    CourseBlock block = new CourseBlock();
+                    block.id = data.GetInt32(0);
                     block.professor = getProfessor(data.GetInt32(1));
                     block.course = getCourse(data.GetInt32(2));
                     block.room = getRoom(data.GetInt32(3));

@@ -28,6 +28,11 @@ namespace KPU_Faculty_Scheduler
                 classList[indexa].time = btime; //set the time of a to b's time
                 classList[indexb].time = atime; //set the time of b to a's time
         }
+        public void swapCourseBlock(CourseBlock a, int time, Room room)
+        {
+            a.time = time; //give new time
+            a.room.id = room.id;
+        }
 
         // Method to confirm the above is aloud to happen.
         public bool swapCourseValid(CourseBlock a, CourseBlock b)
