@@ -241,6 +241,29 @@ CREATE TABLE professorscourses(
             return null;
         }
 
+        public List<CourseBlock> getAllCourseBlockTime(int time)
+        {
+            SQLiteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "select * from schedule where time = " + time;
+
+            List<CourseBlock> blockList = new List<CourseBlock>(); //create the list
+            using (SQLiteDataReader data = cmd.ExecuteReader()) //using the reader
+            {
+                while (data.Read()) //while there are records
+                {
+                    CourseBlock block = new CourseBlock(); //create a block
+                    block.id = data.GetInt32(0); //get the id
+                    block.professor = getProfessor(data.GetInt32(1)); //get the prof object
+                    block.course = getCourse(data.GetInt32(2)); //get the course
+                    block.room = getRoom(data.GetInt32(3)); //get the room
+                    block.time = data.GetInt32(4); //get the time
+                    blockList.Add(block); //add the block
+                }
+            }
+
+            return blockList; //return the list
+        }
+
         public List<CourseBlock> getAllCourseBlock()
         {
             SQLiteCommand cmd = connection.CreateCommand(); //new sql command
