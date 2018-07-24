@@ -111,6 +111,7 @@ namespace KPU_Faculty_Scheduler
                 foreach(CourseBlock block in schedule.classList)
                 {
                     db.addCourseBlock(block);
+                    
                 }
 
                 mainFrame.Content = schedulePage;
@@ -119,7 +120,7 @@ namespace KPU_Faculty_Scheduler
                 loadSchedulePage(); //load scheulde page days -- needs another function here to load created scheulde on dataGrid
             }
         }
-        //END next
+        //END next-----------------
 
         //moved here from ReviewPage
         public void reviewProfesser(List<Professor> input)
@@ -277,6 +278,8 @@ namespace KPU_Faculty_Scheduler
 
         public void loadSchedulePage()
         {
+            day1_ComboBox.Items.Clear();
+            day2_ComboBox.Items.Clear();
             //populate the DAYS combobox for user to select what day they want to change
             foreach (String day in map.Keys)
             {
@@ -311,6 +314,16 @@ namespace KPU_Faculty_Scheduler
                     {
                         //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
                         //[8am - 10pm, cedar 1045] //no teacher and course
+                        /*
+                        String roomBuilding = db.getRoom(blockAtThisTime.room.id).building);
+                        String roomNumber = db.getRoom(blockAtThisTime.room.id).roomNum + "";
+                        String courseName = (String)db.getCourse(blockAtThisTime.course.id).name;
+                        
+                        Course courseSection = db.getCourse(blockAtThisTime.course.id);
+                        MessageBox.Show(courseSection.name.ToString());
+                        String profName = (String)db.getProfessor(blockAtThisTime.professor.id).name;
+                        */
+                        
                         if (blockAtThisTime.room.hasComputers)
                         {
                             //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
@@ -319,12 +332,13 @@ namespace KPU_Faculty_Scheduler
                         else if (!blockAtThisTime.room.hasComputers)
                         {
                             //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
-                            courseDetails.Add(timeSchedule[time] + ", (c)" + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
+                           // courseDetails.Add(timeSchedule[time] + ", (c)" + roomBuilding + roomNumber + ", " + courseName + " S" + courseSection + ", " + profName);
                         }
+                        
                         else//this room has no computers
                         {
                             //[8am - 10pm, cedar 1045] //no teacher and course
-                            courseDetails.Add(timeSchedule[time] + ", " + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
+                            //courseDetails.Add(timeSchedule[time] + ", " + roomBuilding + roomNumber + ", " + courseName + " S" + courseSection + ", " + profName);
                         }
                     }
                     //no course for this room

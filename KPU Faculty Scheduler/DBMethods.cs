@@ -267,7 +267,7 @@ CREATE TABLE professorscourses(
         public List<CourseBlock> getAllCourseBlock()
         {
             SQLiteCommand cmd = connection.CreateCommand(); //new sql command
-            cmd.CommandText = "select * from courses"; //select all courses
+            cmd.CommandText = "select * from schedule"; //select all courses
             List<CourseBlock> blockList = new List<CourseBlock>(); //create the list
             using (SQLiteDataReader data = cmd.ExecuteReader()) //using the reader
             {
