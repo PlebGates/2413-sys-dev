@@ -324,17 +324,11 @@ namespace KPU_Faculty_Scheduler
                         String profName = (String)db.getProfessor(blockAtThisTime.professor.id).name;
                         */
                         
-                        if (blockAtThisTime.room.hasComputers)
+                        if (blockAtThisTime.room.hasComputers && room.hasComputers)
                         {
                             //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
                             courseDetails.Add(timeSchedule[time] + ", (c)" + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
                         }
-                        else if (!blockAtThisTime.room.hasComputers)
-                        {
-                            //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
-                           // courseDetails.Add(timeSchedule[time] + ", (c)" + roomBuilding + roomNumber + ", " + courseName + " S" + courseSection + ", " + profName);
-                        }
-                        
                         else//this room has no computers
                         {
                             //[8am - 10pm, cedar 1045] //no teacher and course
