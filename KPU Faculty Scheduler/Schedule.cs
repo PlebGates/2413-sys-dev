@@ -107,19 +107,20 @@ namespace KPU_Faculty_Scheduler
                 HashSet<IDTime> profTimeSet = new HashSet<IDTime>();
                 /* Time blocks
                  * M |T |W |T |F |S |S
-                 * 0 |4 |0 |4 |14|14
-                 * 1 |5 |8 |11|15|18
-                 * 2 |6 |9 |12|16|19
-                 * 3 |7 |10|13|17|20
+                 * 0 |5 |0 |5 |18|18
+                 * 1 |6 |10|14|19|23
+                 * 2 |7 |11|15|20|24
+                 * 3 |8 |12|16|21|25
+                 * 4 |9 |13|17|22|26
                  */
                 foreach (Course course in courseList)
                 {
-                    time = time % 20; //if the time reaches 20 then reset it
+                    time = time % 26; //if the time reaches 26 then reset it
                     done = false;
                     while (!done)
                     {
                         //if the 6th character of a name (ex INFO |3|110) denotes 3rd or 4th year and the time isn't acceptable
-                        int[] acceptableTimes = { 2, 3, 6, 7, 9, 10, 12, 13, 16, 17, 19, 20 }; //all 4-7 and 7-10 blocks
+                        int[] acceptableTimes = { 3, 4, 8, 9, 12, 13, 16, 17, 21, 22, 25, 26 }; //all 4-7 and 7-10 blocks
                         while ((course.name[5] == '3' || course.name[5] == '4') && !(acceptableTimes.Contains(time)))
                         {
                             time++;
@@ -245,8 +246,8 @@ namespace KPU_Faculty_Scheduler
 
                 //foreach block check if it's a 3rd or 4th year class in the wrong timeslot
                 //if the 6th character of a name (ex INFO |3|110) denotes 3rd or 4th year and the time isn't acceptable
-                int[] acceptableTimes = { 2, 3, 6, 7, 9, 10, 12, 13, 16, 17, 19, 20 }; //all 4-7 and 7-10 blocks
-                
+                int[] acceptableTimes = { 3, 4, 8, 9, 12, 13, 16, 17, 21, 22, 25, 26 }; //all 4-7 and 7-10 blocks
+
                 if ((block.course.name[5] == '3' || block.course.name[5] == '4') && !(acceptableTimes.Contains(block.time)))
                 {
                     return false;
@@ -297,13 +298,14 @@ namespace KPU_Faculty_Scheduler
         }
         //check if the prof is teaching more than 2 classes in any given day
         public bool classesInDay(List<CourseBlock> list, Professor prof)
-        { 
+        {
             /* Time blocks
                  * M |T |W |T |F |S |S
-                 * 0 |4 |0 |4 |14|14
-                 * 1 |5 |8 |11|15|18
-                 * 2 |6 |9 |12|16|19
-                 * 3 |7 |10|13|17|20
+                 * 0 |5 |0 |5 |18|18
+                 * 1 |6 |10|14|19|23
+                 * 2 |7 |11|15|20|24
+                 * 3 |8 |12|16|21|25
+                 * 4 |9 |13|17|22|26
                  */
             int[] days = { 0, 0, 0, 0, 0, 0 }; //6 teaching days
             foreach (CourseBlock block in list)
@@ -315,37 +317,37 @@ namespace KPU_Faculty_Scheduler
                         days[0]++; //one class on monday
                         days[2]++; //one class on wednesday
                     }
-                    else if (block.time >= 1 && block.time <= 3) //other classes on monday
+                    else if (block.time >= 1 && block.time <= 4) //other classes on monday
                     {
                         days[0]++;
                     }
-                    else if (block.time == 4) //first block on tues/thursday
+                    else if (block.time == 5) //first block on tues/thursday
                     {
                         days[1]++; //one class on tuesday
                         days[3]++; //one class on thursday
                     }
-                    else if (block.time >= 5 && block.time <= 7) //other classes on tues
+                    else if (block.time >= 6 && block.time <= 9) //other classes on tues
                     {
                         days[1]++;
                     }
-                    else if (block.time >= 8 && block.time <= 10) //other classes on wed
+                    else if (block.time >= 10 && block.time <= 13) //other classes on wed
                     {
                         days[2]++;
                     }
-                    else if (block.time >= 11 && block.time <= 13) //other classes on wed
+                    else if (block.time >= 14 && block.time <= 17) //other classes on thurs
                     {
                         days[3]++;
                     }
-                    else if (block.time == 14) //first block on fri/sat
+                    else if (block.time == 18) //first block on fri/sat
                     {
                         days[4]++; //one class on fri
                         days[5]++; //one class on sat
                     }
-                    else if (block.time >= 15 && block.time <= 17) //other classes on fri
+                    else if (block.time >= 19 && block.time <= 22) //other classes on fri
                     {
                         days[4]++;
                     }
-                    else if (block.time >= 18 && block.time <= 20) //other classes on sat
+                    else if (block.time >= 23 && block.time <= 26) //other classes on sat
                     {
                         days[5]++;
                     }
@@ -368,13 +370,14 @@ namespace KPU_Faculty_Scheduler
             int day = 0;
             /* Time blocks
                  * M |T |W |T |F |S |S
-                 * 0 |4 |0 |4 |14|14
-                 * 1 |5 |8 |11|15|18
-                 * 2 |6 |9 |12|16|19
-                 * 3 |7 |10|13|17|20
+                 * 0 |5 |0 |5 |18|18
+                 * 1 |6 |10|14|19|23
+                 * 2 |7 |11|15|20|24
+                 * 3 |8 |12|16|21|25
+                 * 4 |9 |13|17|22|26
                  */
-               
-            switch(time)
+
+            switch (time)
             {
                 case 0:
                     day = 13;
@@ -382,37 +385,44 @@ namespace KPU_Faculty_Scheduler
                 case 1: 
                 case 2:
                 case 3:
+                case 4:
                     day = 1;
                     break;
-                case 4:
+                case 5:
                     day = 24;
                     break;
-                case 5:
                 case 6:
                 case 7:
-                    day = 2;
-                    break;
                 case 8:
                 case 9:
-                case 10:
-                    day = 3;
+                    day = 2;
                     break;
+                
+                case 10:
                 case 11:
                 case 12:
                 case 13:
-                    day = 4;
+                    day = 3;
                     break;
                 case 14:
-                    day = 56;
-                    break;
                 case 15:
                 case 16:
                 case 17:
-                    day = 5;
+                    day = 4;
                     break;
                 case 18:
+                    day = 56;
+                    break;
                 case 19:
                 case 20:
+                case 21:
+                case 22:
+                    day = 5;
+                    break;
+                case 23:
+                case 24:
+                case 25:
+                case 26:
                     day = 6;
                     break;
                 default: day = 0;
