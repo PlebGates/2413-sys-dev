@@ -115,7 +115,6 @@ namespace KPU_Faculty_Scheduler
 
                 mainFrame.Content = schedulePage;
                 reviewButtons.Visibility = System.Windows.Visibility.Hidden;
-                SwapButton.Visibility = System.Windows.Visibility.Visible;
                 schedulePageGrid.Visibility = System.Windows.Visibility.Visible;
                 loadSchedulePage(); //load scheulde page days -- needs another function here to load created scheulde on dataGrid
             }
@@ -175,8 +174,7 @@ namespace KPU_Faculty_Scheduler
             {
                 mainFrame.Content = reviewPage;
                 reviewButtons.Visibility = System.Windows.Visibility.Visible;
-                SwapButton.Visibility = System.Windows.Visibility.Hidden;
-                schedulePageGrid.Visibility = System.Windows.Visibility.Hidden;
+                schedulePageGrid.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -233,9 +231,9 @@ namespace KPU_Faculty_Scheduler
 
         private void SwapButton_Click(object sender, RoutedEventArgs e)
         {
-
-            
-
+            CourseBlock a = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
+            CourseBlock b = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
+            schedule.swapCourseBlock(a, b);
         }
 
         /* Time blocks
@@ -344,6 +342,28 @@ namespace KPU_Faculty_Scheduler
 
             return courseDetails;
         }
-        
+
+        public List<CourseBlock> getAllBlocksOnDay(String day)
+        {
+
+            List<CourseBlock> courseDetails = new List<CourseBlock>();
+            List<Room> roomList = db.getAllRoom();
+            foreach (int time in map[day])//check if the block.time is on x day ex."monday"
+            {
+                foreach (Room room in roomList)
+                {
+                    foreach (CourseBlock block in db.getAllCourseBlockTime(time)) //check courses for that time
+                    {
+                        if (room == block.room && time == block.time) //if block is on this time and room
+                        {
+                            courseDetails.Add(block);
+                            break;
+                        }
+                    }
+                }
+            }
+            return courseDetails;
+        }
+
     }
 }

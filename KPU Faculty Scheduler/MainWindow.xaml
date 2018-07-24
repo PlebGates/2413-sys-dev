@@ -26,7 +26,7 @@
         
         <!-- Add button -->
         <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20" Click="AddButton_Click" Visibility="Hidden"/>
-        <Button x:Name="SwapButton" Content="Swap" HorizontalAlignment="Center" Margin="0,0,0,24" VerticalAlignment="Bottom" Width="50" Height="20" Click="SwapButton_Click" Visibility="Hidden"/>
+        
         <!-- Stackpanel for buttons -->
         <StackPanel x:Name="reviewButtons"  HorizontalAlignment="Center" Height="35" Margin="0,68,0,0" VerticalAlignment="Top" Width="300" Orientation="Horizontal" Visibility="Hidden">
             <Button x:Name="reviewCourses" Content="Course" Height="35" Width="100" Click="review_Click_Course"></Button>
@@ -35,11 +35,12 @@
         </StackPanel>
 
         <Grid x:Name="schedulePageGrid" Visibility="Collapsed" >
-            <ComboBox x:Name="day1_ComboBox" HorizontalAlignment="Left" Height="35" Margin="37,481,0,-16" VerticalAlignment="Top" Width="129" MouseDown="day1_ComboBox_MouseDown" />
-            <ComboBox x:Name="course1_ComboBox" HorizontalAlignment="Left" Height="35" Margin="172,481,0,-16" VerticalAlignment="Top" Width="218" RenderTransformOrigin="0.385,0.949"/>
-            <ComboBox x:Name="day2_ComboBox" HorizontalAlignment="Left" Height="35" Margin="493,482,0,-17" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.282,0.709" MouseDown="day2_ComboBox_MouseDown" />
-            <ComboBox x:Name="course2_ComboBox" HorizontalAlignment="Left" Height="35" Margin="614,482,-23,-17" VerticalAlignment="Top" Width="209" RenderTransformOrigin="3.377,1.58"/>
+            <ComboBox x:Name="day1_ComboBox" HorizontalAlignment="Left" Height="35" Margin="30,0,0,98" VerticalAlignment="Bottom" Width="128" MouseDown="day1_ComboBox_MouseDown"  />
+            <ComboBox x:Name="course1_ComboBox" HorizontalAlignment="Left" Height="35" Margin="30,0,0,50" VerticalAlignment="Bottom" Width="340" RenderTransformOrigin="0.385,0.949"/>
+            <ComboBox x:Name="day2_ComboBox" HorizontalAlignment="Right" Height="35" Margin="0,0,30,98" VerticalAlignment="Bottom" Width="128" RenderTransformOrigin="0.282,0.709" MouseDown="day2_ComboBox_MouseDown"  />
+            <ComboBox x:Name="course2_ComboBox" HorizontalAlignment="Right" Height="35" Margin="0,0,30,50" VerticalAlignment="Bottom" Width="340" RenderTransformOrigin="3.377,1.58"/>
             <DataGrid x:Name="schdeuleGrid"  HorizontalAlignment="Left" Height="336" Margin="62,99,0,0" VerticalAlignment="Top" Width="710"/>
+            <Button x:Name="SwapButton" Content="Swap" HorizontalAlignment="Center" Margin="0,0,0,98" VerticalAlignment="Bottom" Width="100" Height="35" Click="SwapButton_Click"  />
         </Grid>
     </Grid>
 </Window>

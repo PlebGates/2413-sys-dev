@@ -5,19 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KPU_Faculty_Scheduler"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="SchedulePage" Width="800" Height="500">
+      d:DesignHeight="450" d:DesignWidth="850"
+      Title="SchedulePage" Width="850" Height="550">
 
-    <Grid Width="800" Height="500">
+    <Grid Width="850" Height="550">
         <!-- Rectangle to contain elements -->
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="10,60,-444,-145" Stroke="Black" Width="834"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="0,60,0,0" Stroke="Black" Width="850"/>
 
         <!-- Page Header & listbox -->
         <Label x:Name="roomHeader" Content="Schedule" HorizontalAlignment="Center" Margin="337,0,298,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36" Width="165"/>
-        
-        
-
-
 
     </Grid>
 </Page>
