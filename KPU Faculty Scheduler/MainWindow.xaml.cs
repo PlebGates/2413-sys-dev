@@ -303,43 +303,45 @@ namespace KPU_Faculty_Scheduler
                     bool roomInUse = false;
                     foreach (CourseBlock block in db.getAllCourseBlockTime(time)) //check courses for that time
                     {
-                        if (room == block.room && time == block.time) //if block is on this time and room
+                        Room thisRoom = db.getRoom(block.room.id);
+                        Course thisCourse = db.getCourse(block.course.id);
+                        Professor thisProf = db.getProfessor(block.professor.id);
+                        MessageBox.Show("checking block:" + block.id + "this block time: " + block.time + "for this time: " + time);
+                        if (room.id == thisRoom.id && time == block.time) //if block is on this time and room
                         {
                             roomInUse = true;
-                            blockAtThisTime = block;
-                            break;
+                            MessageBox.Show("MATCH!");
+                        }
+                        if (roomInUse)
+                        {
+                            //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
+                            //[8am - 10pm, cedar 1045] //no teacher and course
+                            if (thisRoom.hasComputers && room.hasComputers)
+                            {
+                                //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
+                                courseDetails.Add(timeSchedule[time] + ", (c)" + thisRoom.building + thisRoom.roomNum + ", " + thisCourse.name + " S" + thisCourse.sections + ", " + thisProf.name);
+                                break;
+                            }
+                            else//this room has no computers
+                            {
+                                //[8am - 10pm, cedar 1045] //no teacher and course
+                                courseDetails.Add(timeSchedule[time] + ", " + thisRoom.building + thisRoom.roomNum + ", " + thisCourse.name + " S" + thisCourse.sections + ", " + thisProf.name);
+                                break;
+                            }
+                        }
+                        //not a match, keep looking
+                        else
+                        {
+                            MessageBox.Show("no MAtch!");
+                            continue;
                         }
                     }
                     if (!roomInUse)
-                    {
-                        //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
-                        //[8am - 10pm, cedar 1045] //no teacher and course
-                        /*
-                        String roomBuilding = db.getRoom(blockAtThisTime.room.id).building);
-                        String roomNumber = db.getRoom(blockAtThisTime.room.id).roomNum + "";
-                        String courseName = (String)db.getCourse(blockAtThisTime.course.id).name;
-                        
-                        Course courseSection = db.getCourse(blockAtThisTime.course.id);
-                        MessageBox.Show(courseSection.name.ToString());
-                        String profName = (String)db.getProfessor(blockAtThisTime.professor.id).name;
-                        */
-                        
-                        if (blockAtThisTime.room.hasComputers && room.hasComputers)
-                        {
-                            //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
-                            courseDetails.Add(timeSchedule[time] + ", (c)" + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
-                        }
-                        else//this room has no computers
-                        {
-                            //[8am - 10pm, cedar 1045] //no teacher and course
-                            //courseDetails.Add(timeSchedule[time] + ", " + roomBuilding + roomNumber + ", " + courseName + " S" + courseSection + ", " + profName);
-                        }
+                    { //no course for this room
+                        courseDetails.Add(timeSchedule[time] + ", " + room.building + room.roomNum + "no course, no teacher");
+                        continue;
                     }
-                    //no course for this room
-                    else
-                    {
-                        courseDetails.Add(timeSchedule[time] + ", " + room.building + room.roomNum);
-                    }
+                    
                 }
                 
             }
