@@ -235,7 +235,6 @@ namespace KPU_Faculty_Scheduler
         {
             if(course1_ComboBox.SelectedItem != null && course2_ComboBox.SelectedItem != null)
             {
-                MessageBox.Show(course1_ComboBox.SelectedIndex + ":selected " + db.countRooms() + ":total rooms\n" + course2_ComboBox.SelectedIndex + ":selected " + db.countRooms() + ":total rooms");
                 //DAY
                 String aday = day1_ComboBox.SelectedItem.ToString(); //monday
                 String bday = day2_ComboBox.SelectedItem.ToString(); //monday
@@ -243,18 +242,18 @@ namespace KPU_Faculty_Scheduler
                 //timeblock
                 int a = 0;
                 int b = 0;
-                foreach (String key in map.Keys)
+                foreach (int val in map.value)
                 {
-                    if(map[key].Contains((int)Math.Floor((decimal)course1_ComboBox.SelectedIndex / db.countRooms())))
+                    if(map[val].Contains((int)Math.Floor((decimal)course1_ComboBox.SelectedIndex / db.countRooms())))
                     {
-                        a = map[key][(int)Math.Floor((decimal)course1_ComboBox.SelectedIndex / db.countRooms())];
+                        a = (int)map[val][(int)Math.Floor((decimal)course1_ComboBox.SelectedIndex / db.countRooms())];
                     }
                 }
-                foreach (String key in map.Keys)
+                foreach (int val in map.Values)
                 {
-                    if (map[key].Contains((int)Math.Floor((decimal)course2_ComboBox.SelectedIndex / db.countRooms())))
+                    if (map[val].Contains((int)Math.Floor((decimal)course2_ComboBox.SelectedIndex / db.countRooms())))
                     {
-                        b = map[key][(int)Math.Floor((decimal)course2_ComboBox.SelectedIndex / db.countRooms())];
+                        b = (int)map[key][(int)Math.Floor((decimal)course2_ComboBox.SelectedIndex / db.countRooms())];
                     }
                 }
 
