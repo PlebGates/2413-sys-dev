@@ -222,6 +222,7 @@ namespace KPU_Faculty_Scheduler
         private void review_Click_Room(object sender, RoutedEventArgs e)
         {
             reviewPage.reviewRoom(db.getAllRoom());
+
         }
 
         private void review_Click_Professor(object sender, RoutedEventArgs e)
@@ -231,9 +232,13 @@ namespace KPU_Faculty_Scheduler
 
         private void SwapButton_Click(object sender, RoutedEventArgs e)
         {
-            CourseBlock a = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
-            CourseBlock b = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
-            schedule.swapCourseBlock(a, b);
+            if(course1_ComboBox.SelectedItem != null && course2_ComboBox.SelectedItem != null)
+            {
+                CourseBlock a = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
+                CourseBlock b = getAllBlocksOnDay(day1_ComboBox.SelectedItem.ToString())[course1_ComboBox.SelectedIndex];
+                schedule.swapCourseBlock(a, b);
+            }
+            
         }
 
         /* Time blocks
@@ -280,21 +285,7 @@ namespace KPU_Faculty_Scheduler
             }
         }
         //when user clicks on combo box and selects a item it will populate coursescombobox2
-        private void day2_ComboBox_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            foreach (String courseDetails in getBlocksOnDay(day2_ComboBox.SelectedItem.ToString()))
-            {
-                course2_ComboBox.Items.Add(courseDetails);
-            }
-        }
-        //when user clicks on combo box and selects a item it will populate coursescombobox1
-        private void day1_ComboBox_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            foreach (String courseDetails in getBlocksOnDay(day1_ComboBox.SelectedItem.ToString()))
-            {
-                course1_ComboBox.Items.Add(courseDetails);
-            }
-        }
+
         public List<String> getBlocksOnDay(String day)
         {
 
@@ -316,25 +307,30 @@ namespace KPU_Faculty_Scheduler
                             break;
                         }
                     }
-                    if (roomInUse)
+                    if (!roomInUse)
                     {
                         //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
                         //[8am - 10pm, cedar 1045] //no teacher and course
                         if (blockAtThisTime.room.hasComputers)
                         {
                             //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
-                            courseDetails.Add(timeSchedule + ", (c)" + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
+                            courseDetails.Add(timeSchedule[time] + ", (c)" + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
+                        }
+                        else if (!blockAtThisTime.room.hasComputers)
+                        {
+                            //[8am - 10pm,  cedar 1045, INFO1213, jendy lee] //has teacher and course
+                            courseDetails.Add(timeSchedule[time] + ", (c)" + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
                         }
                         else//this room has no computers
                         {
                             //[8am - 10pm, cedar 1045] //no teacher and course
-                            courseDetails.Add(timeSchedule + ", " + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
+                            courseDetails.Add(timeSchedule[time] + ", " + blockAtThisTime.room.building + blockAtThisTime.room.roomNum + ", " + blockAtThisTime.course.name + " S" + blockAtThisTime.course.sections + ", " + blockAtThisTime.professor.name);
                         }
                     }
                     //no course for this room
                     else
                     {
-                        courseDetails.Add(timeSchedule + ", " + room.building + room.roomNum);
+                        courseDetails.Add(timeSchedule[time] + ", " + room.building + room.roomNum);
                     }
                 }
                 
@@ -365,5 +361,24 @@ namespace KPU_Faculty_Scheduler
             return courseDetails;
         }
 
+
+
+        private void day2_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            course2_ComboBox.Items.Clear();
+            foreach (String courseDetails in getBlocksOnDay(day2_ComboBox.SelectedItem.ToString()))
+            {
+                course2_ComboBox.Items.Add(courseDetails);
+            }
+        }
+
+        private void day1_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            course1_ComboBox.Items.Clear();
+            foreach (String courseDetails in getBlocksOnDay(day1_ComboBox.SelectedItem.ToString()))
+            {
+                course1_ComboBox.Items.Add(courseDetails);
+            }
+        }
     }
 }
