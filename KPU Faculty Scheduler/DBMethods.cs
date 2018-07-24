@@ -315,7 +315,7 @@ CREATE TABLE professorscourses(
         public void addCourseBlock(CourseBlock block)
         {
             SQLiteCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO schedule (id,professorid,courseid,roomid,time) values (" + block.id + "," + block.professor.id +
+            cmd.CommandText = "INSERT INTO schedule (professorid,courseid,roomid,time) values ("+ block.professor.id +
                 "," + block.course.id + "," + block.room.id + "," + block.time + ");";
             cmd.ExecuteNonQuery();
         }
